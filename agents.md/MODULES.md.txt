@@ -1,0 +1,1086 @@
+# MODULES.md
+
+# Trinova Landing Page & Digital Growth Platform
+
+Dokumen ini menjelaskan seluruh module dan section yang ada di dalam aplikasi beserta tujuan bisnis, tujuan UX, alur pengguna, dan aturan implementasinya.
+
+---
+
+# Core Philosophy
+
+Project ini bukan website company profile.
+
+Project ini adalah **Marketing Engine**.
+
+Setiap module harus memiliki tujuan yang jelas dalam sales funnel.
+
+```
+Traffic
+
+↓
+
+Attention
+
+↓
+
+Trust
+
+↓
+
+Lead
+
+↓
+
+Meeting
+
+↓
+
+Project
+
+↓
+
+Repeat Client
+```
+
+Apabila sebuah module tidak mendukung salah satu tahapan di atas, maka module tersebut perlu dievaluasi kembali.
+
+---
+
+# Module Overview
+
+```
+Public Website
+│
+├── Landing Page
+├── Program
+├── Portfolio
+├── Blog
+├── FAQ
+├── Contact
+└── Audit Gratis
+
+CMS
+│
+├── Dashboard
+├── Landing Manager
+├── Program Manager
+├── Portfolio Manager
+├── Blog Manager
+├── FAQ Manager
+├── Lead Manager
+├── Testimonial Manager
+├── SEO Manager
+├── Media Library
+└── Website Settings
+```
+
+---
+
+# PUBLIC WEBSITE
+
+Website publik bertugas menghasilkan lead.
+
+Bukan sekadar menampilkan informasi perusahaan.
+
+---
+
+# MODULE 1
+
+# Landing Page
+
+## Tujuan
+
+Menjadi halaman penjualan utama yang mengubah visitor menjadi calon klien.
+
+---
+
+## Target
+
+Owner Online Shop
+
+Seller Shopee
+
+Seller Tokopedia
+
+Seller TikTok Shop
+
+UMKM berkembang
+
+---
+
+## Struktur Section
+
+```
+Hero
+
+↓
+
+Pain
+
+↓
+
+Paradigm Shift
+
+↓
+
+Solution
+
+↓
+
+Programs
+
+↓
+
+Portfolio
+
+↓
+
+Testimonials
+
+↓
+
+FAQ
+
+↓
+
+Final CTA
+
+↓
+
+Footer
+```
+
+---
+
+## CTA
+
+Audit Bisnis Gratis
+
+---
+
+## KPI
+
+- Conversion Rate
+- WhatsApp Click
+- Audit Request
+
+---
+
+# SECTION
+
+## Hero
+
+### Tujuan
+
+Menghentikan perhatian pengunjung dalam waktu kurang dari lima detik.
+
+---
+
+### Pesan
+
+Order makin ramai...
+
+Tapi keuntungan terasa jalan di tempat?
+
+---
+
+### Komponen
+
+- Headline
+- Subheadline
+- CTA
+- Secondary CTA
+- Hero Illustration
+
+---
+
+### CTA
+
+Audit Bisnis Gratis
+
+---
+
+## Pain Section
+
+### Tujuan
+
+Membuat pengunjung merasa:
+
+"Itu masalah saya."
+
+---
+
+### Isi
+
+- Biaya admin
+- Gratis ongkir
+- Voucher
+- Margin menurun
+- Repeat order rendah
+- Ketergantungan marketplace
+
+---
+
+### KPI
+
+Scroll Depth
+
+---
+
+## Paradigm Shift
+
+### Tujuan
+
+Mengubah cara berpikir pengunjung.
+
+---
+
+### Pesan
+
+Marketplace membantu mendapatkan pelanggan.
+
+Website membantu memiliki pelanggan.
+
+---
+
+### Visual
+
+Flow Diagram
+
+Marketplace
+
+↓
+
+Website
+
+↓
+
+Database Pelanggan
+
+↓
+
+Repeat Order
+
+↓
+
+Brand
+
+↓
+
+Aset Digital
+
+---
+
+## Solution
+
+### Tujuan
+
+Menjelaskan mengapa website menjadi solusi.
+
+---
+
+### Jangan membahas
+
+- Framework
+- Hosting
+- Coding
+
+---
+
+### Bahas
+
+- Profit
+- Brand
+- Repeat Order
+- Database Pelanggan
+- SEO
+- Kepercayaan
+
+---
+
+## Programs
+
+### Tujuan
+
+Menawarkan solusi sesuai tahap perkembangan bisnis.
+
+---
+
+### Program
+
+START
+
+↓
+
+GROW
+
+↓
+
+SCALE
+
+↓
+
+EMPIRE
+
+---
+
+### CTA
+
+Pilih Program
+
+Audit Gratis
+
+---
+
+## Portfolio
+
+### Tujuan
+
+Membangun kepercayaan.
+
+---
+
+### Format
+
+Masalah
+
+↓
+
+Solusi
+
+↓
+
+Hasil
+
+Jangan hanya screenshot website.
+
+---
+
+## Testimonials
+
+### Tujuan
+
+Social Proof.
+
+---
+
+### Komponen
+
+- Foto
+- Nama
+- Perusahaan
+- Testimoni
+- Rating
+
+---
+
+## FAQ
+
+### Tujuan
+
+Mengurangi keraguan.
+
+---
+
+### Isi
+
+- Website
+- Marketplace
+- SEO
+- Landing Page
+- Harga
+- Maintenance
+- Waktu pengerjaan
+
+---
+
+## Final CTA
+
+### Tujuan
+
+Menghasilkan Lead.
+
+---
+
+### CTA
+
+Audit Bisnis Gratis
+
+---
+
+# MODULE 2
+
+# Program
+
+## Tujuan
+
+Menjelaskan setiap solusi yang dimiliki Trinova.
+
+---
+
+## Halaman
+
+START
+
+GROW
+
+SCALE
+
+EMPIRE
+
+---
+
+## Struktur
+
+Hero
+
+↓
+
+Target Market
+
+↓
+
+Problem
+
+↓
+
+Solution
+
+↓
+
+Feature
+
+↓
+
+Outcome
+
+↓
+
+FAQ
+
+↓
+
+CTA
+
+---
+
+# MODULE 3
+
+# Portfolio
+
+## Tujuan
+
+Menunjukkan hasil nyata.
+
+---
+
+## Struktur
+
+Hero
+
+↓
+
+Case Studies
+
+↓
+
+Result
+
+↓
+
+CTA
+
+---
+
+## Setiap Portfolio
+
+Harus memiliki:
+
+Problem
+
+↓
+
+Challenge
+
+↓
+
+Solution
+
+↓
+
+Result
+
+↓
+
+Technology
+
+↓
+
+Client Testimonial
+
+---
+
+# MODULE 4
+
+# Blog
+
+## Tujuan
+
+Mesin SEO.
+
+---
+
+## Target
+
+Traffic organik.
+
+---
+
+## Kategori
+
+Website
+
+Marketplace
+
+Brand
+
+SEO
+
+Digital Marketing
+
+Repeat Order
+
+Bisnis Online
+
+UMKM
+
+---
+
+## Struktur Artikel
+
+Problem
+
+↓
+
+Insight
+
+↓
+
+Solution
+
+↓
+
+CTA
+
+---
+
+## CTA
+
+Audit Gratis
+
+---
+
+# MODULE 5
+
+# FAQ
+
+## Tujuan
+
+Mengurangi hambatan sebelum closing.
+
+---
+
+## Kelompok FAQ
+
+Website
+
+SEO
+
+Landing Page
+
+Marketplace
+
+Harga
+
+Maintenance
+
+Program
+
+Audit Gratis
+
+---
+
+# MODULE 6
+
+# Contact
+
+## Tujuan
+
+Memudahkan komunikasi.
+
+---
+
+## Komponen
+
+WhatsApp
+
+Email
+
+Alamat
+
+Google Maps
+
+Contact Form
+
+Jam Operasional
+
+---
+
+# MODULE 7
+
+# Audit Bisnis Gratis
+
+## Tujuan
+
+Module konversi utama.
+
+Ini adalah pintu masuk sales funnel.
+
+---
+
+## Form
+
+Nama
+
+Perusahaan
+
+WhatsApp
+
+Email
+
+Marketplace
+
+Omzet
+
+Masalah utama
+
+Target bisnis
+
+---
+
+## Flow
+
+Visitor
+
+↓
+
+Isi Form
+
+↓
+
+Lead
+
+↓
+
+Follow Up
+
+↓
+
+Meeting
+
+↓
+
+Proposal
+
+↓
+
+Project
+
+---
+
+# CMS
+
+Semua module berikut hanya dapat diakses Administrator.
+
+---
+
+# Dashboard
+
+## Fungsi
+
+Monitoring bisnis.
+
+---
+
+## Widget
+
+Lead Hari Ini
+
+Lead Bulan Ini
+
+Project
+
+Artikel
+
+Portfolio
+
+Traffic
+
+Audit Request
+
+Conversion
+
+---
+
+# Landing Manager
+
+## Fungsi
+
+Mengelola seluruh isi Landing Page.
+
+---
+
+## Yang dapat diubah
+
+Hero
+
+Pain
+
+CTA
+
+Footer
+
+Banner
+
+Section Visibility
+
+---
+
+# Program Manager
+
+## Fungsi
+
+Mengelola:
+
+START
+
+GROW
+
+SCALE
+
+EMPIRE
+
+---
+
+# Portfolio Manager
+
+## Fungsi
+
+Mengelola studi kasus.
+
+---
+
+## Mendukung
+
+Create
+
+Edit
+
+Delete
+
+Publish
+
+Featured
+
+---
+
+# Blog Manager
+
+## Fungsi
+
+Mengelola artikel SEO.
+
+---
+
+## Mendukung
+
+Draft
+
+Review
+
+Publish
+
+Schedule
+
+---
+
+# FAQ Manager
+
+## Fungsi
+
+Mengelola seluruh FAQ.
+
+---
+
+# Testimonial Manager
+
+## Fungsi
+
+Mengelola social proof.
+
+---
+
+# Lead Manager
+
+## Fungsi
+
+CRM sederhana.
+
+---
+
+## Menampilkan
+
+Lead Baru
+
+↓
+
+Sudah Dihubungi
+
+↓
+
+Meeting
+
+↓
+
+Proposal
+
+↓
+
+Negotiation
+
+↓
+
+Won
+
+↓
+
+Lost
+
+---
+
+# SEO Manager
+
+## Fungsi
+
+Mengelola:
+
+Meta Title
+
+Meta Description
+
+OG Image
+
+Canonical
+
+Robots
+
+Schema
+
+Sitemap
+
+Redirect
+
+---
+
+# Media Library
+
+## Fungsi
+
+Pusat seluruh file.
+
+---
+
+## Mendukung
+
+Upload
+
+Delete
+
+Replace
+
+Alt Text
+
+Caption
+
+Folder
+
+---
+
+# Website Settings
+
+## Fungsi
+
+Konfigurasi website.
+
+---
+
+## Pengaturan
+
+Logo
+
+Favicon
+
+Kontak
+
+Social Media
+
+Analytics
+
+SMTP
+
+SEO Default
+
+Brand Color
+
+---
+
+# Future Modules
+
+Belum menjadi prioritas.
+
+- CRM
+- Proposal Generator
+- Invoice
+- Payment Tracking
+- Maintenance Subscription
+- Client Portal
+- WhatsApp Automation
+- Email Marketing
+- AI Assistant
+- Knowledge Base
+
+---
+
+# User Journey
+
+```
+TikTok / Google
+
+↓
+
+Landing Page
+
+↓
+
+Pain
+
+↓
+
+Paradigm Shift
+
+↓
+
+Solution
+
+↓
+
+Program
+
+↓
+
+Portfolio
+
+↓
+
+FAQ
+
+↓
+
+Audit Gratis
+
+↓
+
+Lead
+
+↓
+
+Meeting
+
+↓
+
+Proposal
+
+↓
+
+Project
+
+↓
+
+Maintenance
+
+↓
+
+Repeat Project
+
+↓
+
+Referral
+```
+
+Seluruh module harus memperkuat alur perjalanan pengguna tersebut.
+
+---
+
+# Development Priority
+
+## Phase 1 (Wajib)
+
+- Landing Page
+- Program
+- Portfolio
+- FAQ
+- Contact
+- Audit Gratis
+
+---
+
+## Phase 2
+
+- Blog
+- Testimonial
+- Dashboard
+- Lead Manager
+
+---
+
+## Phase 3
+
+- SEO Manager
+- Media Library
+- Website Settings
+
+---
+
+## Phase 4
+
+- CRM
+- Client Portal
+- Proposal Generator
+- AI Assistant
+- Marketing Automation
+
+---
+
+# Golden Rules
+
+Setiap module wajib menjawab minimal satu pertanyaan berikut:
+
+- Apakah module ini menarik perhatian pengunjung?
+- Apakah module ini membangun kepercayaan?
+- Apakah module ini mengedukasi calon klien?
+- Apakah module ini meningkatkan konversi?
+- Apakah module ini membantu SEO?
+- Apakah module ini mempermudah proses penjualan?
+- Apakah module ini meningkatkan peluang repeat order?
+
+Jika jawabannya **tidak**, maka module tersebut bukan prioritas untuk dikembangkan.

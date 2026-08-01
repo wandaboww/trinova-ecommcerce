@@ -1,0 +1,514 @@
+# TODO.md
+
+# Trinova Landing Page & Digital Growth Platform
+
+Dokumen ini menjadi roadmap pengembangan project sekaligus checklist implementasi. Urutan pengerjaan disusun berdasarkan prioritas bisnis, bukan kompleksitas teknis.
+
+Status:
+
+- ⬜ Belum dikerjakan
+- 🟨 Sedang dikerjakan
+- 🟩 Selesai
+
+---
+
+# PHASE 1 — FOUNDATION
+
+## Project Setup
+
+- ⬜ Install Laravel 12
+- ⬜ Install Livewire 3
+- ⬜ Konfigurasi Tailwind CSS
+- ⬜ Konfigurasi MySQL
+- ⬜ Konfigurasi Vite
+- ⬜ Konfigurasi Environment
+- ⬜ Konfigurasi Storage
+- ⬜ Konfigurasi Mail
+- ⬜ Konfigurasi Queue
+- ⬜ Konfigurasi Cache
+- ⬜ Konfigurasi Logging
+
+---
+
+## Authentication
+
+- ⬜ Login Administrator
+- ⬜ Logout
+- ⬜ Forgot Password
+- ⬜ Reset Password
+- ⬜ Middleware Authentication
+- ⬜ Role Administrator
+
+---
+
+## Global Layout
+
+- ⬜ Navbar
+- ⬜ Footer
+- ⬜ SEO Layout
+- ⬜ Error Page 404
+- ⬜ Error Page 500
+- ⬜ Loading Component
+- ⬜ Toast Notification
+- ⬜ Empty State
+
+---
+
+# PHASE 2 — DATABASE
+
+## Migration
+
+- ⬜ Users
+- ⬜ Landing Settings
+- ⬜ Programs
+- ⬜ Program Features
+- ⬜ Articles
+- ⬜ Categories
+- ⬜ Tags
+- ⬜ Article Tag
+- ⬜ Portfolios
+- ⬜ Testimonials
+- ⬜ FAQs
+- ⬜ Leads
+- ⬜ Lead Activities
+- ⬜ Audit Requests
+- ⬜ Contacts
+- ⬜ Newsletter Subscribers
+- ⬜ SEO Meta
+- ⬜ Media
+- ⬜ Website Settings
+
+---
+
+## Model
+
+- ⬜ User
+- ⬜ LandingSetting
+- ⬜ Program
+- ⬜ ProgramFeature
+- ⬜ Article
+- ⬜ Category
+- ⬜ Tag
+- ⬜ Portfolio
+- ⬜ Testimonial
+- ⬜ Faq
+- ⬜ Lead
+- ⬜ LeadActivity
+- ⬜ AuditRequest
+- ⬜ Contact
+- ⬜ NewsletterSubscriber
+- ⬜ SeoMeta
+- ⬜ Media
+- ⬜ WebsiteSetting
+
+---
+
+# PHASE 3 — PUBLIC WEBSITE
+
+## Landing Page
+
+### Hero
+
+- ⬜ Hero Section
+- ⬜ CTA Audit Gratis
+- ⬜ Secondary CTA
+- ⬜ Responsive Design
+
+---
+
+### Pain Section
+
+- ⬜ Pain Checklist
+- ⬜ Visual Illustration
+
+---
+
+### Paradigm Shift
+
+- ⬜ Flow Diagram
+- ⬜ Value Proposition
+
+---
+
+### Solution
+
+- ⬜ Benefit Cards
+- ⬜ Business Outcome
+
+---
+
+### Program Preview
+
+- ⬜ START
+- ⬜ GROW
+- ⬜ SCALE
+- ⬜ EMPIRE
+
+---
+
+### Portfolio Preview
+
+- ⬜ Featured Portfolio
+- ⬜ Case Study Preview
+
+---
+
+### Testimonials
+
+- ⬜ Slider
+- ⬜ Rating
+- ⬜ Client Information
+
+---
+
+### FAQ
+
+- ⬜ Accordion FAQ
+
+---
+
+### Final CTA
+
+- ⬜ Audit Bisnis Gratis
+- ⬜ WhatsApp Button
+
+---
+
+# PHASE 4 — PROGRAM
+
+- ⬜ Daftar Program
+- ⬜ Detail START
+- ⬜ Detail GROW
+- ⬜ Detail SCALE
+- ⬜ Detail EMPIRE
+
+---
+
+# PHASE 5 — PORTFOLIO
+
+- ⬜ Portfolio List
+- ⬜ Portfolio Detail
+- ⬜ Related Portfolio
+- ⬜ Featured Portfolio
+
+---
+
+# PHASE 6 — BLOG
+
+## Blog
+
+- ⬜ List Artikel
+- ⬜ Detail Artikel
+- ⬜ Kategori
+- ⬜ Tag
+- ⬜ Search
+- ⬜ Related Article
+- ⬜ Reading Time
+- ⬜ Share Button
+
+---
+
+# PHASE 7 — LEAD GENERATION
+
+## Audit Bisnis Gratis
+
+- ⬜ Form Audit
+- ⬜ Validasi
+- ⬜ Simpan Lead
+- ⬜ Simpan Audit Request
+- ⬜ Success Page
+
+---
+
+## Contact Form
+
+- ⬜ Form Kontak
+- ⬜ Simpan Contact
+- ⬜ Email Notification
+
+---
+
+## Newsletter
+
+- ⬜ Subscribe
+- ⬜ Validasi
+- ⬜ Penyimpanan Data
+
+---
+
+# PHASE 8 — CMS
+
+## Dashboard
+
+- ⬜ Statistik Lead
+- ⬜ Statistik Artikel
+- ⬜ Statistik Portfolio
+- ⬜ Statistik Audit
+- ⬜ Statistik Conversion
+
+---
+
+## Landing Manager
+
+- ⬜ Hero
+- ⬜ Pain
+- ⬜ Solution
+- ⬜ CTA
+- ⬜ Footer
+
+---
+
+## Program Manager
+
+- ⬜ CRUD Program
+- ⬜ CRUD Feature Program
+
+---
+
+## Portfolio Manager
+
+- ⬜ CRUD Portfolio
+
+---
+
+## Blog Manager
+
+- ⬜ CRUD Artikel
+- ⬜ CRUD Kategori
+- ⬜ CRUD Tag
+
+---
+
+## FAQ Manager
+
+- ⬜ CRUD FAQ
+
+---
+
+## Testimonial Manager
+
+- ⬜ CRUD Testimonial
+
+---
+
+## Lead Manager
+
+- ⬜ List Lead
+- ⬜ Detail Lead
+- ⬜ Timeline Aktivitas
+- ⬜ Update Status
+- ⬜ Catatan Internal
+
+---
+
+## SEO Manager
+
+- ⬜ Meta Title
+- ⬜ Meta Description
+- ⬜ Open Graph
+- ⬜ Canonical URL
+- ⬜ Robots
+- ⬜ Schema JSON-LD
+
+---
+
+## Media Library
+
+- ⬜ Upload File
+- ⬜ Hapus File
+- ⬜ Alt Text
+- ⬜ Caption
+
+---
+
+## Website Settings
+
+- ⬜ Logo
+- ⬜ Favicon
+- ⬜ Kontak
+- ⬜ Social Media
+- ⬜ SMTP
+- ⬜ Analytics
+
+---
+
+# PHASE 9 — SEO
+
+## Technical SEO
+
+- ⬜ Sitemap.xml
+- ⬜ Robots.txt
+- ⬜ Canonical URL
+- ⬜ Structured Data
+- ⬜ Breadcrumb
+- ⬜ Open Graph
+- ⬜ Twitter Card
+
+---
+
+## On-Page SEO
+
+- ⬜ Meta Title
+- ⬜ Meta Description
+- ⬜ Heading Structure
+- ⬜ Internal Link
+- ⬜ Image Alt
+- ⬜ Schema Article
+- ⬜ Schema FAQ
+
+---
+
+## Landing Pages SEO
+
+- ⬜ Website untuk Seller Shopee
+- ⬜ Website untuk Seller Tokopedia
+- ⬜ Website untuk Online Shop
+- ⬜ Website untuk UMKM
+- ⬜ Landing Page Bisnis
+- ⬜ Website E-Commerce
+
+---
+
+# PHASE 10 — PERFORMANCE
+
+- ⬜ Lazy Loading
+- ⬜ Image Optimization
+- ⬜ Asset Minification
+- ⬜ Cache Optimization
+- ⬜ Database Optimization
+- ⬜ Lighthouse > 90
+- ⬜ Core Web Vitals
+
+---
+
+# PHASE 11 — SECURITY
+
+- ⬜ CSRF Protection
+- ⬜ XSS Protection
+- ⬜ SQL Injection Protection
+- ⬜ Rate Limiting
+- ⬜ Authorization Policy
+- ⬜ Security Headers
+
+---
+
+# PHASE 12 — TESTING
+
+- ⬜ Feature Test
+- ⬜ Unit Test
+- ⬜ Form Validation Test
+- ⬜ Authentication Test
+- ⬜ CRUD Test
+- ⬜ SEO Validation
+- ⬜ Responsive Testing
+
+---
+
+# PHASE 13 — DEPLOYMENT
+
+- ⬜ Production Environment
+- ⬜ SSL
+- ⬜ Backup Database
+- ⬜ Queue Worker
+- ⬜ Scheduler
+- ⬜ Monitoring
+- ⬜ Error Logging
+
+---
+
+# CONTENT TODO
+
+## Landing Page
+
+- ⬜ Headline Hero
+- ⬜ Subheadline
+- ⬜ Pain Copywriting
+- ⬜ Solution Copywriting
+- ⬜ CTA Copywriting
+- ⬜ FAQ Copywriting
+
+---
+
+## Program
+
+- ⬜ START
+- ⬜ GROW
+- ⬜ SCALE
+- ⬜ EMPIRE
+
+---
+
+## Portfolio
+
+- ⬜ Minimal 5 Studi Kasus
+
+---
+
+## Testimonial
+
+- ⬜ Minimal 10 Testimoni
+
+---
+
+## Blog
+
+Target awal:
+
+- ⬜ 10 Artikel "Website untuk Seller Shopee"
+- ⬜ 10 Artikel "Website untuk Seller Tokopedia"
+- ⬜ 10 Artikel "Website untuk UMKM"
+- ⬜ 10 Artikel "Brand & Repeat Order"
+- ⬜ 10 Artikel "Digital Marketing"
+
+Total target awal:
+
+**50 artikel SEO**
+
+---
+
+# BUSINESS PRIORITY
+
+Urutan pengerjaan yang **tidak boleh diubah**:
+
+1. 🥇 Landing Page
+2. 🥇 Audit Bisnis Gratis
+3. 🥇 Program Layanan
+4. 🥇 Portfolio
+5. 🥇 Contact & WhatsApp CTA
+6. 🥈 Blog SEO
+7. 🥈 Dashboard CMS
+8. 🥈 Lead Manager
+9. 🥉 SEO Manager
+10. 🥉 Media Library
+
+---
+
+# SUCCESS CHECKLIST
+
+Project dianggap siap diluncurkan apabila seluruh poin berikut telah terpenuhi:
+
+- ⬜ Landing Page siap digunakan.
+- ⬜ CTA Audit Bisnis Gratis berfungsi.
+- ⬜ Form Lead tersimpan ke database.
+- ⬜ WhatsApp CTA berfungsi.
+- ⬜ Minimal 5 Portfolio dipublikasikan.
+- ⬜ Minimal 20 Artikel SEO dipublikasikan.
+- ⬜ Minimal 10 FAQ tersedia.
+- ⬜ SEO dasar telah diimplementasikan.
+- ⬜ Website responsif di desktop, tablet, dan mobile.
+- ⬜ Lighthouse Performance minimal 90.
+
+---
+
+# FINAL GOAL
+
+Tujuan utama project ini bukan sekadar menyelesaikan website, tetapi membangun **mesin akuisisi pelanggan** yang bekerja secara berkelanjutan.
+
+Ukuran keberhasilan project adalah:
+
+- Website menghasilkan lead secara konsisten.
+- Lead berubah menjadi meeting.
+- Meeting berubah menjadi project.
+- Project menghasilkan repeat order dan referral.
+- SEO dan konten menjadi sumber traffic organik jangka panjang.
+- Website menjadi aset bisnis utama Trinova dalam memperoleh klien baru.

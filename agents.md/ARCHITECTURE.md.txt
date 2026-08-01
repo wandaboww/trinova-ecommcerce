@@ -1,0 +1,789 @@
+# ARCHITECTURE.md
+
+# Trinova Landing Page & Digital Growth Platform
+
+# Architecture Principle
+
+Project menggunakan arsitektur yang bersih (Clean Architecture) dengan pendekatan:
+
+```
+Controller
+    ↓
+Form Request
+    ↓
+Service
+    ↓
+Repository
+    ↓
+Model
+    ↓
+Database
+```
+
+Controller tidak boleh berisi business logic.
+
+Business logic harus berada di dalam Service.
+
+Repository bertanggung jawab terhadap query database.
+
+Model hanya merepresentasikan data.
+
+Blade hanya bertugas menampilkan data.
+
+---
+
+# Project Structure
+
+```
+app
+│
+├── Actions
+│
+├── Console
+│
+├── Enums
+│
+├── Helpers
+│
+├── Http
+│   ├── Controllers
+│   │
+│   ├── Requests
+│   │
+│   ├── Middleware
+│   │
+│   └── Resources
+│
+├── Models
+│
+├── Repositories
+│
+├── Services
+│
+├── DTO
+│
+├── Traits
+│
+├── Policies
+│
+└── Providers
+```
+
+---
+
+# Resources
+
+```
+resources
+│
+├── views
+│   │
+│   ├── landing
+│   │
+│   ├── blog
+│   │
+│   ├── program
+│   │
+│   ├── portfolio
+│   │
+│   ├── faq
+│   │
+│   ├── components
+│   │
+│   └── layouts
+│
+├── css
+│
+└── js
+```
+
+---
+
+# Database
+
+```
+database
+│
+├── migrations
+│
+├── factories
+│
+├── seeders
+```
+
+---
+
+# Routes
+
+```
+routes
+│
+├── web.php
+│
+├── admin.php
+│
+└── api.php
+```
+
+---
+
+# Public
+
+```
+public
+│
+├── images
+│
+├── uploads
+│
+└── icons
+```
+
+---
+
+# Modules
+
+Project dibagi menjadi beberapa modul utama.
+
+```
+Landing Page
+
+Blog
+
+Program
+
+Portfolio
+
+FAQ
+
+Lead
+
+SEO
+
+CMS
+
+Authentication
+
+Dashboard
+```
+
+Setiap modul memiliki Controller, Service, Repository, Request, Model, dan View masing-masing.
+
+---
+
+# Layer Responsibility
+
+## Controller
+
+Lokasi
+
+```
+app/Http/Controllers
+```
+
+Tugas:
+
+- menerima request
+- memanggil Service
+- mengembalikan View atau Response
+
+Tidak boleh:
+
+- query database
+- business logic
+- validasi manual
+
+---
+
+## Form Request
+
+Lokasi
+
+```
+app/Http/Requests
+```
+
+Tugas:
+
+- validasi input
+- authorization
+
+Semua validasi wajib menggunakan Form Request.
+
+---
+
+## Service
+
+Lokasi
+
+```
+app/Services
+```
+
+Service adalah pusat business logic.
+
+Semua proses seperti:
+
+- membuat data
+- update
+- delete
+- generate slug
+- upload file
+- sinkronisasi data
+- SEO
+- workflow
+
+ditulis di sini.
+
+Controller hanya memanggil Service.
+
+---
+
+## Repository
+
+Lokasi
+
+```
+app/Repositories
+```
+
+Semua query database ditempatkan di sini.
+
+Contoh:
+
+```
+ArticleRepository
+
+ProgramRepository
+
+LeadRepository
+
+PortfolioRepository
+```
+
+Repository bertanggung jawab:
+
+- find
+- paginate
+- filter
+- search
+- create
+- update
+- delete
+
+---
+
+## Model
+
+Lokasi
+
+```
+app/Models
+```
+
+Model hanya berisi:
+
+- relationship
+- casts
+- accessor
+- mutator
+- scope sederhana
+
+Business logic tidak boleh ditaruh di Model.
+
+---
+
+## Blade
+
+Lokasi
+
+```
+resources/views
+```
+
+Blade hanya bertugas:
+
+- looping
+- if sederhana
+- menampilkan data
+
+Blade tidak boleh:
+
+- query database
+- business logic
+- perhitungan kompleks
+
+---
+
+# Folder Per Module
+
+Contoh:
+
+Blog
+
+```
+Controller
+
+BlogController
+
+↓
+
+Service
+
+BlogService
+
+↓
+
+Repository
+
+BlogRepository
+
+↓
+
+Model
+
+Article
+
+↓
+
+Views
+
+resources/views/blog
+```
+
+Program
+
+```
+ProgramController
+
+↓
+
+ProgramService
+
+↓
+
+ProgramRepository
+
+↓
+
+Program
+
+↓
+
+resources/views/program
+```
+
+Landing Page
+
+```
+LandingController
+
+↓
+
+LandingService
+
+↓
+
+LandingRepository
+
+↓
+
+LandingSetting
+
+↓
+
+resources/views/landing
+```
+
+---
+
+# Request Flow
+
+## Menampilkan Landing Page
+
+```
+Visitor
+
+↓
+
+LandingController
+
+↓
+
+LandingService
+
+↓
+
+LandingRepository
+
+↓
+
+Database
+
+↓
+
+LandingService
+
+↓
+
+LandingController
+
+↓
+
+Blade
+
+↓
+
+Browser
+```
+
+---
+
+## Submit Audit Gratis
+
+```
+Visitor
+
+↓
+
+Landing Page
+
+↓
+
+Audit Form
+
+↓
+
+StoreLeadRequest
+
+↓
+
+LeadController
+
+↓
+
+LeadService
+
+↓
+
+LeadRepository
+
+↓
+
+Database
+
+↓
+
+Success Page
+```
+
+---
+
+## Membuat Artikel
+
+```
+Admin
+
+↓
+
+BlogController
+
+↓
+
+StoreArticleRequest
+
+↓
+
+BlogService
+
+↓
+
+BlogRepository
+
+↓
+
+Article Model
+
+↓
+
+Database
+```
+
+---
+
+# SEO Flow
+
+```
+Google
+
+↓
+
+Article
+
+↓
+
+Landing Page
+
+↓
+
+CTA
+
+↓
+
+Audit Gratis
+
+↓
+
+Lead
+
+↓
+
+Project
+```
+
+SEO bukan tujuan.
+
+SEO adalah mesin traffic.
+
+---
+
+# Sales Funnel
+
+```
+TikTok
+
+↓
+
+Landing Page
+
+↓
+
+Pain
+
+↓
+
+Paradigm
+
+↓
+
+Program
+
+↓
+
+Audit Gratis
+
+↓
+
+WhatsApp
+
+↓
+
+Meeting
+
+↓
+
+Proposal
+
+↓
+
+Project
+
+↓
+
+Maintenance
+
+↓
+
+Upselling
+```
+
+Semua halaman harus mendukung funnel ini.
+
+---
+
+# CMS Flow
+
+Admin Login
+
+↓
+
+Dashboard
+
+↓
+
+Kelola Artikel
+
+↓
+
+Kelola Landing Page
+
+↓
+
+Kelola Program
+
+↓
+
+Kelola Portfolio
+
+↓
+
+Kelola FAQ
+
+↓
+
+Kelola SEO
+
+↓
+
+Publish
+
+↓
+
+Website
+
+---
+
+# Naming Convention
+
+Controller
+
+```
+LandingController
+BlogController
+ProgramController
+LeadController
+PortfolioController
+```
+
+Service
+
+```
+LandingService
+BlogService
+ProgramService
+LeadService
+```
+
+Repository
+
+```
+LandingRepository
+BlogRepository
+ProgramRepository
+LeadRepository
+```
+
+Request
+
+```
+StoreLeadRequest
+UpdateProgramRequest
+StoreArticleRequest
+```
+
+Model
+
+```
+Article
+Program
+Lead
+Portfolio
+Faq
+LandingSetting
+```
+
+---
+
+# Development Rules
+
+Saat membuat fitur baru, AI wajib mengikuti urutan berikut:
+
+1.
+
+Buat Migration
+
+↓
+
+2.
+
+Buat Model
+
+↓
+
+3.
+
+Buat Repository
+
+↓
+
+4.
+
+Buat Service
+
+↓
+
+5.
+
+Buat Form Request
+
+↓
+
+6.
+
+Buat Controller
+
+↓
+
+7.
+
+Tambahkan Route
+
+↓
+
+8.
+
+Buat Blade
+
+↓
+
+9.
+
+Lakukan Testing
+
+---
+
+# AI Coding Rules
+
+AI harus selalu menentukan layer yang tepat sebelum menulis kode.
+
+| Kebutuhan | Lokasi |
+|-----------|--------|
+| Validasi Form | Form Request |
+| Business Logic | Service |
+| Query Database | Repository |
+| Relationship | Model |
+| Routing | routes/web.php |
+| Tampilan | Blade |
+| Middleware | Middleware |
+| Authorization | Policy |
+| Helper Function | Helpers |
+| Enum | Enums |
+| DTO | DTO |
+
+---
+
+# Project Goal
+
+Project ini bukan sekadar website company profile.
+
+Project ini adalah **Marketing Engine** yang memiliki satu tujuan utama:
+
+Mengubah traffic menjadi lead.
+
+Mengubah lead menjadi project.
+
+Mengubah project menjadi repeat client.
+
+Seluruh pengembangan fitur, desain UI, struktur halaman, maupun implementasi kode harus selalu mendukung tujuan tersebut.
+
+Jika suatu fitur tidak memberikan dampak terhadap conversion, trust, user experience, SEO, atau efisiensi operasional, maka fitur tersebut harus dievaluasi kembali sebelum diimplementasikan.

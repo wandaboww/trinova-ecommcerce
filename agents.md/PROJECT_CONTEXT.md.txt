@@ -1,0 +1,324 @@
+# Nama Aplikasi
+
+**Trinova Landing Page & Digital Growth Platform**
+
+Platform digital yang dirancang sebagai mesin pemasaran (marketing engine) untuk membantu Trinova memperoleh project pembuatan website dari owner online shop dan seller marketplace yang telah berkembang.
+
+Aplikasi ini bukan sekadar website company profile, melainkan sebuah **sales funnel** yang mengedukasi calon pelanggan mengenai pentingnya memiliki aset digital sendiri, membangun kepercayaan, menghasilkan prospek (lead), serta mengarahkan pengunjung menjadi calon klien melalui layanan **Audit Bisnis Gratis**.
+
+---
+
+# Tujuan
+
+Membangun sebuah platform digital yang mampu:
+
+- Menghasilkan project website secara konsisten.
+- Mengedukasi seller marketplace mengenai pentingnya memiliki aset digital.
+- Mengubah cara berpikir owner bisnis dari bergantung pada marketplace menjadi membangun brand sendiri.
+- Menghasilkan lead berkualitas melalui strategi inbound marketing.
+- Menjadi pusat aktivitas digital marketing Trinova.
+- Mendukung strategi SEO jangka panjang.
+- Mendukung distribusi traffic dari TikTok, Instagram, Google, dan media digital lainnya.
+- Menjadi aset digital utama Trinova yang terus berkembang.
+
+---
+
+# Role
+
+## 1. Visitor
+
+Pengunjung yang berasal dari:
+
+- Google Search
+- TikTok
+- Instagram
+- Facebook
+- WhatsApp
+- Referral
+
+Hak akses:
+
+- Membaca artikel.
+- Melihat landing page.
+- Melihat portfolio.
+- Melihat program layanan.
+- Mengajukan Audit Bisnis Gratis.
+- Menghubungi Trinova.
+
+---
+
+## 2. Calon Klien (Lead)
+
+Visitor yang telah melakukan konversi melalui:
+
+- Form Audit Bisnis Gratis.
+- Form Konsultasi.
+- WhatsApp.
+- Contact Form.
+
+Hak akses:
+
+- Mengirim data bisnis.
+- Menjadwalkan konsultasi.
+- Berkomunikasi dengan tim Trinova.
+
+---
+
+## 3. Administrator
+
+Mengelola seluruh sistem.
+
+Hak akses:
+
+- Mengelola landing page.
+- Mengelola artikel blog.
+- Mengelola halaman SEO.
+- Mengelola portfolio.
+- Mengelola program layanan.
+- Mengelola FAQ.
+- Mengelola testimonial.
+- Mengelola lead.
+- Mengelola CTA.
+- Mengelola media.
+- Mengelola metadata SEO.
+
+---
+
+## 4. Content Manager
+
+Mengelola seluruh konten pemasaran.
+
+Hak akses:
+
+- Membuat artikel.
+- Mengubah artikel.
+- Menjadwalkan publikasi.
+- Mengelola kategori.
+- Mengelola tag.
+- Mengelola halaman layanan.
+- Mengoptimalkan SEO.
+
+---
+
+# Modul
+
+## Landing Page
+
+Menampilkan halaman utama yang berfungsi sebagai sales page dengan struktur:
+
+- Hero
+- Pain
+- Paradigm Shift
+- Solution
+- Program
+- Portfolio
+- FAQ
+- CTA
+- Footer
+
+---
+
+## Program Layanan
+
+Menampilkan seluruh program transformasi digital:
+
+- START
+- GROW
+- SCALE
+- EMPIRE
+
+Setiap program berisi:
+
+- Tujuan
+- Target pelanggan
+- Fasilitas
+- Outcome
+- CTA
+
+---
+
+## Portfolio
+
+Menampilkan studi kasus dengan format:
+
+Masalah
+
+↓
+
+Solusi
+
+↓
+
+Hasil
+
+Bukan hanya screenshot website.
+
+---
+
+## Blog
+
+Pusat strategi SEO.
+
+Berisi artikel yang membahas:
+
+- Website untuk Seller Shopee
+- Website untuk Tokopedia
+- Website untuk Online Shop
+- Repeat Order
+- Brand
+- Marketplace
+- Profit
+- Aset Digital
+- Digital Marketing
+
+---
+
+## Audit Bisnis Gratis
+
+Modul utama konversi.
+
+Berfungsi untuk:
+
+- Mengumpulkan data calon klien.
+- Menjadwalkan konsultasi.
+- Menjadi pintu masuk proses penjualan.
+
+---
+
+## FAQ
+
+Menjawab pertanyaan yang sering diajukan calon pelanggan mengenai:
+
+- Website
+- Marketplace
+- SEO
+- Landing Page
+- E-Commerce
+- Proses pengerjaan
+- Biaya
+- Maintenance
+
+---
+
+## Testimonial
+
+Menampilkan pengalaman klien untuk meningkatkan kepercayaan.
+
+---
+
+## Contact
+
+Menyediakan berbagai jalur komunikasi:
+
+- WhatsApp
+- Email
+- Form Kontak
+
+---
+
+## SEO Pages
+
+Halaman layanan yang dioptimalkan berdasarkan keyword.
+
+Contoh:
+
+- Website untuk Seller Shopee
+- Website untuk Seller Tokopedia
+- Website untuk Online Shop
+- Website untuk UMKM
+- Landing Page
+- Website E-Commerce
+
+---
+
+## CMS
+
+Content Management System untuk mengelola:
+
+- Landing Page
+- Artikel
+- Program
+- Portfolio
+- FAQ
+- Testimonial
+- Metadata SEO
+- Banner
+- CTA
+
+---
+
+# Goal
+
+## Goal Bisnis
+
+Menjadikan website sebagai mesin pemasaran digital yang mampu menghasilkan project secara konsisten tanpa bergantung pada promosi manual.
+
+---
+
+## Goal Marketing
+
+- Mendatangkan traffic organik melalui SEO.
+- Mendatangkan traffic dari TikTok.
+- Mengubah visitor menjadi lead.
+- Mengubah lead menjadi project.
+- Membangun database calon pelanggan.
+
+---
+
+## Goal Branding
+
+Membangun persepsi bahwa Trinova adalah partner digital yang membantu seller marketplace membangun aset digital dan mengurangi ketergantungan terhadap marketplace.
+
+---
+
+## Goal Penjualan
+
+Meningkatkan jumlah:
+
+- Audit Bisnis Gratis.
+- Konsultasi.
+- Proposal.
+- Closing project.
+- Repeat Order.
+
+---
+
+## Goal Jangka Panjang
+
+Membangun ekosistem digital Trinova yang terdiri dari:
+
+TikTok
+
+↓
+
+Landing Page
+
+↓
+
+SEO
+
+↓
+
+Blog
+
+↓
+
+Audit Bisnis Gratis
+
+↓
+
+Project
+
+↓
+
+Maintenance
+
+↓
+
+Upselling
+
+↓
+
+Repeat Client
+
+Sehingga Trinova memiliki mesin akuisisi pelanggan yang terus bekerja, menghasilkan lead berkualitas, serta mendukung pertumbuhan bisnis secara berkelanjutan.

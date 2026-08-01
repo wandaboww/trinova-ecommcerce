@@ -1,0 +1,559 @@
+# AI Rules
+
+## Project Vision
+
+Trinova bukan sekadar software house.
+
+Trinova hadir untuk membantu owner online shop dan seller marketplace membangun aset digital yang mereka miliki sendiri sehingga bisnis tidak sepenuhnya bergantung pada marketplace.
+
+Website bukan produk utama.
+
+Website adalah alat.
+
+Yang dijual adalah transformasi bisnis.
+
+---
+
+## Mission
+
+- Membantu seller marketplace memiliki aset digital sendiri.
+- Membantu bisnis meningkatkan profit melalui kanal penjualan sendiri.
+- Mengurangi ketergantungan terhadap marketplace.
+- Membangun brand yang berkelanjutan.
+- Menjadikan website sebagai investasi bisnis, bukan sekadar biaya.
+
+---
+
+## Core Philosophy
+
+Marketplace membantu bisnis mendapatkan pelanggan.
+
+Website membantu bisnis memiliki pelanggan.
+
+---
+
+## Target Market
+
+Target utama bukan seluruh UMKM.
+
+Prioritaskan:
+
+- Seller Shopee
+- Seller Tokopedia
+- Seller TikTok Shop
+- Online Shop yang sudah berkembang
+- UMKM dengan omzet puluhan hingga ratusan juta rupiah per bulan
+- Bisnis yang mulai merasakan biaya marketplace semakin besar
+- Bisnis yang ingin membangun brand sendiri
+
+---
+
+## Ideal Customer
+
+Karakteristik calon klien:
+
+- Sudah memiliki penjualan yang stabil.
+- Sudah menggunakan iklan marketplace.
+- Sudah memiliki admin.
+- Sudah melakukan live selling.
+- Sudah memiliki ribuan review.
+- Sudah mengirim banyak pesanan setiap hari.
+- Mulai memikirkan profit, bukan sekadar omzet.
+
+---
+
+## Positioning
+
+Jangan memposisikan Trinova sebagai:
+
+- Jasa Website
+- Web Developer
+- Software House
+
+Posisikan Trinova sebagai:
+
+Partner Digital yang membantu seller marketplace membangun aset digital agar bisnis dapat berkembang tanpa sepenuhnya bergantung pada marketplace.
+
+---
+
+## Enemy
+
+Musuh utama bukan marketplace.
+
+Musuh utama adalah:
+
+Ketergantungan terhadap marketplace.
+
+Marketplace adalah partner.
+
+Ketergantungan adalah risiko.
+
+---
+
+## Core Message
+
+Selalu gunakan pesan utama berikut.
+
+Marketplace membantu Anda mendapatkan pelanggan.
+
+Website membantu Anda memiliki pelanggan.
+
+Alternatif pesan:
+
+- Bangun Brand, Bukan Ketergantungan.
+- Dari Seller Marketplace Menjadi Brand Mandiri.
+- Miliki Pelanggan, Bukan Sekadar Toko.
+
+---
+
+## Sales Strategy
+
+Selalu jual outcome.
+
+Jangan menjual:
+
+- Landing Page
+- Website
+- Hosting
+- Domain
+- SEO
+
+Yang dijual:
+
+- Brand
+- Repeat Order
+- Database Pelanggan
+- Profit
+- Kepemilikan pelanggan
+- Aset Digital
+- Pertumbuhan bisnis
+
+---
+
+## Sales Funnel
+
+TikTok
+
+↓
+
+Landing Page
+
+↓
+
+Audit Bisnis Gratis
+
+↓
+
+Meeting
+
+↓
+
+Proposal
+
+↓
+
+Project
+
+↓
+
+Maintenance
+
+↓
+
+Upselling
+
+Landing page bertugas menghasilkan percakapan.
+
+Bukan sekadar visitor.
+
+---
+
+## Product Programs
+
+### START
+
+Target:
+
+Seller yang baru membangun identitas digital.
+
+Outcome:
+
+Memiliki website profesional sebagai aset digital pertama.
+
+---
+
+### GROW
+
+Target:
+
+Seller dengan penjualan stabil.
+
+Outcome:
+
+Mulai mendapatkan pelanggan sendiri dan membangun repeat order.
+
+---
+
+### SCALE
+
+Target:
+
+Bisnis yang ingin mengurangi ketergantungan marketplace.
+
+Outcome:
+
+Website menjadi mesin penjualan.
+
+---
+
+### EMPIRE
+
+Target:
+
+Perusahaan yang ingin melakukan transformasi digital.
+
+Outcome:
+
+Website menjadi pusat ekosistem digital bisnis.
+
+---
+
+## Landing Page Rules
+
+Landing page bukan company profile.
+
+Landing page adalah sales page.
+
+Prioritas isi:
+
+1. Hero
+2. Pain
+3. Paradigm Shift
+4. Solution
+5. Programs
+6. Portfolio
+7. FAQ
+8. CTA
+9. Footer
+
+Proporsi konten:
+
+80% membahas calon pelanggan.
+
+20% membahas Trinova.
+
+---
+
+## Hero Rules
+
+Headline harus menghentikan perhatian.
+
+Contoh pendekatan:
+
+- Order makin ramai, tapi keuntungan terasa jalan di tempat?
+- Marketplace ramai. Tapi apakah pelanggan itu benar-benar milik Anda?
+
+CTA utama:
+
+Audit Bisnis Gratis.
+
+Jangan gunakan CTA:
+
+Hubungi Kami
+
+Pesan Sekarang
+
+---
+
+## Pain Rules
+
+Fokus pada masalah bisnis.
+
+Jangan membahas teknologi.
+
+Contoh:
+
+- Biaya admin marketplace.
+- Gratis ongkir.
+- Voucher.
+- Margin semakin tipis.
+- Sulit mendapatkan repeat order.
+- Pelanggan hanya mengingat marketplace.
+- Risiko perubahan algoritma.
+- Risiko akun dibatasi.
+
+---
+
+## Paradigm Rules
+
+Selalu tanamkan perubahan cara berpikir.
+
+Marketplace
+
+↓
+
+Pelanggan Baru
+
+↓
+
+Website
+
+↓
+
+WhatsApp
+
+↓
+
+Database Pelanggan
+
+↓
+
+Repeat Order
+
+↓
+
+Brand
+
+↓
+
+Aset Digital
+
+---
+
+## Content Rules
+
+Konten tidak mengajarkan website.
+
+Konten mengubah cara berpikir owner bisnis.
+
+Fokus pembahasan:
+
+- Profit
+- Brand
+- Repeat Order
+- Kepemilikan pelanggan
+- Ketergantungan marketplace
+- Aset Digital
+- Strategi bisnis
+
+Website muncul sebagai solusi.
+
+Bukan sebagai topik utama.
+
+---
+
+## TikTok Rules
+
+Gunakan akun brand.
+
+Contoh:
+
+@trinova.id
+
+Fokus konten:
+
+80%
+
+Pain + Edukasi Bisnis
+
+20%
+
+Solusi
+
+Jangan membuat konten:
+
+- Tutorial Laravel
+- Tutorial Hosting
+- Tutorial Coding
+
+---
+
+## SEO Rules
+
+Gunakan domain brand.
+
+Contoh:
+
+trinova.id
+
+Optimasi dilakukan melalui halaman dan artikel.
+
+Prioritas keyword:
+
+- website untuk seller shopee
+- website untuk seller tokopedia
+- website untuk toko online
+- website untuk online shop
+- website untuk umkm
+- website ecommerce
+- website untuk penjual online
+- jasa website online shop
+
+Artikel harus menjawab masalah owner bisnis.
+
+Bukan membahas teknologi.
+
+---
+
+## CTA Rules
+
+CTA utama:
+
+Audit Bisnis Gratis
+
+CTA pendukung:
+
+- Konsultasi Gratis
+- Jadwalkan Audit
+- Diskusikan Bisnis Anda
+
+Hindari CTA:
+
+- Pesan Sekarang
+- Hubungi Kami
+
+---
+
+## Portfolio Rules
+
+Jangan hanya menampilkan screenshot website.
+
+Gunakan format:
+
+Masalah
+
+↓
+
+Solusi
+
+↓
+
+Hasil
+
+---
+
+## Blog Rules
+
+Target:
+
+Membangun aset SEO jangka panjang.
+
+Minimal:
+
+2 artikel setiap minggu.
+
+Tema utama:
+
+- Website untuk seller marketplace
+- Repeat Order
+- Brand
+- Profit
+- Marketplace
+- Digital Asset
+- Bisnis Online
+
+---
+
+## Daily KPI
+
+Fokus pada aktivitas yang menghasilkan project.
+
+Ukur setiap hari:
+
+- Jumlah owner yang dihubungi.
+- Jumlah percakapan.
+- Jumlah audit yang dijadwalkan.
+- Jumlah proposal.
+- Jumlah project masuk.
+
+Jangan menjadikan follower sebagai KPI utama.
+
+---
+
+## Priority
+
+90 hari pertama.
+
+80%
+
+Aktivitas menghasilkan uang.
+
+- Landing Page
+- Outbound
+- Follow Up
+- Proposal
+- Closing
+- Delivery
+
+20%
+
+Membangun aset.
+
+- TikTok
+- SEO
+- Blog
+- Branding
+
+Cash Flow lebih penting daripada Branding.
+
+---
+
+## Long Term Goal
+
+Membangun mesin marketing yang mampu menghasilkan project secara konsisten melalui:
+
+- SEO
+- TikTok
+- Landing Page
+- Blog
+- Outbound
+- Portfolio
+- Testimoni
+
+---
+
+## Success Indicator
+
+Trinova dianggap berhasil apabila:
+
+- Memiliki alur project yang konsisten.
+- Memiliki sumber lead dari SEO.
+- Memiliki sumber lead dari TikTok.
+- Memiliki database calon pelanggan.
+- Memiliki portfolio yang terus berkembang.
+- Memiliki pelanggan repeat order.
+
+---
+
+## Decision Rules
+
+Dalam setiap keputusan bisnis, prioritaskan:
+
+1. Aktivitas yang menghasilkan project.
+2. Aktivitas yang meningkatkan conversion.
+3. Aktivitas yang memperkuat kepercayaan.
+4. Aktivitas yang membangun aset jangka panjang.
+
+---
+
+## Golden Rules
+
+Selalu ingat.
+
+Website bukan produk.
+
+Website adalah alat.
+
+Brand adalah aset.
+
+Pelanggan adalah investasi.
+
+Profit adalah tujuan.
+
+Marketplace adalah partner.
+
+Aset digital adalah masa depan bisnis.
+
+Selalu jual hasil.
+
+Jangan menjual teknologi.

@@ -1,0 +1,751 @@
+# API.md
+
+# Trinova Landing Page & Digital Growth Platform
+
+Dokumen ini mendefinisikan seluruh API internal maupun eksternal yang digunakan oleh aplikasi.
+
+Project ini berorientasi pada **Server Rendered Application (Laravel + Livewire)** sehingga API bukan menjadi jalur utama komunikasi aplikasi.
+
+API hanya digunakan apabila benar-benar diperlukan.
+
+---
+
+# API Philosophy
+
+Prioritas komunikasi aplikasi:
+
+```
+Livewire
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+Database
+```
+
+Gunakan API hanya apabila:
+
+- dibutuhkan oleh aplikasi pihak ketiga
+- dibutuhkan oleh Mobile Apps
+- dibutuhkan integrasi eksternal
+- dibutuhkan AJAX yang kompleks
+- dibutuhkan webhook
+
+Jangan membuat API hanya karena bisa.
+
+---
+
+# API Version
+
+```
+/api/v1
+```
+
+Seluruh endpoint wajib menggunakan versioning.
+
+Contoh
+
+```
+/api/v1/leads
+```
+
+---
+
+# Authentication
+
+Gunakan Laravel Sanctum.
+
+```
+Bearer Token
+```
+
+Endpoint publik tidak memerlukan authentication.
+
+Endpoint Dashboard wajib menggunakan authentication.
+
+---
+
+# Response Format
+
+Semua response menggunakan format yang konsisten.
+
+## Success
+
+```json
+{
+    "success": true,
+    "message": "Success",
+    "data": {}
+}
+```
+
+---
+
+## Validation Error
+
+```json
+{
+    "success": false,
+    "message": "Validation Error",
+    "errors": {}
+}
+```
+
+---
+
+## Server Error
+
+```json
+{
+    "success": false,
+    "message": "Internal Server Error"
+}
+```
+
+---
+
+# Public API
+
+API yang dapat diakses oleh Landing Page.
+
+---
+
+## Submit Audit Gratis
+
+```
+POST
+
+/api/v1/leads
+```
+
+Body
+
+```json
+{
+    "name": "",
+    "company": "",
+    "phone": "",
+    "email": "",
+    "business_type": "",
+    "marketplace": "",
+    "monthly_revenue": "",
+    "team_size": "",
+    "message": ""
+}
+```
+
+Response
+
+```json
+{
+    "success": true,
+    "message": "Lead berhasil dibuat."
+}
+```
+
+Flow
+
+```
+Landing Page
+
+↓
+
+API
+
+↓
+
+LeadService
+
+↓
+
+LeadRepository
+
+↓
+
+Database
+```
+
+---
+
+## Contact Form
+
+```
+POST
+
+/api/v1/contact
+```
+
+Body
+
+```json
+{
+    "name": "",
+    "email": "",
+    "phone": "",
+    "subject": "",
+    "message": ""
+}
+```
+
+---
+
+## Newsletter
+
+```
+POST
+
+/api/v1/newsletter
+```
+
+Body
+
+```json
+{
+    "email": ""
+}
+```
+
+---
+
+# CMS API
+
+Endpoint yang hanya digunakan oleh Dashboard.
+
+Authentication wajib.
+
+---
+
+## Dashboard Statistics
+
+```
+GET
+
+/api/v1/dashboard
+```
+
+Menghasilkan:
+
+- Total Leads
+- Total Articles
+- Total Portfolio
+- Total Visitor
+- Total Audit Request
+
+---
+
+## Leads
+
+### List Lead
+
+```
+GET
+
+/api/v1/leads
+```
+
+---
+
+### Detail Lead
+
+```
+GET
+
+/api/v1/leads/{id}
+```
+
+---
+
+### Update Lead
+
+```
+PUT
+
+/api/v1/leads/{id}
+```
+
+---
+
+### Delete Lead
+
+```
+DELETE
+
+/api/v1/leads/{id}
+```
+
+---
+
+## Lead Activities
+
+### Tambah Activity
+
+```
+POST
+
+/api/v1/leads/{id}/activities
+```
+
+---
+
+### Riwayat Activity
+
+```
+GET
+
+/api/v1/leads/{id}/activities
+```
+
+---
+
+## Articles
+
+### List
+
+```
+GET
+
+/api/v1/articles
+```
+
+---
+
+### Detail
+
+```
+GET
+
+/api/v1/articles/{id}
+```
+
+---
+
+### Create
+
+```
+POST
+
+/api/v1/articles
+```
+
+---
+
+### Update
+
+```
+PUT
+
+/api/v1/articles/{id}
+```
+
+---
+
+### Delete
+
+```
+DELETE
+
+/api/v1/articles/{id}
+```
+
+---
+
+## Programs
+
+```
+GET
+
+/api/v1/programs
+```
+
+```
+POST
+
+/api/v1/programs
+```
+
+```
+PUT
+
+/api/v1/programs/{id}
+```
+
+```
+DELETE
+
+/api/v1/programs/{id}
+```
+
+---
+
+## Portfolio
+
+```
+GET
+
+/api/v1/portfolios
+```
+
+```
+POST
+
+/api/v1/portfolios
+```
+
+```
+PUT
+
+/api/v1/portfolios/{id}
+```
+
+```
+DELETE
+
+/api/v1/portfolios/{id}
+```
+
+---
+
+## FAQ
+
+```
+GET
+
+/api/v1/faqs
+```
+
+```
+POST
+
+/api/v1/faqs
+```
+
+```
+PUT
+
+/api/v1/faqs/{id}
+```
+
+```
+DELETE
+
+/api/v1/faqs/{id}
+```
+
+---
+
+## Testimonial
+
+```
+GET
+
+/api/v1/testimonials
+```
+
+```
+POST
+
+/api/v1/testimonials
+```
+
+```
+PUT
+
+/api/v1/testimonials/{id}
+```
+
+```
+DELETE
+
+/api/v1/testimonials/{id}
+```
+
+---
+
+## Media
+
+Upload file.
+
+```
+POST
+
+/api/v1/media
+```
+
+Multipart Form Data
+
+Response
+
+```json
+{
+    "url": "...",
+    "path": "...",
+    "filename": "..."
+}
+```
+
+---
+
+# Future Integration API
+
+API ini belum menjadi prioritas, namun struktur aplikasi harus mendukung implementasi di masa depan.
+
+---
+
+## WhatsApp Gateway
+
+Digunakan untuk:
+
+- Notifikasi Lead Baru
+- Reminder Meeting
+- Follow Up
+
+Contoh Service
+
+```
+WhatsAppService
+```
+
+---
+
+## Google Analytics
+
+Digunakan untuk:
+
+- Visitor
+- Event
+- Conversion
+
+Tidak perlu API khusus.
+
+Menggunakan Script Tracking.
+
+---
+
+## Google Search Console
+
+Digunakan untuk:
+
+- Sitemap
+- Indexing
+- Performance
+
+Tidak memerlukan endpoint API aplikasi.
+
+---
+
+## Google Business Profile
+
+Digunakan untuk meningkatkan SEO lokal.
+
+Tidak memerlukan endpoint API aplikasi.
+
+---
+
+## Email Service
+
+Digunakan untuk:
+
+- Newsletter
+- Follow Up
+- Audit Confirmation
+
+Implementasi melalui Laravel Notification atau Mail.
+
+---
+
+## AI Chat Assistant
+
+Future.
+
+```
+POST
+
+/api/v1/chat
+```
+
+Digunakan sebagai AI Assistant website.
+
+---
+
+## CRM Integration
+
+Future.
+
+```
+POST
+
+/api/v1/crm/sync
+```
+
+Sinkronisasi Lead.
+
+---
+
+# Internal Service Flow
+
+Semua endpoint harus mengikuti alur berikut.
+
+```
+API Route
+
+↓
+
+Controller
+
+↓
+
+Form Request
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+Model
+
+↓
+
+Database
+```
+
+Controller tidak boleh berisi business logic.
+
+---
+
+# Validation Rules
+
+Semua endpoint wajib menggunakan:
+
+```
+Form Request
+```
+
+Tidak boleh melakukan validasi langsung di Controller.
+
+---
+
+# Authorization Rules
+
+Gunakan:
+
+- Policy
+- Gate
+- Middleware
+
+Jangan melakukan pengecekan role secara manual di Controller.
+
+---
+
+# Rate Limiting
+
+Public API
+
+```
+60 request / menit / IP
+```
+
+Authentication API
+
+```
+120 request / menit / user
+```
+
+Gunakan Laravel Rate Limiter.
+
+---
+
+# Error Handling
+
+Gunakan HTTP Status Code yang sesuai.
+
+| Status | Arti |
+|---------|------|
+| 200 | Success |
+| 201 | Created |
+| 400 | Bad Request |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+| 404 | Not Found |
+| 422 | Validation Error |
+| 500 | Internal Server Error |
+
+Jangan pernah mengembalikan stack trace ke client.
+
+---
+
+# API Coding Rules
+
+Selalu gunakan:
+
+- Form Request
+- Service Pattern
+- Repository Pattern
+- Resource Class untuk response JSON
+- Pagination untuk data list
+- Eager Loading untuk relationship
+
+Hindari:
+
+- Query di Controller
+- Query di Resource
+- Business Logic di Controller
+- Raw SQL tanpa kebutuhan khusus
+
+---
+
+# API Priority
+
+## Phase 1 (Wajib)
+
+- Submit Audit Gratis
+- Contact Form
+- Newsletter
+- Media Upload
+
+---
+
+## Phase 2
+
+- Dashboard API
+- Leads API
+- Portfolio API
+- Article API
+- Program API
+
+---
+
+## Phase 3
+
+- WhatsApp Integration
+- CRM Integration
+- AI Assistant
+- Analytics Integration
+
+---
+
+# Final Principle
+
+Aplikasi ini bukan API First.
+
+Aplikasi ini adalah **Conversion First**.
+
+API dibuat hanya apabila benar-benar memberikan nilai terhadap:
+
+- Conversion
+- Integrasi
+- Skalabilitas
+- Otomatisasi
+
+Apabila suatu fitur dapat diselesaikan dengan Livewire atau Server Side Rendering secara lebih sederhana, maka gunakan pendekatan tersebut dibanding membuat endpoint API baru.

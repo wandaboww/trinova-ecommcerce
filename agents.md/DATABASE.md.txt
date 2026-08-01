@@ -1,0 +1,1007 @@
+# DATABASE.md
+
+# Trinova Landing Page & Digital Growth Platform
+
+# Database Philosophy
+
+Database dirancang dengan prinsip:
+
+- Normalize First
+- Soft Delete bila diperlukan
+- UUID Ready
+- SEO Friendly
+- Scalable
+- Audit Friendly
+
+Semua tabel wajib memiliki:
+
+```sql
+id
+created_at
+updated_at
+```
+
+Untuk tabel penting gunakan:
+
+```sql
+deleted_at
+```
+
+---
+
+# Entity Relationship Overview
+
+```
+Users
+│
+├── Articles
+│       ├── Categories
+│       └── Tags
+│
+├── Programs
+│
+├── Portfolios
+│
+├── Testimonials
+│
+├── FAQs
+│
+└── Leads
+
+Landing Settings
+
+SEO Meta
+
+Media Library
+
+Contacts
+```
+
+---
+
+# USERS
+
+Administrator CMS.
+
+## Columns
+
+```
+id
+name
+email
+password
+role
+avatar
+phone
+remember_token
+created_at
+updated_at
+```
+
+## Relationships
+
+```
+User
+
+hasMany
+
+Articles
+
+Programs
+
+Portfolios
+```
+
+---
+
+# LANDING_SETTINGS
+
+Konfigurasi seluruh Landing Page.
+
+Hanya satu record aktif.
+
+## Columns
+
+```
+id
+
+hero_title
+
+hero_subtitle
+
+hero_cta
+
+hero_image
+
+pain_title
+
+pain_description
+
+paradigm_title
+
+paradigm_description
+
+cta_title
+
+cta_description
+
+footer_description
+
+created_at
+
+updated_at
+```
+
+---
+
+# PROGRAMS
+
+Program layanan.
+
+Contoh:
+
+- START
+- GROW
+- SCALE
+- EMPIRE
+
+## Columns
+
+```
+id
+
+title
+
+slug
+
+short_description
+
+description
+
+target_market
+
+outcome
+
+icon
+
+thumbnail
+
+sort_order
+
+is_active
+
+created_at
+
+updated_at
+```
+
+---
+
+# PROGRAM_FEATURES
+
+Fitur setiap program.
+
+## Columns
+
+```
+id
+
+program_id
+
+title
+
+description
+
+sort_order
+
+created_at
+
+updated_at
+```
+
+## Relationships
+
+```
+Program
+
+hasMany
+
+ProgramFeature
+```
+
+---
+
+# ARTICLES
+
+Artikel SEO.
+
+## Columns
+
+```
+id
+
+user_id
+
+category_id
+
+title
+
+slug
+
+excerpt
+
+content
+
+featured_image
+
+status
+
+published_at
+
+reading_time
+
+views
+
+created_at
+
+updated_at
+```
+
+---
+
+# ARTICLE_CATEGORIES
+
+Kategori artikel.
+
+## Columns
+
+```
+id
+
+name
+
+slug
+
+description
+
+created_at
+
+updated_at
+```
+
+---
+
+# TAGS
+
+Tag artikel.
+
+## Columns
+
+```
+id
+
+name
+
+slug
+
+created_at
+
+updated_at
+```
+
+---
+
+# ARTICLE_TAG
+
+Pivot Table.
+
+## Columns
+
+```
+article_id
+
+tag_id
+```
+
+---
+
+# PORTFOLIOS
+
+Studi kasus.
+
+## Columns
+
+```
+id
+
+user_id
+
+title
+
+slug
+
+client_name
+
+industry
+
+problem
+
+solution
+
+result
+
+thumbnail
+
+website_url
+
+is_featured
+
+published_at
+
+created_at
+
+updated_at
+```
+
+---
+
+# TESTIMONIALS
+
+Testimoni pelanggan.
+
+## Columns
+
+```
+id
+
+name
+
+company
+
+position
+
+photo
+
+content
+
+rating
+
+sort_order
+
+is_active
+
+created_at
+
+updated_at
+```
+
+---
+
+# FAQS
+
+Pertanyaan yang sering diajukan.
+
+## Columns
+
+```
+id
+
+question
+
+answer
+
+sort_order
+
+is_active
+
+created_at
+
+updated_at
+```
+
+---
+
+# LEADS
+
+Calon pelanggan.
+
+Tabel terpenting.
+
+## Columns
+
+```
+id
+
+name
+
+company
+
+phone
+
+email
+
+business_type
+
+marketplace
+
+monthly_revenue
+
+team_size
+
+website
+
+message
+
+lead_source
+
+status
+
+notes
+
+created_at
+
+updated_at
+```
+
+---
+
+# LEAD_ACTIVITIES
+
+Riwayat follow up.
+
+## Columns
+
+```
+id
+
+lead_id
+
+user_id
+
+activity
+
+notes
+
+activity_date
+
+created_at
+
+updated_at
+```
+
+---
+
+# CONTACTS
+
+Pesan dari Contact Form.
+
+## Columns
+
+```
+id
+
+name
+
+email
+
+phone
+
+subject
+
+message
+
+status
+
+created_at
+
+updated_at
+```
+
+---
+
+# SEO_META
+
+SEO setiap halaman.
+
+## Columns
+
+```
+id
+
+page_type
+
+reference_id
+
+meta_title
+
+meta_description
+
+canonical
+
+robots
+
+og_title
+
+og_description
+
+og_image
+
+schema_json
+
+created_at
+
+updated_at
+```
+
+reference_id dapat mengarah ke:
+
+- article
+- portfolio
+- program
+- page
+
+---
+
+# MEDIA
+
+Media Library.
+
+## Columns
+
+```
+id
+
+user_id
+
+file_name
+
+original_name
+
+disk
+
+path
+
+mime_type
+
+extension
+
+size
+
+alt
+
+caption
+
+created_at
+
+updated_at
+```
+
+---
+
+# SETTINGS
+
+Pengaturan website.
+
+## Columns
+
+```
+id
+
+site_name
+
+site_tagline
+
+logo
+
+favicon
+
+email
+
+phone
+
+whatsapp
+
+address
+
+facebook
+
+instagram
+
+tiktok
+
+youtube
+
+linkedin
+
+created_at
+
+updated_at
+```
+
+---
+
+# NEWSLETTER_SUBSCRIBERS
+
+Email subscriber.
+
+## Columns
+
+```
+id
+
+email
+
+status
+
+subscribed_at
+
+created_at
+
+updated_at
+```
+
+---
+
+# AUDIT_REQUESTS
+
+Permintaan Audit Bisnis Gratis.
+
+## Columns
+
+```
+id
+
+lead_id
+
+current_marketplace
+
+monthly_orders
+
+monthly_ads_cost
+
+main_problem
+
+goal
+
+preferred_schedule
+
+status
+
+created_at
+
+updated_at
+```
+
+---
+
+# Relationship Diagram
+
+```
+User
+
+├── hasMany Articles
+
+├── hasMany Portfolios
+
+├── hasMany LeadActivities
+
+└── hasMany Media
+```
+
+---
+
+```
+Category
+
+hasMany
+
+Articles
+```
+
+---
+
+```
+Article
+
+belongsTo
+
+Category
+
+belongsTo
+
+User
+
+belongsToMany
+
+Tags
+```
+
+---
+
+```
+Tag
+
+belongsToMany
+
+Articles
+```
+
+---
+
+```
+Program
+
+hasMany
+
+ProgramFeatures
+```
+
+---
+
+```
+Lead
+
+hasMany
+
+LeadActivities
+
+hasOne
+
+AuditRequest
+```
+
+---
+
+```
+AuditRequest
+
+belongsTo
+
+Lead
+```
+
+---
+
+# Database Flow
+
+## Visitor membaca artikel
+
+```
+Articles
+
+↓
+
+CTA
+
+↓
+
+Audit Gratis
+
+↓
+
+Lead
+
+↓
+
+Project
+```
+
+---
+
+## Visitor mengisi Audit Gratis
+
+```
+Landing Page
+
+↓
+
+Audit Request
+
+↓
+
+Lead
+
+↓
+
+Lead Activities
+
+↓
+
+Proposal
+
+↓
+
+Project
+```
+
+---
+
+## SEO Flow
+
+```
+Category
+
+↓
+
+Article
+
+↓
+
+Google
+
+↓
+
+Visitor
+
+↓
+
+Landing Page
+
+↓
+
+Lead
+```
+
+---
+
+# Index Recommendation
+
+Gunakan index pada field berikut.
+
+Articles
+
+```
+slug
+
+status
+
+published_at
+```
+
+Programs
+
+```
+slug
+
+is_active
+```
+
+Portfolio
+
+```
+slug
+
+published_at
+```
+
+Lead
+
+```
+status
+
+lead_source
+
+created_at
+
+phone
+
+email
+```
+
+SEO
+
+```
+page_type
+
+reference_id
+```
+
+---
+
+# Enum Recommendation
+
+Lead Status
+
+```
+new
+
+contacted
+
+meeting
+
+proposal
+
+negotiation
+
+won
+
+lost
+```
+
+---
+
+Article Status
+
+```
+draft
+
+review
+
+published
+
+archived
+```
+
+---
+
+Program Status
+
+```
+active
+
+inactive
+```
+
+---
+
+Lead Source
+
+```
+google
+
+tiktok
+
+instagram
+
+facebook
+
+whatsapp
+
+referral
+
+direct
+```
+
+---
+
+# AI Query Rules
+
+AI wajib memahami relasi sebelum membuat query.
+
+Gunakan Eloquent Relationship.
+
+Prioritaskan:
+
+- eager loading (`with()`)
+- pagination
+- scopes
+- repository
+
+Hindari:
+
+- N+1 Query
+- Query di Blade
+- Raw SQL tanpa alasan yang jelas
+- Query berulang pada Controller
+
+---
+
+# Future Expansion
+
+Struktur database disiapkan agar mudah dikembangkan untuk fitur berikut:
+
+- CRM sederhana
+- Pipeline penjualan
+- Reminder follow-up
+- Kalender meeting
+- Proposal digital
+- Invoice
+- Payment tracking
+- Client portal
+- Maintenance subscription
+- AI Chat Assistant
+- Email marketing
+- WhatsApp automation
+- Knowledge base
+
+Seluruh tabel baru harus tetap mengikuti prinsip pemisahan tanggung jawab, mendukung skalabilitas, dan tidak mengubah struktur tabel lama tanpa kebutuhan yang jelas.
