@@ -94,12 +94,12 @@
                 Ingin Mengonsultasikan Strategi Digital Brand Anda?
             </h3>
             <p class="text-zinc-400 text-sm max-w-md mx-auto mb-8">
-                Isi form audit bisnis kami sekarang untuk mendapatkan rekomendasi dan masukan dari konsultan senior secara gratis.
+                Isi form analisa bisnis kami sekarang untuk mendapatkan rekomendasi dan masukan dari konsultan senior secara gratis.
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="{{ route('audit.index') }}" 
                    class="w-full sm:w-auto py-3 px-8 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-zinc-900 font-bold text-sm rounded-xl shadow-lg transition-all">
-                    Dapatkan Audit Bisnis Gratis
+                    Dapatkan Analisa Bisnis Gratis
                 </a>
             </div>
         </div>

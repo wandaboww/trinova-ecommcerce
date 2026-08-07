@@ -1,4 +1,4 @@
-<x-layouts.admin :title="'Kelola Leads — CMS Admin'" :headerTitle="'Manajemen Leads Pengajuan Audit Bisnis'">
+<x-layouts.admin :title="'Kelola Leads — CMS Admin'" :headerTitle="'Manajemen Leads Pengajuan Analisa Bisnis'">
 
     @if(session('success'))
         <div class="mb-6 px-5 py-4 bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-semibold rounded-xl">

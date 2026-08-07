@@ -32,13 +32,13 @@ class DatabaseSeeder extends Seeder
             [
                 'hero_title' => 'Kami Bukan Agensi Biasa.',
                 'hero_subtitle' => 'Omzet UMKM & E-Commerce Anda Tumbuh',
-                'hero_cta' => 'Audit Bisnis Gratis Sekarang',
+                'hero_cta' => 'Analisa Bisnis Gratis Sekarang',
                 'pain_title' => 'Mengapa Penjualan Online Anda Stagnan?',
                 'pain_description' => 'Banyak bisnis terjebak pada iklan mahal tanpa konversi, website lambat, dan funnel whatsapp manual yang melelahkan.',
                 'paradigm_title' => 'Dari Manual Menuju Otomatisasi Penjualan',
                 'paradigm_description' => 'Trinova mengubah cara Anda berjualan dengan sistem landing page mandiri, payment gateway terintegrasi, dan CRM otomatis.',
                 'cta_title' => 'Siap Mengubah Bisnis E-Commerce Anda?',
-                'cta_description' => 'Dapatkan Audit Bisnis Gratis senilai Rp2.500.000 sekarang juga. Kuota terbatas setiap bulan!',
+                'cta_description' => 'Dapatkan Analisa Bisnis Gratis senilai Rp2.500.000 sekarang juga. Kuota terbatas setiap bulan!',
                 'footer_description' => 'Trinova Digital membantu brand e-commerce dan UMKM Indonesia tumbuh lewat sistem website konversi tinggi dan otomatisasi penjualan.',
             ]
         );

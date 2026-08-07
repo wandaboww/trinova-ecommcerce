@@ -13,7 +13,7 @@ class LeadService
     ) {}
 
     /**
-     * Buat lead baru dari form Audit Bisnis Gratis
+     * Buat lead baru dari form Analisa Bisnis Gratis
      */
     public function createFromAudit(array $data): Lead
     {

@@ -49,7 +49,7 @@
                 <a href="{{ route('audit.index') }}"
                    class="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-semibold text-sm rounded-full shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-200 hover:-translate-y-0.5"
                    id="navbar-audit-cta">
-                    {{ $navSetting->hero_cta ?? 'Audit Bisnis Gratis' }}
+                    {{ $navSetting->hero_cta ?? 'Analisa Bisnis Gratis' }}
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
             </div>
@@ -86,7 +86,7 @@
             <a href="{{ route('audit.index') }}"
                class="mt-2 px-4 py-3 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white font-semibold text-sm rounded-xl text-center"
                id="mobile-audit-cta">
-                {{ $navSetting->hero_cta ?? 'Audit Bisnis Gratis' }} →
+                {{ $navSetting->hero_cta ?? 'Analisa Bisnis Gratis' }} →
             </a>
         </nav>
 

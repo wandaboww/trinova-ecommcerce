@@ -1,10 +1,10 @@
 <x-layouts.app :seo="[
-    'title'       => 'Form Audit Bisnis Gratis — Trinova Digital',
+    'title'       => 'Form Analisa Bisnis Gratis — Trinova Digital',
     'description' => 'Isi data bisnis Anda untuk mendapatkan analisa eksklusif 1-on-1 bersama tim analis Trinova secara gratis.',
     'canonical'   => route('audit.index'),
 ]">
 
-<section class="min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden" aria-label="Form Audit Bisnis Gratis">
+<section class="min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden" aria-label="Form Analisa Bisnis Gratis">
     
     {{-- Decorative Backgrounds --}}
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(99,102,241,0.12),transparent)]"></div>
@@ -45,7 +45,7 @@
                     1-on-1 Consultation
                 </span>
                 <h1 class="text-2xl sm:text-3xl font-extrabold text-zinc-100 font-heading">
-                    Ajukan Audit Bisnis Gratis
+                    Ajukan Analisa Bisnis Gratis
                 </h1>
                 <p class="text-xs sm:text-sm text-zinc-500 mt-2 max-w-md mx-auto">
                     Bantu kami memahami kondisi bisnis Anda saat ini agar sesi konsultasi berjalan lebih optimal.
@@ -225,7 +225,7 @@
                         </button>
                         <button type="submit" :disabled="!validateStep3()"
                                 class="w-2/3 py-3.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-zinc-900 font-bold text-sm rounded-xl shadow-lg shadow-amber-500/20 disabled:opacity-50 disabled:pointer-events-none transition-all duration-200">
-                            Ajukan Audit Bisnis Sekarang
+                            Ajukan Analisa Bisnis Sekarang
                         </button>
                     </div>
 

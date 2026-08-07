@@ -1,6 +1,6 @@
 <x-layouts.app :seo="[
         'title' => 'Trinova Digital — Partner Transformasi Digital untuk Seller Marketplace',
-        'description' => 'Trinova Digital membantu seller Shopee, Tokopedia, dan TikTok Shop membangun aset digital sendiri. Dari marketplace menjadi brand mandiri. Mulai dengan Audit Bisnis Gratis.',
+        'description' => 'Trinova Digital membantu seller Shopee, Tokopedia, dan TikTok Shop membangun aset digital sendiri. Dari marketplace menjadi brand mandiri. Mulai dengan Analisa Bisnis Gratis.',
         'canonical' => route('home'),
     ]">
 
@@ -86,7 +86,7 @@
                             <a href="{{ route('audit.index') }}"
                                 class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-zinc-900 font-bold text-lg rounded-full shadow-2xl shadow-amber-500/20 hover:shadow-amber-500/40 transition-all duration-200 hover:-translate-y-1 w-full sm:w-auto justify-center"
                                 id="hero-audit-cta">
-                                {{ $setting->hero_cta ?? 'Audit Bisnis Gratis' }}
+                                {{ $setting->hero_cta ?? 'Analisa Bisnis Gratis' }}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                                     aria-hidden="true">
@@ -635,13 +635,15 @@
                                             <ul class="space-y-2.5">
                                                 @if(is_array($program->outcome))
                                                     @foreach($program->outcome as $item)
-                                                        <li class="text-zinc-300 text-sm flex items-start gap-2.5 leading-relaxed">
-                                                            @if(($item['icon'] ?? 'check') === 'check')
-                                                                <span class="text-emerald-400 font-extrabold shrink-0">✓</span>
-                                                            @else
-                                                                <span class="text-red-400 font-extrabold shrink-0">✗</span>
-                                                            @endif
-                                                            <span>{{ $item['text'] ?? '' }}</span>
+                                                        <li class="flex items-start gap-3 {{ $item['custom_class'] ?? '' }}">
+                                                            <div class="mt-0.5 w-5 h-5 rounded-full {{ ($item['icon'] ?? 'check') === 'check' ? 'bg-indigo-500/10 text-indigo-400' : 'bg-red-500/10 text-red-400' }} flex items-center justify-center shrink-0">
+                                                                @if(($item['icon'] ?? 'check') === 'check')
+                                                                    <span class="font-extrabold text-[10px]">✓</span>
+                                                                @else
+                                                                    <span class="font-extrabold text-[10px]">✗</span>
+                                                                @endif
+                                                            </div>
+                                                            <span class="text-zinc-300 text-sm leading-relaxed">{{ $item['text'] ?? '' }}</span>
                                                         </li>
                                                     @endforeach
                                                 @else
@@ -1201,7 +1203,7 @@
                                     </button>
                                     <div x-show="open" x-collapse x-transition:enter="transition-all ease-out duration-200"
                                         class="px-5 pb-5 text-zinc-400 text-xs sm:text-sm leading-relaxed border-t border-white/5 pt-3">
-                                        Cukup klik "Audit Bisnis Gratis", isi data tantangan utama bisnis Anda, dan
+                                        Cukup klik "Analisa Bisnis Gratis", isi data tantangan utama bisnis Anda, dan
                                         jadwalkan konsultasi 1-on-1 bersama tim analis kami secara gratis.
                                     </div>
                                 </div>
@@ -1421,7 +1423,7 @@
         {{-- =========================================================
         SECTION 9: FINAL CTA
         ========================================================= --}}
-        <section id="cta-final" class="py-24 relative overflow-hidden" aria-label="CTA — {{ $setting->cta_title ?? 'Audit Bisnis Gratis' }}">
+        <section id="cta-final" class="py-24 relative overflow-hidden" aria-label="CTA — {{ $setting->cta_title ?? 'Analisa Bisnis Gratis' }}">
 
             {{-- Decorative Background Glows --}}
             <div class="absolute inset-0 bg-gradient-to-r from-indigo-900/25 via-zinc-950/80 to-indigo-950/25"></div>

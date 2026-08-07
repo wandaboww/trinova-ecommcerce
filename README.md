@@ -36,7 +36,7 @@ npm run dev
 ## 🔗 Daftar URL Akses Halaman (Lokal)
 
 *   **Landing Page Utama**: [http://localhost:8000](http://localhost:8000)
-*   **Form Audit Bisnis**: [http://localhost:8000/audit-bisnis-gratis](http://localhost:8000/audit-bisnis-gratis)
+*   **Form Analisa Bisnis**: [http://localhost:8000/analisa-bisnis-gratis](http://localhost:8000/analisa-bisnis-gratis)
 *   **Dashboard Admin / CMS**: [http://localhost:8000/admin](http://localhost:8000/admin)
 *   **Halaman Daftar Program**: [http://localhost:8000/program](http://localhost:8000/program)
 *   **Halaman Daftar Blog**: [http://localhost:8000/blog](http://localhost:8000/blog)

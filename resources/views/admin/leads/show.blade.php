@@ -1,4 +1,4 @@
-<x-layouts.admin :title="'Detail Lead — CMS Admin'" :headerTitle="'Detail Pengajuan Audit Bisnis'">
+<x-layouts.admin :title="'Detail Lead — CMS Admin'" :headerTitle="'Detail Pengajuan Analisa Bisnis'">
 
     <div class="mb-6">
         <a href="{{ route('admin.leads.index') }}" class="inline-flex items-center gap-2 text-xs text-zinc-500 hover:text-zinc-300 font-semibold transition-colors">
@@ -14,7 +14,7 @@
                 <div class="flex items-start justify-between border-b border-zinc-800 pb-5">
                     <div>
                         <h2 class="text-xl font-extrabold text-zinc-100 font-heading">Detail Lead</h2>
-                        <p class="text-xs text-zinc-500 mt-1">Data pengajuan audit bisnis gratis dari calon klien</p>
+                        <p class="text-xs text-zinc-500 mt-1">Data pengajuan analisa bisnis gratis dari calon klien</p>
                     </div>
                     <span class="px-3 py-1 bg-yellow-500/10 text-yellow-400 text-[10px] font-bold rounded-full uppercase tracking-widest">Baru</span>
                 </div>

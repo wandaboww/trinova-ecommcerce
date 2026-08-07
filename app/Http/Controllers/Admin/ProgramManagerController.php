@@ -21,6 +21,7 @@ class ProgramManagerController extends Controller
             'title'             => 'required|string|max:150',
             'slug'              => 'required|string|unique:programs,slug',
             'short_description' => 'required|string',
+            'description'       => 'nullable|string',
             'target_market'     => 'required|string|max:200',
             'outcome_text'      => 'required|array|min:1',
             'outcome_text.*'    => 'required|string',
@@ -33,6 +34,7 @@ class ProgramManagerController extends Controller
                 $outcomeItems[] = [
                     'icon' => ($request->outcome_icon[$i] ?? 'check'),
                     'text' => trim($text),
+                    'custom_class' => trim($request->outcome_custom_class[$i] ?? ''),
                 ];
             }
         }
@@ -41,6 +43,7 @@ class ProgramManagerController extends Controller
             'title'             => $request->title,
             'slug'              => Str::slug($request->slug),
             'short_description' => $request->short_description,
+            'description'       => $request->description,
             'target_market'     => $request->target_market,
             'outcome'           => $outcomeItems,
             'is_active'         => true,
@@ -56,6 +59,7 @@ class ProgramManagerController extends Controller
             'title'             => 'required|string|max:150',
             'slug'              => 'required|string|unique:programs,slug,' . $program->id,
             'short_description' => 'required|string',
+            'description'       => 'nullable|string',
             'target_market'     => 'required|string|max:200',
             'outcome_text'      => 'required|array|min:1',
             'outcome_text.*'    => 'required|string',
@@ -68,6 +72,7 @@ class ProgramManagerController extends Controller
                 $outcomeItems[] = [
                     'icon' => ($request->outcome_icon[$i] ?? 'check'),
                     'text' => trim($text),
+                    'custom_class' => trim($request->outcome_custom_class[$i] ?? ''),
                 ];
             }
         }
@@ -76,6 +81,7 @@ class ProgramManagerController extends Controller
             'title'             => $request->title,
             'slug'              => Str::slug($request->slug),
             'short_description' => $request->short_description,
+            'description'       => $request->description,
             'target_market'     => $request->target_market,
             'outcome'           => $outcomeItems,
         ]);
@@ -101,5 +107,35 @@ class ProgramManagerController extends Controller
         
         $msg = $newVal ? "Program {$program->title} ditandai sebagai Recommended!" : "Tanda Recommended dinonaktifkan.";
         return redirect()->route('admin.program.index')->with('success', $msg);
+    }
+
+    public function updateTopics(Request $request, Program $program)
+    {
+        $request->validate([
+            'topic_title'   => 'required|array|min:1',
+            'topic_title.*' => 'required|string',
+        ]);
+
+        $topics = [];
+        if ($request->has('topic_title') && is_array($request->topic_title)) {
+            foreach ($request->topic_title as $i => $title) {
+                if (!empty(trim($title))) {
+                    $rawKey = $request->topic_key[$i] ?? '';
+                    $key = !empty($rawKey) ? Str::slug($rawKey, '_') : Str::slug($title, '_');
+                    $topics[] = [
+                        'key'          => $key ?: 'topic_' . ($i + 1),
+                        'icon'         => $request->topic_icon[$i] ?? '📌',
+                        'title'        => trim($title),
+                        'subtitle'     => trim($request->topic_subtitle[$i] ?? ''),
+                        'content'      => trim($request->topic_content[$i] ?? ''),
+                        'custom_class' => trim($request->topic_custom_class[$i] ?? ''),
+                    ];
+                }
+            }
+        }
+
+        $program->update(['topics' => $topics]);
+
+        return redirect()->route('admin.program.index')->with('success', "Navigasi Topik Detail untuk program '{$program->title}' berhasil diperbarui.");
     }
 }

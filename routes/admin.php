@@ -40,6 +40,7 @@ Route::prefix('admin')
             Route::post('/', [ProgramManagerController::class, 'store'])->name('store');
             Route::get('/{program}/edit', [ProgramManagerController::class, 'edit'])->name('edit');
             Route::put('/{program}', [ProgramManagerController::class, 'update'])->name('update');
+            Route::put('/{program}/topics', [ProgramManagerController::class, 'updateTopics'])->name('update-topics');
             Route::delete('/{program}', [ProgramManagerController::class, 'destroy'])->name('destroy');
             Route::post('/{program}/best-value', [ProgramManagerController::class, 'toggleBestValue'])->name('toggle-best-value');
         });

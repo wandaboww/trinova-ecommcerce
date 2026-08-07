@@ -78,7 +78,7 @@
                             <span class="ml-2 text-[9px] font-bold text-zinc-500 uppercase tracking-wider">Tampilkan</span>
                         </label>
                     </div>
-                    <input type="text" name="hero_cta_primary" value="{{ $landingSetting->hero_cta ?? 'Audit Bisnis Gratis' }}"
+                    <input type="text" name="hero_cta_primary" value="{{ $landingSetting->hero_cta ?? 'Analisa Bisnis Gratis' }}"
                            class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
                 </div>
                 <div>

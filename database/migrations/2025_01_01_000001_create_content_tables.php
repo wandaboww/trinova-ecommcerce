@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('hero_title')->nullable();
             $table->text('hero_subtitle')->nullable();
-            $table->string('hero_cta')->default('Audit Bisnis Gratis');
+            $table->string('hero_cta')->default('Analisa Bisnis Gratis');
             $table->string('hero_image')->nullable();
             $table->string('pain_title')->nullable();
             $table->text('pain_description')->nullable();

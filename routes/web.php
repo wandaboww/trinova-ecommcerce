@@ -17,10 +17,10 @@ use App\Http\Controllers\ContactController;
 // Landing Page (Home)
 Route::get('/', [LandingController::class, 'index'])->name('home');
 
-// Audit Bisnis Gratis
-Route::get('/audit-bisnis-gratis', [AuditController::class, 'index'])->name('audit.index');
-Route::post('/audit-bisnis-gratis', [AuditController::class, 'store'])->name('audit.store');
-Route::get('/audit-bisnis-gratis/terima-kasih', [AuditController::class, 'success'])->name('audit.success');
+// Analisa Bisnis Gratis
+Route::get('/analisa-bisnis-gratis', [AuditController::class, 'index'])->name('audit.index');
+Route::post('/analisa-bisnis-gratis', [AuditController::class, 'store'])->name('audit.store');
+Route::get('/analisa-bisnis-gratis/terima-kasih', [AuditController::class, 'success'])->name('audit.success');
 
 // Program Layanan
 Route::redirect('/program', '/#program')->name('program.index');

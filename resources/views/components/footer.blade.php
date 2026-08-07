@@ -34,7 +34,7 @@
                     @php
                         $footerSetting = \App\Models\LandingSetting::first();
                     @endphp
-                    <li><a href="{{ route('audit.index') }}"            class="text-sm text-zinc-500 hover:text-zinc-200 transition-colors" id="footer-audit">{{ $footerSetting->hero_cta ?? 'Audit Bisnis Gratis' }}</a></li>
+                    <li><a href="{{ route('audit.index') }}"            class="text-sm text-zinc-500 hover:text-zinc-200 transition-colors" id="footer-audit">{{ $footerSetting->hero_cta ?? 'Analisa Bisnis Gratis' }}</a></li>
                 </ul>
             </div>
 

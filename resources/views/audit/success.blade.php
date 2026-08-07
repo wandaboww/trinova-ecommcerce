@@ -1,6 +1,6 @@
 <x-layouts.app :seo="[
     'title'       => 'Pengajuan Berhasil — Trinova Digital',
-    'description' => 'Terima kasih telah mengajukan Audit Bisnis Gratis. Tim analis kami akan segera menghubungi Anda.',
+    'description' => 'Terima kasih telah mengajukan Analisa Bisnis Gratis. Tim analis kami akan segera menghubungi Anda.',
     'canonical'   => route('home'),
 ]">
 
@@ -27,7 +27,7 @@
 
             {{-- Message --}}
             <p class="text-zinc-400 text-sm sm:text-base leading-relaxed mb-8">
-                Terima kasih telah mengajukan Audit Bisnis Gratis. Data Anda telah kami terima dengan aman. Tim analis senior Trinova Digital akan mempelajari profil toko Anda dan menghubungi Anda melalui WhatsApp dalam waktu maksimal 24 jam untuk menjadwalkan sesi konsultasi.
+                Terima kasih telah mengajukan Analisa Bisnis Gratis. Data Anda telah kami terima dengan aman. Tim analis senior Trinova Digital akan mempelajari profil toko Anda dan menghubungi Anda melalui WhatsApp dalam waktu maksimal 24 jam untuk menjadwalkan sesi konsultasi.
             </p>
 
             {{-- Action Buttons --}}
