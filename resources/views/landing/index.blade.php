@@ -138,16 +138,42 @@
         </section>
 
         {{-- Divider --}}
-        <div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" aria-hidden="true"></div>
-
-        {{-- =========================================================
-        SECTION 2: PAIN
+        <div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" aria-hidden="true"></div>        {{-- =========================================================
+        SECTION 2: PAIN POINTS (PAIN) - Horizontal Slider
         ========================================================= --}}
-        <section id="pain" class="py-24 relative" aria-label="Masalah yang dihadapi seller marketplace">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <section id="pain" class="py-24 relative overflow-hidden" aria-label="Masalah yang dihadapi seller marketplace">
+            <div x-data="{
+                activeCard: 0,
+                scrollTo(index) {
+                    const container = this.$refs.slider;
+                    const cards = Array.from(container.children);
+                    if (cards[index]) {
+                        cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                        this.activeCard = index;
+                    }
+                },
+                updateActive() {
+                    const container = this.$refs.slider;
+                    if (!container) return;
+                    const containerCenter = container.getBoundingClientRect().left + container.clientWidth / 2;
+                    const cards = Array.from(container.children);
+                    let minDistance = Infinity;
+                    let closestIndex = 0;
+                    cards.forEach((card, idx) => {
+                        const rect = card.getBoundingClientRect();
+                        const cardCenter = rect.left + rect.width / 2;
+                        const distance = Math.abs(containerCenter - cardCenter);
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            closestIndex = idx;
+                        }
+                    });
+                    this.activeCard = closestIndex;
+                }
+            }" x-init="$nextTick(() => { updateActive(); })" class="max-w-7xl mx-auto px-4 sm:px-6">
 
                 {{-- Section Header --}}
-                <div class="max-w-3xl mx-auto text-center mb-16">
+                <div class="max-w-3xl mx-auto text-center mb-10">
                     <span
                         class="inline-flex items-center gap-2 px-4 py-1.5 bg-red-500/10 border border-red-500/20 rounded-full text-xs font-semibold text-red-400 uppercase tracking-widest mb-4"
                         data-reveal>
@@ -159,18 +185,39 @@
                         <span
                             class="bg-gradient-to-r from-red-400 to-amber-500 bg-clip-text text-transparent">Marketplace</span>
                     </h2>
-                    <p class="text-zinc-400 text-lg" data-reveal data-delay="200">
+                    <p class="text-zinc-400 text-base sm:text-lg" data-reveal data-delay="200">
                         Apakah Anda merasakan jualan semakin ramai, tetapi uang di rekening justru tidak bertambah
                         karena masalah-masalah ini?
                     </p>
                 </div>
 
-                {{-- Pain Cards Grid --}}
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {{-- Navigation Controls (Arrows) --}}
+                <div class="flex items-center justify-between mb-4 px-2 sm:px-6">
+                    <span class="text-xs font-medium text-zinc-500 flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+                        Geser horizontal atau klik kartu untuk fokus
+                    </span>
+                    <div class="flex items-center gap-2">
+                        <button @click="scrollTo(Math.max(0, activeCard - 1))" 
+                                class="w-10 h-10 rounded-xl bg-zinc-900 border border-white/10 hover:border-red-500/50 text-zinc-400 hover:text-white flex items-center justify-center transition-all duration-200 hover:bg-zinc-800 shadow-md">
+                            ←
+                        </button>
+                        <button @click="scrollTo(Math.min(5, activeCard + 1))" 
+                                class="w-10 h-10 rounded-xl bg-zinc-900 border border-white/10 hover:border-red-500/50 text-zinc-400 hover:text-white flex items-center justify-center transition-all duration-200 hover:bg-zinc-800 shadow-md">
+                            →
+                        </button>
+                    </div>
+                </div>
+
+                {{-- Pain Cards Horizontal Scroll Container (1 Row) --}}
+                <div x-ref="slider"
+                     @scroll.debounce.10ms="updateActive()"
+                     class="flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory py-10 px-4 sm:px-12 scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
 
                     {{-- Pain Card 1: Biaya Admin Mencekik --}}
-                    <div class="bg-zinc-900/50 border border-white/5 hover:border-red-500/30 rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300 group"
-                        data-reveal data-delay="100">
+                    <div @click="scrollTo(0)"
+                         :class="activeCard === 0 ? 'scale-105 opacity-100 bg-zinc-900 border-red-500/50 shadow-[0_0_35px_rgba(239,68,68,0.2)] z-20' : 'scale-95 opacity-50 bg-zinc-900/40 border-white/5 z-0 hover:opacity-75'"
+                         class="w-[290px] sm:w-[350px] shrink-0 snap-center rounded-2xl p-7 sm:p-8 border transition-all duration-300 cursor-pointer group">
                         <div
                             class="w-12 h-12 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center justify-center text-red-400 mb-6 group-hover:scale-110 transition-transform">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -187,8 +234,9 @@
                     </div>
 
                     {{-- Pain Card 2: Perang Harga Brutal --}}
-                    <div class="bg-zinc-900/50 border border-white/5 hover:border-red-500/30 rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300 group"
-                        data-reveal data-delay="200">
+                    <div @click="scrollTo(1)"
+                         :class="activeCard === 1 ? 'scale-105 opacity-100 bg-zinc-900 border-red-500/50 shadow-[0_0_35px_rgba(239,68,68,0.2)] z-20' : 'scale-95 opacity-50 bg-zinc-900/40 border-white/5 z-0 hover:opacity-75'"
+                         class="w-[290px] sm:w-[350px] shrink-0 snap-center rounded-2xl p-7 sm:p-8 border transition-all duration-300 cursor-pointer group">
                         <div
                             class="w-12 h-12 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center justify-center text-red-400 mb-6 group-hover:scale-110 transition-transform">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -204,8 +252,9 @@
                     </div>
 
                     {{-- Pain Card 3: Subsidi Ongkir & Voucher --}}
-                    <div class="bg-zinc-900/50 border border-white/5 hover:border-red-500/30 rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300 group"
-                        data-reveal data-delay="300">
+                    <div @click="scrollTo(2)"
+                         :class="activeCard === 2 ? 'scale-105 opacity-100 bg-zinc-900 border-red-500/50 shadow-[0_0_35px_rgba(239,68,68,0.2)] z-20' : 'scale-95 opacity-50 bg-zinc-900/40 border-white/5 z-0 hover:opacity-75'"
+                         class="w-[290px] sm:w-[350px] shrink-0 snap-center rounded-2xl p-7 sm:p-8 border transition-all duration-300 cursor-pointer group">
                         <div
                             class="w-12 h-12 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center justify-center text-red-400 mb-6 group-hover:scale-110 transition-transform">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -222,8 +271,9 @@
                     </div>
 
                     {{-- Pain Card 4: Pelanggan Bukan Milik Anda --}}
-                    <div class="bg-zinc-900/50 border border-white/5 hover:border-red-500/30 rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300 group"
-                        data-reveal data-delay="100">
+                    <div @click="scrollTo(3)"
+                         :class="activeCard === 3 ? 'scale-105 opacity-100 bg-zinc-900 border-red-500/50 shadow-[0_0_35px_rgba(239,68,68,0.2)] z-20' : 'scale-95 opacity-50 bg-zinc-900/40 border-white/5 z-0 hover:opacity-75'"
+                         class="w-[290px] sm:w-[350px] shrink-0 snap-center rounded-2xl p-7 sm:p-8 border transition-all duration-300 cursor-pointer group">
                         <div
                             class="w-12 h-12 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center justify-center text-red-400 mb-6 group-hover:scale-110 transition-transform">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -240,8 +290,9 @@
                     </div>
 
                     {{-- Pain Card 5: Repeat Order Rendah --}}
-                    <div class="bg-zinc-900/50 border border-white/5 hover:border-red-500/30 rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300 group"
-                        data-reveal data-delay="200">
+                    <div @click="scrollTo(4)"
+                         :class="activeCard === 4 ? 'scale-105 opacity-100 bg-zinc-900 border-red-500/50 shadow-[0_0_35px_rgba(239,68,68,0.2)] z-20' : 'scale-95 opacity-50 bg-zinc-900/40 border-white/5 z-0 hover:opacity-75'"
+                         class="w-[290px] sm:w-[350px] shrink-0 snap-center rounded-2xl p-7 sm:p-8 border transition-all duration-300 cursor-pointer group">
                         <div
                             class="w-12 h-12 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center justify-center text-red-400 mb-6 group-hover:scale-110 transition-transform">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -258,8 +309,9 @@
                     </div>
 
                     {{-- Pain Card 6: Ketergantungan Algoritma --}}
-                    <div class="bg-zinc-900/50 border border-white/5 hover:border-red-500/30 rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300 group"
-                        data-reveal data-delay="300">
+                    <div @click="scrollTo(5)"
+                         :class="activeCard === 5 ? 'scale-105 opacity-100 bg-zinc-900 border-red-500/50 shadow-[0_0_35px_rgba(239,68,68,0.2)] z-20' : 'scale-95 opacity-50 bg-zinc-900/40 border-white/5 z-0 hover:opacity-75'"
+                         class="w-[290px] sm:w-[350px] shrink-0 snap-center rounded-2xl p-7 sm:p-8 border transition-all duration-300 cursor-pointer group">
                         <div
                             class="w-12 h-12 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center justify-center text-red-400 mb-6 group-hover:scale-110 transition-transform">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -277,11 +329,20 @@
 
                 </div>
 
+                {{-- Dots Navigation Indicator --}}
+                <div class="flex justify-center items-center gap-2 mt-4">
+                    <template x-for="i in 6">
+                        <button @click="scrollTo(i-1)"
+                                :class="activeCard === (i-1) ? 'w-8 bg-red-500 shadow-sm shadow-red-500/50' : 'w-2 bg-zinc-700 hover:bg-zinc-500'"
+                                class="h-2 rounded-full transition-all duration-300 focus:outline-none"></button>
+                    </template>
+                </div>
+
             </div>
         </section>
 
         {{-- =========================================================
-        SECTION 3: PARADIGM SHIFT
+        SECTION 3: PARADIGM SHIFT (Horizontal Timeline Concept)
         ========================================================= --}}
         <section id="paradigm" class="py-24 relative bg-zinc-900/40 overflow-hidden"
             aria-label="Perubahan cara pandang bisnis digital">
@@ -294,158 +355,152 @@
             </div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
 
-                    {{-- Copywriting (Left) --}}
-                    <div class="lg:col-span-5 flex flex-col items-start">
-                        <span
-                            class="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-xs font-semibold text-indigo-400 uppercase tracking-widest mb-6"
-                            data-reveal>
-                            Ubah Pola Pikir Anda
-                        </span>
-
-                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-6 font-heading"
-                            data-reveal data-delay="100">
-                            Marketplace untuk <span class="text-indigo-400">Mendapatkan</span> Pelanggan.<br />
-                            Website untuk <span class="text-amber-400">Memiliki</span> Pelanggan.
-                        </h2>
-
-                        <p class="text-zinc-400 text-base leading-relaxed mb-6" data-reveal data-delay="200">
-                            Di marketplace, Anda sebenarnya menumpang di lapak orang lain. Pelanggan yang membeli produk
-                            Anda adalah pelanggan milik marketplace. Ketika kebijakan berubah, potongan naik, atau akun
-                            dibatasi, Anda bisa kehilangan seluruh bisnis dalam sekejap.
-                        </p>
-
-                        <p class="text-zinc-400 text-base leading-relaxed mb-8" data-reveal data-delay="250">
-                            Gunakan marketplace sebagai <strong class="text-zinc-200">pintu masuk (akuisisi)</strong>
-                            pelanggan baru, arahkan mereka ke ekosistem <strong class="text-indigo-300">Website Mandiri
-                                Anda</strong>, bangun database WhatsApp mereka, dan nikmati repeat order dengan profit
-                            bersih 100%.
-                        </p>
-
-                        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto" data-reveal data-delay="300">
-                            <a href="{{ route('audit.index') }}"
-                                class="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm rounded-full transition-all duration-200 shadow-lg shadow-indigo-500/25">
-                                Konsultasi Strategi Gratis
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    {{-- Flow Timeline (Right) --}}
-                    <div class="lg:col-span-7 flex justify-center lg:justify-end">
-                        <div class="relative max-w-lg w-full bg-zinc-950/80 border border-white/5 p-8 sm:p-10 rounded-3xl"
-                            data-reveal data-delay="200">
-
-                            {{-- Vertikal Line --}}
-                            <div
-                                class="absolute left-14 sm:left-16 top-16 bottom-16 w-0.5 bg-gradient-to-b from-indigo-500 via-indigo-500/50 to-amber-500/20 pointer-events-none">
-                            </div>
-
-                            <div class="space-y-8 relative">
-
-                                {{-- Step 1 --}}
-                                <div class="flex items-start gap-6 group">
-                                    <div
-                                        class="w-12 h-12 rounded-xl bg-indigo-600 text-white font-bold flex items-center justify-center shrink-0 shadow-lg shadow-indigo-500/20 z-10 group-hover:scale-110 transition-transform">
-                                        1
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-zinc-100 text-base font-heading">Marketplace</h3>
-                                        <p class="text-xs text-zinc-500 mt-0.5">Media akuisisi traffic &amp; pelanggan
-                                            baru</p>
-                                    </div>
-                                </div>
-
-                                {{-- Step 2 --}}
-                                <div class="flex items-start gap-6 group">
-                                    <div
-                                        class="w-12 h-12 rounded-xl bg-indigo-600 text-white font-bold flex items-center justify-center shrink-0 shadow-lg shadow-indigo-500/20 z-10 group-hover:scale-110 transition-transform">
-                                        2
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-zinc-100 text-base font-heading">Pelanggan Baru</h3>
-                                        <p class="text-xs text-zinc-500 mt-0.5">Pembelian pertama &amp; kenal dengan
-                                            brand Anda</p>
-                                    </div>
-                                </div>
-
-                                {{-- Step 3 --}}
-                                <div class="flex items-start gap-6 group">
-                                    <div
-                                        class="w-12 h-12 rounded-xl bg-indigo-500 border border-indigo-400 text-white font-bold flex items-center justify-center shrink-0 shadow-lg shadow-indigo-400/20 z-10 group-hover:scale-110 transition-transform">
-                                        3
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-indigo-400 text-base font-heading">Website Sendiri
-                                        </h3>
-                                        <p class="text-xs text-zinc-400 mt-0.5">Transaksi kedua diarahkan ke website
-                                            Anda sendiri</p>
-                                    </div>
-                                </div>
-
-                                {{-- Step 4 --}}
-                                <div class="flex items-start gap-6 group">
-                                    <div
-                                        class="w-12 h-12 rounded-xl bg-indigo-500 border border-indigo-400 text-white font-bold flex items-center justify-center shrink-0 shadow-lg shadow-indigo-400/20 z-10 group-hover:scale-110 transition-transform">
-                                        4
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-indigo-400 text-base font-heading">Database Pelanggan
-                                        </h3>
-                                        <p class="text-xs text-zinc-400 mt-0.5">Kontak WhatsApp &amp; data belanja
-                                            tersimpan aman</p>
-                                    </div>
-                                </div>
-
-                                {{-- Step 5 --}}
-                                <div class="flex items-start gap-6 group">
-                                    <div
-                                        class="w-12 h-12 rounded-xl bg-amber-500 text-zinc-950 font-bold flex items-center justify-center shrink-0 shadow-lg shadow-amber-500/20 z-10 group-hover:scale-110 transition-transform">
-                                        5
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-amber-400 text-base font-heading">Repeat Order Gratis
-                                        </h3>
-                                        <p class="text-xs text-zinc-400 mt-0.5">Penjualan berulang via WhatsApp
-                                            Broadcast bebas biaya iklan</p>
-                                    </div>
-                                </div>
-
-                                {{-- Step 6 --}}
-                                <div class="flex items-start gap-6 group">
-                                    <div
-                                        class="w-12 h-12 rounded-xl bg-amber-500 text-zinc-950 font-bold flex items-center justify-center shrink-0 shadow-lg shadow-amber-500/20 z-10 group-hover:scale-110 transition-transform">
-                                        6
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-amber-400 text-base font-heading">Aset Digital Mandiri
-                                        </h3>
-                                        <p class="text-xs text-zinc-400 mt-0.5">Bisnis kuat, mandiri, dan punya nilai
-                                            brand tinggi</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
+                {{-- Section Header (Like Section Solution) --}}
+                <div class="max-w-3xl mx-auto text-center mb-16">
+                    <span
+                        class="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-xs font-semibold text-indigo-400 uppercase tracking-widest mb-4"
+                        data-reveal>
+                        Ubah Pola Pikir Anda
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 font-heading"
+                        data-reveal data-delay="100">
+                        Marketplace untuk <span class="text-indigo-400">Mendapatkan</span> Pelanggan.<br />
+                        Website untuk <span class="text-amber-400">Memiliki</span> Pelanggan.
+                    </h2>
+                    <p class="text-zinc-400 text-base sm:text-lg leading-relaxed" data-reveal data-delay="200">
+                        Gunakan marketplace sebagai <strong class="text-zinc-200">pintu masuk (akuisisi)</strong> pelanggan baru, arahkan mereka ke ekosistem <strong class="text-indigo-300">Website Mandiri Anda</strong>, bangun database WhatsApp mereka, dan nikmati repeat order dengan profit bersih 100%.
+                    </p>
                 </div>
+
+                {{-- Horizontal Process Timeline Container --}}
+                <div class="relative" data-reveal data-delay="250">
+
+                    {{-- Horizontal Connecting Line (Desktop) --}}
+                    <div class="hidden lg:block absolute top-[52px] left-12 right-12 h-1 bg-gradient-to-r from-indigo-600 via-indigo-400 to-amber-500 pointer-events-none z-0 rounded-full opacity-60"></div>
+
+                    {{-- Grid 6 Steps Horizontal Timeline --}}
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 relative z-10">
+
+                        {{-- Step 1 --}}
+                        <div class="bg-zinc-950/80 border border-white/5 hover:border-indigo-500/30 rounded-2xl p-6 flex flex-col items-center text-center group hover:-translate-y-1.5 transition-all duration-300 shadow-xl relative">
+                            <div class="w-12 h-12 rounded-xl bg-indigo-600 text-white font-extrabold flex items-center justify-center shrink-0 shadow-lg shadow-indigo-500/20 mb-4 group-hover:scale-110 transition-transform font-heading">
+                                1
+                            </div>
+                            <h3 class="font-bold text-zinc-100 text-sm font-heading mb-1.5">Marketplace</h3>
+                            <p class="text-xs text-zinc-400 leading-relaxed">Media akuisisi traffic &amp; pelanggan baru</p>
+                        </div>
+
+                        {{-- Step 2 --}}
+                        <div class="bg-zinc-950/80 border border-white/5 hover:border-indigo-500/30 rounded-2xl p-6 flex flex-col items-center text-center group hover:-translate-y-1.5 transition-all duration-300 shadow-xl relative">
+                            <div class="w-12 h-12 rounded-xl bg-indigo-600 text-white font-extrabold flex items-center justify-center shrink-0 shadow-lg shadow-indigo-500/20 mb-4 group-hover:scale-110 transition-transform font-heading">
+                                2
+                            </div>
+                            <h3 class="font-bold text-zinc-100 text-sm font-heading mb-1.5">Pelanggan Baru</h3>
+                            <p class="text-xs text-zinc-400 leading-relaxed">Pembelian pertama &amp; kenal dengan brand Anda</p>
+                        </div>
+
+                        {{-- Step 3 --}}
+                        <div class="bg-zinc-950/80 border border-indigo-500/20 hover:border-indigo-500/40 rounded-2xl p-6 flex flex-col items-center text-center group hover:-translate-y-1.5 transition-all duration-300 shadow-xl relative">
+                            <div class="w-12 h-12 rounded-xl bg-indigo-500 border border-indigo-400 text-white font-extrabold flex items-center justify-center shrink-0 shadow-lg shadow-indigo-400/20 mb-4 group-hover:scale-110 transition-transform font-heading">
+                                3
+                            </div>
+                            <h3 class="font-bold text-indigo-400 text-sm font-heading mb-1.5">Website Sendiri</h3>
+                            <p class="text-xs text-zinc-400 leading-relaxed">Transaksi kedua diarahkan ke website Anda sendiri</p>
+                        </div>
+
+                        {{-- Step 4 --}}
+                        <div class="bg-zinc-950/80 border border-indigo-500/20 hover:border-indigo-500/40 rounded-2xl p-6 flex flex-col items-center text-center group hover:-translate-y-1.5 transition-all duration-300 shadow-xl relative">
+                            <div class="w-12 h-12 rounded-xl bg-indigo-500 border border-indigo-400 text-white font-extrabold flex items-center justify-center shrink-0 shadow-lg shadow-indigo-400/20 mb-4 group-hover:scale-110 transition-transform font-heading">
+                                4
+                            </div>
+                            <h3 class="font-bold text-indigo-400 text-sm font-heading mb-1.5">Database Pelanggan</h3>
+                            <p class="text-xs text-zinc-400 leading-relaxed">Kontak WhatsApp &amp; data belanja tersimpan aman</p>
+                        </div>
+
+                        {{-- Step 5 --}}
+                        <div class="bg-zinc-950/80 border border-amber-500/20 hover:border-amber-500/40 rounded-2xl p-6 flex flex-col items-center text-center group hover:-translate-y-1.5 transition-all duration-300 shadow-xl relative">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500 text-zinc-950 font-extrabold flex items-center justify-center shrink-0 shadow-lg shadow-amber-500/20 mb-4 group-hover:scale-110 transition-transform font-heading">
+                                5
+                            </div>
+                            <h3 class="font-bold text-amber-400 text-sm font-heading mb-1.5">Repeat Order Gratis</h3>
+                            <p class="text-xs text-zinc-400 leading-relaxed">Penjualan berulang via WhatsApp Broadcast bebas biaya iklan</p>
+                        </div>
+
+                        {{-- Step 6 --}}
+                        <div class="bg-zinc-950/80 border border-amber-500/20 hover:border-amber-500/40 rounded-2xl p-6 flex flex-col items-center text-center group hover:-translate-y-1.5 transition-all duration-300 shadow-xl relative">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500 text-zinc-950 font-extrabold flex items-center justify-center shrink-0 shadow-lg shadow-amber-500/20 mb-4 group-hover:scale-110 transition-transform font-heading">
+                                6
+                            </div>
+                            <h3 class="font-bold text-amber-400 text-sm font-heading mb-1.5">Aset Digital Mandiri</h3>
+                            <p class="text-xs text-zinc-400 leading-relaxed">Bisnis kuat, mandiri, dan punya nilai brand tinggi</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                {{-- Action Button --}}
+                <div class="mt-14 text-center" data-reveal data-delay="300">
+                    <a href="{{ route('audit.index') }}"
+                        class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm rounded-full transition-all duration-200 shadow-lg shadow-indigo-500/25">
+                        Konsultasi Strategi Gratis
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                        </svg>
+                    </a>
+                </div>
+
             </div>
         </section>
 
         {{-- =========================================================
-        SECTION 4: SOLUTION
+        SECTION 4: SOLUTION (Horizontal Curved Zoom-In Slider)
         ========================================================= --}}
-        <section id="solution" class="py-24 relative" aria-label="Solusi — Bagaimana website membantu bisnis Anda">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <section id="solution" class="py-24 relative overflow-hidden" aria-label="Solusi — Bagaimana website membantu bisnis Anda">
+            <div x-data="{
+                activeCard: 1,
+                scrollTo(index) {
+                    const container = this.$refs.slider;
+                    const cards = Array.from(container.children);
+                    if (cards[index]) {
+                        cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                        this.activeCard = index;
+                    }
+                },
+                updateActive() {
+                    const container = this.$refs.slider;
+                    if (!container) return;
+                    const containerCenter = container.getBoundingClientRect().left + container.clientWidth / 2;
+                    const cards = Array.from(container.children);
+                    let minDistance = Infinity;
+                    let closestIndex = 0;
+                    cards.forEach((card, idx) => {
+                        const rect = card.getBoundingClientRect();
+                        const cardCenter = rect.left + rect.width / 2;
+                        const distance = Math.abs(containerCenter - cardCenter);
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            closestIndex = idx;
+                        }
+                    });
+                    this.activeCard = closestIndex;
+                },
+                getCurveStyles(index) {
+                    const diff = Math.abs(index - this.activeCard);
+                    if (diff === 0) {
+                        return 'scale-110 -translate-y-2 opacity-100 bg-zinc-900 border-indigo-500/60 shadow-[0_0_40px_rgba(99,102,241,0.25)] z-30 ring-1 ring-indigo-500/40';
+                    } else if (diff === 1) {
+                        return 'scale-90 translate-y-3 opacity-60 bg-zinc-900/60 border-white/10 z-10 hover:opacity-85 hover:scale-95';
+                    } else {
+                        return 'scale-75 translate-y-7 opacity-30 bg-zinc-900/30 border-white/5 z-0 hover:opacity-60';
+                    }
+                }
+            }" x-init="$nextTick(() => { updateActive(); })" class="max-w-7xl mx-auto px-4 sm:px-6">
 
                 {{-- Section Header --}}
-                <div class="max-w-3xl mx-auto text-center mb-16">
+                <div class="max-w-3xl mx-auto text-center mb-10">
                     <span
                         class="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-xs font-semibold text-indigo-400 uppercase tracking-widest mb-4"
                         data-reveal>
@@ -457,18 +512,39 @@
                         <span class="bg-gradient-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">Milik
                             Anda Sendiri</span>
                     </h2>
-                    <p class="text-zinc-400 text-lg" data-reveal data-delay="200">
+                    <p class="text-zinc-400 text-base sm:text-lg" data-reveal data-delay="200">
                         Fokus kami adalah hasil bisnis (outcome), bukan sekadar urusan teknis seperti coding, hosting,
-                        atau coding bahasa pemrograman.
+                        atau bahasa pemrograman.
                     </p>
                 </div>
 
-                {{-- Benefits Grid --}}
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {{-- Controls --}}
+                <div class="flex items-center justify-between mb-4 px-2 sm:px-6">
+                    <span class="text-xs font-medium text-zinc-500 flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
+                        Geser horizontal untuk melihat efek curve fokus solusi
+                    </span>
+                    <div class="flex items-center gap-2">
+                        <button @click="scrollTo(Math.max(0, activeCard - 1))" 
+                                class="w-10 h-10 rounded-xl bg-zinc-900 border border-white/10 hover:border-indigo-500/50 text-zinc-400 hover:text-white flex items-center justify-center transition-all duration-200 hover:bg-zinc-800 shadow-md">
+                            ←
+                        </button>
+                        <button @click="scrollTo(Math.min(5, activeCard + 1))" 
+                                class="w-10 h-10 rounded-xl bg-zinc-900 border border-white/10 hover:border-indigo-500/50 text-zinc-400 hover:text-white flex items-center justify-center transition-all duration-200 hover:bg-zinc-800 shadow-md">
+                            →
+                        </button>
+                    </div>
+                </div>
 
-                    {{-- Benefit 1: Margin Keuntungan --}}
-                    <div class="bg-zinc-900/30 border border-white/5 hover:border-indigo-500/20 rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300 group"
-                        data-reveal data-delay="100">
+                {{-- Horizontal Curved Zoom-In Slider Container --}}
+                <div x-ref="slider"
+                     @scroll.debounce.10ms="updateActive()"
+                     class="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory py-14 px-4 sm:px-12 scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+
+                    {{-- Benefit 1 --}}
+                    <div @click="scrollTo(0)"
+                         :class="getCurveStyles(0)"
+                         class="w-[290px] sm:w-[350px] shrink-0 snap-center rounded-2xl p-7 sm:p-8 border transition-all duration-300 cursor-pointer group">
                         <div
                             class="w-12 h-12 bg-indigo-500/10 border border-indigo-500/20 rounded-xl flex items-center justify-center text-indigo-400 mb-6 group-hover:scale-110 transition-transform">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -484,9 +560,10 @@
                         </p>
                     </div>
 
-                    {{-- Benefit 2: Data Pelanggan --}}
-                    <div class="bg-zinc-900/30 border border-white/5 hover:border-indigo-500/20 rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300 group"
-                        data-reveal data-delay="200">
+                    {{-- Benefit 2 --}}
+                    <div @click="scrollTo(1)"
+                         :class="getCurveStyles(1)"
+                         class="w-[290px] sm:w-[350px] shrink-0 snap-center rounded-2xl p-7 sm:p-8 border transition-all duration-300 cursor-pointer group">
                         <div
                             class="w-12 h-12 bg-indigo-500/10 border border-indigo-500/20 rounded-xl flex items-center justify-center text-indigo-400 mb-6 group-hover:scale-110 transition-transform">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -502,9 +579,10 @@
                         </p>
                     </div>
 
-                    {{-- Benefit 3: Pemasaran Ulang --}}
-                    <div class="bg-zinc-900/30 border border-white/5 hover:border-indigo-500/20 rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300 group"
-                        data-reveal data-delay="300">
+                    {{-- Benefit 3 --}}
+                    <div @click="scrollTo(2)"
+                         :class="getCurveStyles(2)"
+                         class="w-[290px] sm:w-[350px] shrink-0 snap-center rounded-2xl p-7 sm:p-8 border transition-all duration-300 cursor-pointer group">
                         <div
                             class="w-12 h-12 bg-indigo-500/10 border border-indigo-500/20 rounded-xl flex items-center justify-center text-indigo-400 mb-6 group-hover:scale-110 transition-transform">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -520,9 +598,10 @@
                         </p>
                     </div>
 
-                    {{-- Benefit 4: Kredibilitas Brand --}}
-                    <div class="bg-zinc-900/30 border border-white/5 hover:border-indigo-500/20 rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300 group"
-                        data-reveal data-delay="100">
+                    {{-- Benefit 4 --}}
+                    <div @click="scrollTo(3)"
+                         :class="getCurveStyles(3)"
+                         class="w-[290px] sm:w-[350px] shrink-0 snap-center rounded-2xl p-7 sm:p-8 border transition-all duration-300 cursor-pointer group">
                         <div
                             class="w-12 h-12 bg-indigo-500/10 border border-indigo-500/20 rounded-xl flex items-center justify-center text-indigo-400 mb-6 group-hover:scale-110 transition-transform">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -538,9 +617,10 @@
                         </p>
                     </div>
 
-                    {{-- Benefit 5: Bebas Blokir --}}
-                    <div class="bg-zinc-900/30 border border-white/5 hover:border-indigo-500/20 rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300 group"
-                        data-reveal data-delay="200">
+                    {{-- Benefit 5 --}}
+                    <div @click="scrollTo(4)"
+                         :class="getCurveStyles(4)"
+                         class="w-[290px] sm:w-[350px] shrink-0 snap-center rounded-2xl p-7 sm:p-8 border transition-all duration-300 cursor-pointer group">
                         <div
                             class="w-12 h-12 bg-indigo-500/10 border border-indigo-500/20 rounded-xl flex items-center justify-center text-indigo-400 mb-6 group-hover:scale-110 transition-transform">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -556,9 +636,10 @@
                         </p>
                     </div>
 
-                    {{-- Benefit 6: SEO Organik --}}
-                    <div class="bg-zinc-900/30 border border-white/5 hover:border-indigo-500/20 rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300 group"
-                        data-reveal data-delay="300">
+                    {{-- Benefit 6 --}}
+                    <div @click="scrollTo(5)"
+                         :class="getCurveStyles(5)"
+                         class="w-[290px] sm:w-[350px] shrink-0 snap-center rounded-2xl p-7 sm:p-8 border transition-all duration-300 cursor-pointer group">
                         <div
                             class="w-12 h-12 bg-indigo-500/10 border border-indigo-500/20 rounded-xl flex items-center justify-center text-indigo-400 mb-6 group-hover:scale-110 transition-transform">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -574,6 +655,15 @@
                         </p>
                     </div>
 
+                </div>
+
+                {{-- Dots Navigation Indicator --}}
+                <div class="flex justify-center items-center gap-2 mt-4">
+                    <template x-for="i in 6">
+                        <button @click="scrollTo(i-1)"
+                                :class="activeCard === (i-1) ? 'w-8 bg-indigo-500 shadow-sm shadow-indigo-500/50' : 'w-2 bg-zinc-700 hover:bg-zinc-500'"
+                                class="h-2 rounded-full transition-all duration-300 focus:outline-none"></button>
+                    </template>
                 </div>
 
             </div>
@@ -610,7 +700,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         @foreach($programs as $program)
                             <div
-                                class="card-program bg-zinc-950/80 border border-white/5 hover:border-indigo-500/20 rounded-3xl p-6 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300 relative group">
+                                class="card-program bg-zinc-950/80 border {{ $program->is_best_value ? 'border-[#FFC800]' : 'border-white/5' }} hover:border-indigo-500/20 rounded-3xl p-6 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300 relative group">
                                 @if($program->is_best_value)
                                     <div
                                         class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full text-[10px] font-bold tracking-widest uppercase text-white shadow-lg shadow-indigo-500/20">
@@ -698,7 +788,7 @@
                         </div>
 
                         {{-- Program 2: GROW --}}
-                        <div class="bg-zinc-950/80 border border-white/5 hover:border-indigo-500/25 rounded-3xl p-6 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300 relative group"
+                        <div class="bg-zinc-950/80 border border-[#FFC800] hover:border-indigo-500/25 rounded-3xl p-6 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300 relative group"
                             data-reveal data-delay="200">
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-full text-[10px] font-bold tracking-widest uppercase shadow-lg shadow-indigo-500/20 z-10">
