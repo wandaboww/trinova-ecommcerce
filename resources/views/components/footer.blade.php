@@ -1,7 +1,7 @@
 <footer class="bg-zinc-900 border-t border-white/5 pt-16 pb-8" role="contentinfo" id="footer">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 mb-12">
 
             {{-- Brand --}}
             <div class="lg:col-span-1">
@@ -42,10 +42,19 @@
             <div>
                 <h3 class="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-4">Informasi</h3>
                 <ul class="flex flex-col gap-3" role="list">
-                    <li><a href="{{ route('portfolio.index') }}" class="text-sm text-zinc-500 hover:text-zinc-200 transition-colors" id="footer-portfolio">Portfolio</a></li>
+                    <li><a href="{{ route('home') }}#portfolio" class="text-sm text-zinc-500 hover:text-zinc-200 transition-colors" id="footer-portfolio">Portfolio</a></li>
                     <li><a href="{{ route('blog.index') }}"      class="text-sm text-zinc-500 hover:text-zinc-200 transition-colors" id="footer-blog">Blog</a></li>
                     <li><a href="{{ route('home') }}#faq"        class="text-sm text-zinc-500 hover:text-zinc-200 transition-colors" id="footer-faq">FAQ</a></li>
                     <li><a href="{{ route('contact.index') }}"   class="text-sm text-zinc-500 hover:text-zinc-200 transition-colors" id="footer-kontak">Kontak</a></li>
+                </ul>
+            </div>
+
+            {{-- Legal --}}
+            <div>
+                <h3 class="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-4">LEGAL</h3>
+                <ul class="flex flex-col gap-3" role="list">
+                    <li><a href="#" class="text-sm text-zinc-500 hover:text-zinc-200 transition-colors" id="footer-privacy">Kebijakan Privasi</a></li>
+                    <li><a href="#" class="text-sm text-zinc-500 hover:text-zinc-200 transition-colors" id="footer-terms">Syarat &amp; Ketentuan</a></li>
                 </ul>
             </div>
 
@@ -81,14 +90,10 @@
         </div>
 
         {{-- Bottom Bar --}}
-        <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="pt-8 border-t border-white/5 flex flex-col items-center justify-center text-center gap-4">
             <p class="text-xs text-zinc-600">
                 &copy; {{ date('Y') }} Trinova Digital. Hak cipta dilindungi.
             </p>
-            <div class="flex gap-6">
-                <a href="#" class="text-xs text-zinc-600 hover:text-zinc-400 transition-colors" id="footer-privacy">Kebijakan Privasi</a>
-                <a href="#" class="text-xs text-zinc-600 hover:text-zinc-400 transition-colors" id="footer-terms">Syarat &amp; Ketentuan</a>
-            </div>
         </div>
 
     </div>

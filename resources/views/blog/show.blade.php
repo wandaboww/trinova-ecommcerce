@@ -2,7 +2,67 @@
     'title'       => $article->title . ' — Blog Trinova Digital',
     'description' => $article->excerpt,
     'canonical'   => route('blog.show', $article->slug),
+    'og_type'     => 'article',
+    'og_image'    => (isset($article->featured_image) && $article->featured_image) ? asset($article->featured_image) : asset('images/og-default.jpg'),
 ]">
+
+@push('schema')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BlogPosting",
+    "headline": {{ json_encode($article->title) }},
+    "description": {{ json_encode($article->excerpt) }},
+    "image": [
+        "{{ (isset($article->featured_image) && $article->featured_image) ? asset($article->featured_image) : asset('images/og-default.jpg') }}"
+    ],
+    "datePublished": "{{ date('c', strtotime($article->published_at ?? now())) }}",
+    "dateModified": "{{ date('c', strtotime($article->updated_at ?? now())) }}",
+    "author": {
+        "@@type": "Organization",
+        "name": "{{ $article->author->name ?? $article->author ?? 'Tim Trinova' }}"
+    },
+    "publisher": {
+        "@@type": "Organization",
+        "name": "Trinova Digital",
+        "logo": {
+            "@@type": "ImageObject",
+            "url": "{{ asset('images/logo.png') }}"
+        }
+    },
+    "mainEntityOfPage": {
+        "@@type": "WebPage",
+        "@@id": "{{ route('blog.show', $article->slug) }}"
+    }
+}
+</script>
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@@type": "ListItem",
+            "position": 1,
+            "name": "Beranda",
+            "item": "{{ route('home') }}"
+        },
+        {
+            "@@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "{{ route('blog.index') }}"
+        },
+        {
+            "@@type": "ListItem",
+            "position": 3,
+            "name": {{ json_encode($article->title) }},
+            "item": "{{ route('blog.show', $article->slug) }}"
+        }
+    ]
+}
+</script>
+@endpush
 
 <section class="pt-32 pb-24 relative overflow-hidden" aria-label="Artikel: {{ $article->title }}">
     
@@ -12,13 +72,22 @@
 
     <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
         
-        {{-- Back Link --}}
-        <div class="mb-8" data-reveal>
-            <a href="{{ route('blog.index') }}" class="inline-flex items-center gap-2 text-zinc-500 hover:text-zinc-300 text-sm font-semibold transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12l7.5-7.5" /></svg>
-                Kembali ke Blog
-            </a>
-        </div>
+        {{-- Visual Breadcrumb & Back Link --}}
+        <nav aria-label="Breadcrumb" class="mb-8" data-reveal>
+            <ol class="flex flex-wrap items-center gap-2 text-xs text-zinc-500 font-medium">
+                <li>
+                    <a href="{{ route('home') }}" class="hover:text-zinc-300 transition-colors">Beranda</a>
+                </li>
+                <li><span>/</span></li>
+                <li>
+                    <a href="{{ route('blog.index') }}" class="hover:text-zinc-300 transition-colors">Blog</a>
+                </li>
+                <li><span>/</span></li>
+                <li class="text-indigo-400 font-semibold truncate max-w-[200px] sm:max-w-xs" aria-current="page">
+                    {{ $article->title }}
+                </li>
+            </ol>
+        </nav>
 
         {{-- Article Header --}}
         <header class="space-y-6 mb-12" data-reveal data-delay="100">
@@ -66,7 +135,7 @@
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     @foreach($relatedArticles as $related)
-                        <div class="bg-zinc-950 border border-white/5 p-6 rounded-2xl hover:border-indigo-500/20 transition-all group">
+                        <div class="bg-zinc-950 border border-white p-6 rounded-2xl hover:border-indigo-400 transition-all group">
                             <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-wider">
                                 {{ $related->category->name ?? 'Bisnis Online' }}
                             </span>

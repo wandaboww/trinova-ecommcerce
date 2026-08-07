@@ -16,10 +16,10 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="text-zinc-100 min-h-screen flex">
+<body class="text-zinc-100 min-h-screen flex" x-data="{ sidebarOpen: true }">
 
     {{-- Sidebar Navigation --}}
-    <aside class="w-64 bg-zinc-950 border-r border-zinc-800 flex flex-col justify-between shrink-0 fixed top-0 bottom-0 left-0 z-30">
+    <aside class="w-64 bg-zinc-950 border-r border-zinc-800 flex flex-col justify-between shrink-0 fixed top-0 bottom-0 left-0 z-30 transition-transform duration-300" :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
         
         <div>
             {{-- Header Logo --}}
@@ -101,13 +101,20 @@
     </aside>
 
     {{-- Content Layout (Right) --}}
-    <div class="flex-grow pl-64 min-h-screen flex flex-col">
+    <div class="flex-grow min-h-screen flex flex-col transition-all duration-300" :class="sidebarOpen ? 'pl-64' : 'pl-0'">
         
         {{-- Top Info Header --}}
         <header class="h-16 border-b border-zinc-800 bg-zinc-950/40 backdrop-blur px-8 flex items-center justify-between shrink-0 sticky top-0 z-20">
-            <h1 class="font-bold text-zinc-100 text-sm tracking-tight font-heading uppercase tracking-widest text-zinc-400 text-xs">
-                {{ $headerTitle ?? 'CMS Control Panel' }}
-            </h1>
+            <div class="flex items-center gap-4">
+                <button @click="sidebarOpen = !sidebarOpen" class="text-zinc-400 hover:text-white focus:outline-none transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <h1 class="font-bold text-zinc-100 text-sm tracking-tight font-heading uppercase tracking-widest text-zinc-400 text-xs">
+                    {{ $headerTitle ?? 'CMS Control Panel' }}
+                </h1>
+            </div>
             <div class="flex items-center gap-4 text-xs font-semibold">
                 <span class="px-2.5 py-1 bg-green-500/10 text-green-400 rounded-full">Developer Mode</span>
                 <span class="text-zinc-500">v1.0.0</span>

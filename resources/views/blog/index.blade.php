@@ -4,6 +4,29 @@
     'canonical'   => route('blog.index'),
 ]">
 
+@push('schema')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Beranda",
+            "item": "{{ route('home') }}"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "{{ route('blog.index') }}"
+        }
+    ]
+}
+</script>
+@endpush
+
 <section class="pt-32 pb-24 relative overflow-hidden" aria-label="Blog Trinova Digital">
     
     {{-- Background Glows --}}
@@ -29,10 +52,16 @@
             
             {{-- Articles Area (Left) --}}
             <div class="lg:col-span-9 space-y-12">
-                @if(count($articles) > 0)
+                @if(count($articles) === 0)
+                    <div class="text-center py-16 bg-zinc-950 border border-white/5 rounded-3xl">
+                        <span class="text-4xl">📭</span>
+                        <h3 class="text-lg font-bold text-zinc-300 font-heading mt-4">Belum Ada Artikel</h3>
+                        <p class="text-zinc-500 text-sm mt-1">Kami sedang menyusun artikel menarik untuk Anda.</p>
+                    </div>
+                @else
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         @foreach($articles as $article)
-                            <article class="bg-zinc-950 border border-white/5 rounded-2xl overflow-hidden hover:border-indigo-500/20 transition-all duration-300 flex flex-col justify-between group">
+                            <article class="bg-zinc-950 border border-white rounded-2xl overflow-hidden hover:border-indigo-400 transition-all duration-300 flex flex-col justify-between group">
                                 <div>
                                     {{-- Placeholder / Dynamic Image --}}
                                     <div class="aspect-video bg-zinc-900 flex items-center justify-center border-b border-white/5 relative overflow-hidden">
@@ -45,7 +74,7 @@
                                     </div>
 
                                     <div class="p-6 space-y-4">
-                                        <div class="flex items-center gap-3">
+                                        <div class="flex items-center justify-between">
                                             <span class="px-2.5 py-0.5 bg-indigo-500/10 text-indigo-400 text-[10px] font-bold rounded uppercase tracking-wider">
                                                 {{ $article->category->name }}
                                             </span>
@@ -77,17 +106,11 @@
                     </div>
 
                     {{-- Pagination --}}
-                    @if($articles instanceof \Illuminate\Pagination\LengthAwarePaginator)
-                        <div class="mt-12">
-                            {{ $articles->links() }}
+                    @if(method_exists($articles, 'links'))
+                        <div class="mt-12 flex justify-center">
+                            {{ $articles->links('vendor.pagination.blog-pagination') }}
                         </div>
                     @endif
-                @else
-                    <div class="text-center py-16 bg-zinc-950 border border-white/5 rounded-3xl">
-                        <span class="text-4xl">📭</span>
-                        <h3 class="text-lg font-bold text-zinc-300 font-heading mt-4">Belum Ada Artikel</h3>
-                        <p class="text-zinc-500 text-sm mt-1">Kami sedang menyusun artikel menarik untuk Anda.</p>
-                    </div>
                 @endif
             </div>
 

@@ -17,7 +17,7 @@
     <meta name="robots" content="{{ $seo['robots'] ?? 'index, follow' }}" />
 
     {{-- Open Graph --}}
-    <meta property="og:type"        content="website" />
+    <meta property="og:type"        content="{{ $seo['og_type'] ?? 'website' }}" />
     <meta property="og:url"         content="{{ url()->current() }}" />
     <meta property="og:title"       content="{{ $seo['og_title'] ?? $seo['title'] ?? config('app.name') }}" />
     <meta property="og:description" content="{{ $seo['og_description'] ?? $seo['description'] ?? '' }}" />

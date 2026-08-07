@@ -28,7 +28,7 @@
         {{-- Action Bar --}}
         <div class="flex items-center justify-between mb-6">
             <p class="text-xs text-zinc-500">Kelola daftar pertanyaan umum (FAQ) yang sering diajukan pelanggan.</p>
-            <button @click="showAddModal = true" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-indigo-500/20 transition-all hover:-translate-y-0.5 duration-200">
+            <button @click="showAddModal = true" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow transition-all hover:-translate-y-0.5 duration-200">
                 + Tambah FAQ
             </button>
         </div>
@@ -84,33 +84,36 @@
                  x-transition:enter="transition ease-out duration-200"
                  x-transition:enter-start="opacity-0 scale-95"
                  x-transition:enter-end="opacity-100 scale-100"
-                 class="w-full max-w-lg bg-zinc-950 border border-zinc-900 rounded-3xl p-7 space-y-6 shadow-2xl">
-                <div class="flex items-center justify-between border-b border-zinc-900 pb-4">
-                    <h3 class="text-sm font-bold text-zinc-200 uppercase tracking-widest">+ Tambah Pertanyaan Baru</h3>
-                    <button @click="showAddModal = false" class="text-zinc-500 hover:text-zinc-300 text-lg leading-none">✕</button>
+                 class="w-full max-w-lg bg-gray-800 border border-gray-700 rounded-3xl shadow-2xl">
+                {{-- Blue Header --}}
+                <div class="flex items-center justify-between bg-blue-700 px-7 py-5 rounded-t-3xl">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-widest">+ Tambah Pertanyaan Baru</h3>
+                    <button @click="showAddModal = false" class="text-blue-200 hover:text-white text-xl leading-none transition-colors">✕</button>
                 </div>
+                <div class="px-7 pb-7 pt-6 space-y-5">
                 <form action="{{ route('admin.faq.store') }}" method="POST" class="space-y-5">
                     @csrf
                     <div>
-                        <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Pertanyaan</label>
+                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Pertanyaan</label>
                         <input type="text" name="question" placeholder="cth: Berapa lama waktu pengerjaan website?" required
-                               class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
+                               class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Jawaban</label>
+                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Jawaban</label>
                         <textarea name="answer" rows="5" placeholder="Tulis jawaban yang jelas dan informatif..." required
-                                  class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none resize-none transition-colors"></textarea>
+                                  class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none resize-none transition-colors"></textarea>
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Urutan Tampilan</label>
+                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Urutan Tampilan</label>
                         <input type="number" name="sort_order" value="1" min="1"
-                               class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none transition-colors">
+                               class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                     </div>
                     <div class="flex justify-end gap-3 pt-2">
-                        <button type="button" @click="showAddModal = false" class="px-5 py-3 bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 text-xs font-bold rounded-xl transition-all">Batal</button>
-                        <button type="submit" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl shadow-lg shadow-indigo-500/20 transition-all">Simpan FAQ</button>
+                        <button type="button" @click="showAddModal = false" class="px-5 py-3 bg-gray-700 border border-gray-600 hover:bg-gray-600 text-gray-300 hover:text-white text-xs font-bold rounded-xl transition-all">Batal</button>
+                        <button type="submit" class="px-6 py-3 bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold rounded-xl shadow transition-all">Simpan FAQ</button>
                     </div>
                 </form>
+                </div>
             </div>
         </div>
 
@@ -127,42 +130,44 @@
                  x-transition:enter="transition ease-out duration-200"
                  x-transition:enter-start="opacity-0 scale-95"
                  x-transition:enter-end="opacity-100 scale-100"
-                 class="w-full max-w-lg bg-zinc-950 border border-zinc-900 rounded-3xl p-7 space-y-6 shadow-2xl">
-                <div class="flex items-center justify-between border-b border-zinc-900 pb-4">
-                    <h3 class="text-sm font-bold text-zinc-200 uppercase tracking-widest">✏️ Edit Pertanyaan FAQ</h3>
-                    <button @click="showEditModal = false" class="text-zinc-500 hover:text-zinc-300 text-lg leading-none">✕</button>
+                 class="w-full max-w-lg bg-gray-800 border border-gray-700 rounded-3xl shadow-2xl">
+                {{-- Blue Header --}}
+                <div class="flex items-center justify-between bg-blue-700 px-7 py-5 rounded-t-3xl">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-widest">✏️ Edit Pertanyaan FAQ</h3>
+                    <button @click="showEditModal = false" class="text-blue-200 hover:text-white text-xl leading-none transition-colors">✕</button>
                 </div>
-
+                <div class="px-7 pb-7 pt-6 space-y-5">
                 <form
                     x-bind:action="'/admin/faq/' + activeFaq.id"
                     method="POST" class="space-y-5">
                     @csrf
                     <input type="hidden" name="_method" value="PUT">
                     <div>
-                        <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Pertanyaan</label>
+                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Pertanyaan</label>
                         <input type="text" name="question"
                                x-model="activeFaq.question"
                                required
-                               class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none transition-colors">
+                               class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Jawaban</label>
+                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Jawaban</label>
                         <textarea name="answer" rows="5" required
                                   x-ref="editAnswer"
-                                  class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none resize-none transition-colors"></textarea>
+                                  class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none resize-none transition-colors"></textarea>
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Urutan Tampilan</label>
+                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Urutan Tampilan</label>
                         <input type="number" name="sort_order"
                                x-model="activeFaq.sort_order"
                                min="1"
-                               class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none transition-colors">
+                               class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                     </div>
                     <div class="flex justify-end gap-3 pt-2">
-                        <button type="button" @click="showEditModal = false" class="px-5 py-3 bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 text-xs font-bold rounded-xl transition-all">Batal</button>
-                        <button type="submit" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl shadow-lg shadow-indigo-500/20 transition-all">Simpan Perubahan</button>
+                        <button type="button" @click="showEditModal = false" class="px-5 py-3 bg-gray-700 border border-gray-600 hover:bg-gray-600 text-gray-300 hover:text-white text-xs font-bold rounded-xl transition-all">Batal</button>
+                        <button type="submit" class="px-6 py-3 bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold rounded-xl shadow transition-all">Simpan Perubahan</button>
                     </div>
                 </form>
+                </div>
             </div>
         </div>
 

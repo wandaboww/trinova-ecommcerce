@@ -11,7 +11,7 @@ class BlogController extends Controller
     public function index()
     {
         try {
-            $articles = Article::latestPublished()->paginate(9);
+            $articles = Article::latestPublished()->paginate(4);
             $categories = Category::withCount(['articles' => function ($query) {
                 $query->published();
             }])->get();
@@ -48,7 +48,7 @@ class BlogController extends Controller
                     'views' => 98
                 ]
             ];
-            $articles = new \Illuminate\Pagination\LengthAwarePaginator($mockArticles, count($mockArticles), 9);
+            $articles = new \Illuminate\Pagination\LengthAwarePaginator($mockArticles, count($mockArticles), 4);
         }
 
         return view('blog.index', compact('articles', 'categories'));
@@ -58,7 +58,7 @@ class BlogController extends Controller
     {
         try {
             $category = Category::where('slug', $slug)->firstOrFail();
-            $articles = $category->articles()->latestPublished()->paginate(9);
+            $articles = $category->articles()->latestPublished()->paginate(4);
             $categories = Category::withCount(['articles' => function ($query) {
                 $query->published();
             }])->get();
@@ -78,7 +78,7 @@ class BlogController extends Controller
                     'views' => 124
                 ]
             ];
-            $articles = new \Illuminate\Pagination\LengthAwarePaginator($mockArticles, count($mockArticles), 9);
+            $articles = new \Illuminate\Pagination\LengthAwarePaginator($mockArticles, count($mockArticles), 4);
         }
 
         return view('blog.category', compact('category', 'articles', 'categories'));

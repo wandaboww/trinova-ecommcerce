@@ -110,4 +110,40 @@ class BlogManagerController extends Controller
         $article->delete();
         return redirect()->route('admin.blog.index')->with('success', 'Artikel berhasil dihapus.');
     }
+
+    public function duplicate(Article $article)
+    {
+        $newArticle = $article->replicate();
+        $newArticle->title = $article->title . ' (Copy)';
+        
+        $slug = Str::slug($newArticle->title);
+        $originalSlug = $slug;
+        $count = 1;
+        while (Article::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $count;
+            $count++;
+        }
+        $newArticle->slug = $slug;
+        $newArticle->status = 'draft';
+        $newArticle->published_at = null;
+        $newArticle->save();
+
+        return redirect()->route('admin.blog.index')->with('success', 'Artikel berhasil diduplikat sebagai draf.');
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        $ids = json_decode($request->input('ids', '[]'), true);
+        if (!empty($ids)) {
+            $articles = Article::whereIn('id', $ids)->get();
+            foreach ($articles as $article) {
+                if ($article->featured_image && file_exists(public_path($article->featured_image))) {
+                    @unlink(public_path($article->featured_image));
+                }
+                $article->delete();
+            }
+            return redirect()->route('admin.blog.index')->with('success', count($ids) . ' artikel berhasil dihapus.');
+        }
+        return redirect()->route('admin.blog.index')->with('error', 'Tidak ada artikel yang terpilih.');
+    }
 }

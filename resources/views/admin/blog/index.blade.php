@@ -78,6 +78,7 @@
         showAddModal: false,
         showCategoryModal: false,
         showEditModal: false,
+        selectedIds: [],
         activeArticle: { id: '', title: '', status: 'draft', category_name: '', excerpt: '', content: '' },
         openEdit(data) {
             this.activeArticle = data;
@@ -89,17 +90,38 @@
                     document.getElementById('edit-content-input').value = data.content;
                 }
             });
+        },
+        toggleSelectAll(e) {
+            if (e.target.checked) {
+                this.selectedIds = Array.from(document.querySelectorAll('.article-checkbox')).map(el => el.value);
+            } else {
+                this.selectedIds = [];
+            }
         }
     }">
 
         {{-- Action Bar --}}
         <div class="flex items-center justify-between mb-6">
-            <p class="text-xs text-zinc-500">Kelola artikel edukatif blog bisnis dan e-commerce Trinova Digital.</p>
+            <div class="flex items-center gap-4">
+                <p class="text-xs text-zinc-500">Kelola artikel edukatif blog bisnis dan e-commerce Trinova Digital.</p>
+                
+                {{-- Bulk Action --}}
+                <div x-show="selectedIds.length > 0" class="flex items-center gap-2" x-cloak x-transition>
+                    <span class="text-xs text-zinc-400 font-semibold" x-text="selectedIds.length + ' item terpilih'"></span>
+                    <form action="{{ route('admin.blog.bulk-delete') }}" method="POST" class="inline" @submit="return confirm('Apakah Anda yakin ingin menghapus ' + selectedIds.length + ' artikel terpilih?')">
+                        @csrf
+                        <input type="hidden" name="ids" :value="JSON.stringify(selectedIds)">
+                        <button type="submit" class="px-4 py-2 bg-red-500/10 border border-red-500/30 hover:bg-red-600 hover:text-white text-red-400 font-bold text-xs rounded-xl shadow transition-all duration-200">
+                            🗑️ Hapus Terpilih
+                        </button>
+                    </form>
+                </div>
+            </div>
             <div class="flex gap-3">
                 <button @click="showCategoryModal = true" class="px-5 py-2.5 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-300 font-bold text-xs rounded-xl transition-all duration-200">
                     + Kategori Baru
                 </button>
-                <button @click="showAddModal = true" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-indigo-500/20 transition-all hover:-translate-y-0.5 duration-200">
+                <button @click="showAddModal = true" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow transition-all hover:-translate-y-0.5 duration-200">
                     + Tulis Artikel Baru
                 </button>
             </div>
@@ -111,6 +133,9 @@
                 <table class="w-full text-xs">
                     <thead>
                         <tr class="border-b border-zinc-800 text-left">
+                            <th class="px-6 py-4 text-center w-12">
+                                <input type="checkbox" @change="toggleSelectAll($event)" :checked="selectedIds.length > 0 && selectedIds.length === document.querySelectorAll('.article-checkbox').length" class="rounded bg-zinc-900 border-zinc-800 text-indigo-600 focus:ring-indigo-500">
+                            </th>
                             <th class="px-6 py-4 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Judul Artikel</th>
                             <th class="px-6 py-4 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Kategori</th>
                             <th class="px-6 py-4 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Status</th>
@@ -120,12 +145,15 @@
                     <tbody class="divide-y divide-zinc-900">
                         @if($articles->isEmpty())
                             <tr>
-                                <td colspan="4" class="px-6 py-8 text-center text-zinc-500 text-xs">Belum ada artikel.</td>
+                                <td colspan="5" class="px-6 py-8 text-center text-zinc-500 text-xs">Belum ada artikel.</td>
                             </tr>
                         @endif
 
                         @foreach($articles as $article)
                         <tr class="hover:bg-zinc-900/30 transition-colors">
+                            <td class="px-6 py-4 text-center">
+                                <input type="checkbox" value="{{ $article->id }}" x-model="selectedIds" class="article-checkbox rounded bg-zinc-900 border-zinc-800 text-indigo-600 focus:ring-indigo-500">
+                            </td>
                             <td class="px-6 py-4 font-semibold text-zinc-200 max-w-sm">
                                 <span class="line-clamp-2 leading-relaxed">{{ $article->title }}</span>
                             </td>
@@ -153,6 +181,10 @@
                                         class="px-3 py-1.5 bg-zinc-900 border border-zinc-800 hover:border-indigo-500/40 text-zinc-300 hover:text-white rounded-lg transition-all text-[10px] font-bold">
                                         Edit
                                     </button>
+                                    <form action="{{ route('admin.blog.duplicate', $article->id) }}" method="POST" class="inline">
+                                        @csrf
+                                        <button type="submit" class="px-3 py-1.5 bg-zinc-900 border border-zinc-800 hover:border-indigo-500/40 text-zinc-300 hover:text-white rounded-lg transition-all text-[10px] font-bold">Duplikat</button>
+                                    </form>
                                     <form action="{{ route('admin.blog.destroy', $article->id) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')">
                                         @csrf
                                         @method('DELETE')
@@ -180,22 +212,24 @@
                  x-transition:enter="transition ease-out duration-200"
                  x-transition:enter-start="opacity-0 scale-95"
                  x-transition:enter-end="opacity-100 scale-100"
-                 class="w-full max-w-4xl bg-zinc-950 border border-zinc-900 rounded-3xl p-7 space-y-6 shadow-2xl overflow-y-auto max-h-[90vh]">
-                <div class="flex items-center justify-between border-b border-zinc-900 pb-4">
-                    <h3 class="text-sm font-bold text-zinc-200 uppercase tracking-widest">✏️ Tulis Artikel Baru</h3>
-                    <button @click="showAddModal = false" class="text-zinc-500 hover:text-zinc-300 text-lg leading-none">✕</button>
+                 class="w-full max-w-4xl bg-gray-800 border border-gray-700 rounded-3xl shadow-2xl overflow-y-auto max-h-[90vh]">
+                {{-- Blue Header --}}
+                <div class="flex items-center justify-between bg-blue-700 px-7 py-5 rounded-t-3xl">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-widest">✏️ Tulis Artikel Baru</h3>
+                    <button @click="showAddModal = false" class="text-blue-200 hover:text-white text-xl leading-none transition-colors">✕</button>
                 </div>
+                <div class="px-7 pb-7 pt-6 space-y-6">
                 <form action="{{ route('admin.blog.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
                     @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div class="md:col-span-2">
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Judul Artikel</label>
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Judul Artikel</label>
                             <input type="text" name="title" placeholder="cth: 5 Kesalahan Fatal Seller Tokopedia..." required
-                                   class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
+                                   class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Kategori</label>
-                            <select name="category_name" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none transition-colors">
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Kategori</label>
+                            <select name="category_name" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                                 @if($categories->isEmpty())
                                     <option>E-Commerce</option>
                                     <option>Marketing</option>
@@ -208,33 +242,34 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Status Publikasi</label>
-                            <select name="status" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none transition-colors">
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Status Publikasi</label>
+                            <select name="status" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                                 <option value="draft">Draft</option>
                                 <option value="publish">Publish</option>
                             </select>
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Gambar Unggulan (Featured Image)</label>
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Gambar Unggulan (Featured Image)</label>
                             <input type="file" name="featured_image" accept="image/*"
-                                   class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none transition-colors">
+                                   class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Ringkasan Artikel</label>
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Ringkasan Artikel</label>
                             <textarea name="excerpt" rows="2" placeholder="Ringkasan singkat artikel..." required
-                                      class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none resize-none transition-colors"></textarea>
+                                      class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none resize-none transition-colors"></textarea>
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Konten Artikel</label>
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Konten Artikel</label>
                             <input type="hidden" name="content" id="add-content-input" required>
                             <div id="add-editor-container"></div>
                         </div>
                     </div>
-                    <div class="flex justify-end gap-3 pt-2 border-t border-zinc-900">
-                        <button type="button" @click="showAddModal = false" class="px-5 py-3 bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 text-xs font-bold rounded-xl transition-all">Batal</button>
-                        <button type="submit" class="px-7 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-indigo-500/20 transition-all">Simpan Artikel</button>
+                    <div class="flex justify-end gap-3 pt-2 border-t border-gray-700">
+                        <button type="button" @click="showAddModal = false" class="px-5 py-3 bg-gray-700 border border-gray-600 hover:bg-gray-600 text-gray-300 hover:text-white text-xs font-bold rounded-xl transition-all">Batal</button>
+                        <button type="submit" class="px-7 py-3 bg-blue-700 hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow transition-all">Simpan Artikel</button>
                     </div>
                 </form>
+                </div>
             </div>
         </div>
 
@@ -251,23 +286,26 @@
                  x-transition:enter="transition ease-out duration-200"
                  x-transition:enter-start="opacity-0 scale-95"
                  x-transition:enter-end="opacity-100 scale-100"
-                 class="w-full max-w-md bg-zinc-950 border border-zinc-900 rounded-3xl p-7 space-y-6 shadow-2xl">
-                <div class="flex items-center justify-between border-b border-zinc-900 pb-4">
-                    <h3 class="text-sm font-bold text-zinc-200 uppercase tracking-widest">+ Tambah Kategori Baru</h3>
-                    <button @click="showCategoryModal = false" class="text-zinc-500 hover:text-zinc-300 text-lg leading-none">✕</button>
+                 class="w-full max-w-md bg-gray-800 border border-gray-700 rounded-3xl shadow-2xl">
+                {{-- Blue Header --}}
+                <div class="flex items-center justify-between bg-blue-700 px-7 py-5 rounded-t-3xl">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-widest">+ Tambah Kategori Baru</h3>
+                    <button @click="showCategoryModal = false" class="text-blue-200 hover:text-white text-xl leading-none transition-colors">✕</button>
                 </div>
+                <div class="px-7 pb-7 pt-6 space-y-5">
                 <form action="{{ route('admin.blog.categories.store') }}" method="POST" class="space-y-5">
                     @csrf
                     <div>
-                        <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Nama Kategori</label>
+                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Nama Kategori</label>
                         <input type="text" name="name" placeholder="cth: Finansial" required
-                               class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
+                               class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
                     </div>
                     <div class="flex justify-end gap-3 pt-2">
-                        <button type="button" @click="showCategoryModal = false" class="px-5 py-3 bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 text-xs font-bold rounded-xl transition-all">Batal</button>
-                        <button type="submit" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl shadow-lg shadow-indigo-500/20 transition-all">Simpan Kategori</button>
+                        <button type="button" @click="showCategoryModal = false" class="px-5 py-3 bg-gray-700 border border-gray-600 hover:bg-gray-600 text-gray-300 hover:text-white text-xs font-bold rounded-xl transition-all">Batal</button>
+                        <button type="submit" class="px-6 py-3 bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold rounded-xl shadow transition-all">Simpan Kategori</button>
                     </div>
                 </form>
+                </div>
             </div>
         </div>
 
@@ -284,25 +322,26 @@
                  x-transition:enter="transition ease-out duration-200"
                  x-transition:enter-start="opacity-0 scale-95"
                  x-transition:enter-end="opacity-100 scale-100"
-                 class="w-full max-w-4xl bg-zinc-950 border border-zinc-900 rounded-3xl p-7 space-y-6 shadow-2xl overflow-y-auto max-h-[90vh]">
-                <div class="flex items-center justify-between border-b border-zinc-900 pb-4">
-                    <h3 class="text-sm font-bold text-zinc-200 uppercase tracking-widest">✏️ Edit Artikel Blog</h3>
-                    <button @click="showEditModal = false" class="text-zinc-500 hover:text-zinc-300 text-lg leading-none">✕</button>
+                 class="w-full max-w-4xl bg-gray-800 border border-gray-700 rounded-3xl shadow-2xl overflow-y-auto max-h-[90vh]">
+                {{-- Blue Header --}}
+                <div class="flex items-center justify-between bg-blue-700 px-7 py-5 rounded-t-3xl">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-widest">✏️ Edit Artikel Blog</h3>
+                    <button @click="showEditModal = false" class="text-blue-200 hover:text-white text-xl leading-none transition-colors">✕</button>
                 </div>
-
+                <div class="px-7 pb-7 pt-6 space-y-6">
                 <form x-bind:action="'/admin/blog/' + activeArticle.id" method="POST" enctype="multipart/form-data" class="space-y-5">
                     @csrf
                     <input type="hidden" name="_method" value="PUT">
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div class="md:col-span-2">
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Judul Artikel</label>
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Judul Artikel</label>
                             <input type="text" name="title" x-model="activeArticle.title" required
-                                   class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none transition-colors">
+                                   class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Kategori</label>
-                            <select name="category_name" x-model="activeArticle.category_name" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none transition-colors">
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Kategori</label>
+                            <select name="category_name" x-model="activeArticle.category_name" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                                 @if($categories->isEmpty())
                                     <option>E-Commerce</option>
                                     <option>Marketing</option>
@@ -315,35 +354,36 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Status Publikasi</label>
-                            <select name="status" x-model="activeArticle.status" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none transition-colors">
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Status Publikasi</label>
+                            <select name="status" x-model="activeArticle.status" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                                 <option value="draft">Draft</option>
                                 <option value="publish">Publish</option>
                             </select>
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Gambar Unggulan Baru (Featured Image)</label>
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Gambar Unggulan Baru (Featured Image)</label>
                             <input type="file" name="featured_image" accept="image/*"
-                                   class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none transition-colors">
+                                   class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Ringkasan Artikel</label>
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Ringkasan Artikel</label>
                             <textarea name="excerpt" rows="2"
                                       x-ref="editExcerpt"
                                       required
-                                      class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none resize-none transition-colors"></textarea>
+                                      class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none resize-none transition-colors"></textarea>
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Konten Artikel</label>
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Konten Artikel</label>
                             <input type="hidden" name="content" id="edit-content-input" required>
                             <div id="edit-editor-container"></div>
                         </div>
                     </div>
-                    <div class="flex justify-end gap-3 pt-2 border-t border-zinc-900">
-                        <button type="button" @click="showEditModal = false" class="px-5 py-3 bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 text-xs font-bold rounded-xl transition-all">Batal</button>
-                        <button type="submit" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl shadow-lg shadow-indigo-500/20 transition-all">Simpan Perubahan</button>
+                    <div class="flex justify-end gap-3 pt-2 border-t border-gray-700">
+                        <button type="button" @click="showEditModal = false" class="px-5 py-3 bg-gray-700 border border-gray-600 hover:bg-gray-600 text-gray-300 hover:text-white text-xs font-bold rounded-xl transition-all">Batal</button>
+                        <button type="submit" class="px-6 py-3 bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold rounded-xl shadow transition-all">Simpan Perubahan</button>
                     </div>
                 </form>
+                </div>
             </div>
         </div>
 

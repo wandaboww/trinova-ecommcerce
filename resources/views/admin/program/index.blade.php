@@ -54,7 +54,7 @@
                     utama.</p>
             </div>
             <button @click="showAddModal = true; addOutcomeItems = [{ icon: 'check', text: '' }];"
-                class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-indigo-500/20 transition-all hover:-translate-y-0.5 duration-200">
+                class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow transition-all hover:-translate-y-0.5 duration-200">
                 + Tambah Program
             </button>
         </div>
@@ -270,7 +270,7 @@
                     </button>
 
                     <button type="submit"
-                        class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-indigo-500/20 transition-all">
+                        class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow transition-all">
                         💾 Simpan Perubahan Dropdown Topik
                     </button>
                 </div>
@@ -285,36 +285,38 @@
             class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" x-cloak>
             <div @click.away="showAddModal = false" x-transition:enter="transition ease-out duration-200"
                 x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
-                class="w-full max-w-2xl bg-zinc-950 border border-zinc-900 rounded-3xl p-7 space-y-6 shadow-2xl max-h-[90vh] overflow-y-auto">
-                <div class="flex items-center justify-between border-b border-zinc-900 pb-4">
-                    <h3 class="text-sm font-bold text-zinc-200 uppercase tracking-widest">+ Tambah Program Baru</h3>
+                class="w-full max-w-2xl bg-gray-800 border border-gray-700 rounded-3xl shadow-2xl max-h-[90vh] overflow-y-auto">
+                {{-- Blue Header --}}
+                <div class="flex items-center justify-between bg-blue-700 px-7 py-5 rounded-t-3xl">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-widest">+ Tambah Program Baru</h3>
                     <button @click="showAddModal = false"
-                        class="text-zinc-500 hover:text-zinc-300 text-lg leading-none">✕</button>
+                        class="text-blue-200 hover:text-white text-xl leading-none transition-colors">✕</button>
                 </div>
+                <div class="px-7 pb-7 pt-6 space-y-6">
 
                 <form action="{{ route('admin.program.store') }}" method="POST" class="space-y-5">
                     @csrf
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Judul
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Judul
                                 Program</label>
                             <input type="text" name="title" placeholder="cth: START" required
-                                class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
+                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Slug
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Slug
                                 (URL)</label>
                             <input type="text" name="slug" placeholder="cth: start" required
-                                class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
+                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Target
+                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Target
                             Pasar</label>
                         <input type="text" name="target_market" placeholder="cth: Pemula / Brand Baru" required
-                            class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
+                            class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
                     </div>
 
                     {{-- Outcome List Builder --}}
@@ -343,10 +345,10 @@
                                     <div class="flex-1 space-y-1">
                                         <input type="text" :name="'outcome_text[' + i + ']'" x-model="item.text"
                                             placeholder="cth: Landing Page siap konversi" required
-                                            class="w-full px-3 py-2 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-xs placeholder-zinc-600 focus:outline-none transition-colors">
+                                            class="w-full px-3 py-2 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-xs placeholder-gray-500 focus:outline-none transition-colors">
                                         <input type="text" :name="'outcome_custom_class[' + i + ']'"
                                             x-model="item.custom_class" placeholder="Custom Class CSS (Opsional)"
-                                            class="w-full px-3 py-1.5 bg-zinc-950 border border-zinc-800/80 focus:border-indigo-500/60 rounded-lg text-zinc-400 text-[10px] font-mono focus:outline-none transition-colors">
+                                            class="w-full px-3 py-1.5 bg-gray-900 border border-gray-700 focus:border-blue-400 rounded-lg text-gray-400 text-[10px] font-mono focus:outline-none transition-colors">
                                     </div>
                                     {{-- Remove Button --}}
                                     <button type="button" @click="removeAddOutcomeRow(i)"
@@ -360,26 +362,27 @@
                     </div>
 
                     <div>
-                        <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Deskripsi
+                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Deskripsi
                             Singkat</label>
                         <textarea name="short_description" rows="2" placeholder="Deskripsi singkat program..." required
-                            class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors resize-none"></textarea>
+                            class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors resize-none"></textarea>
                     </div>
 
                     <div>
-                        <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Penjelasan Detail Program</label>
+                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Penjelasan Detail Program</label>
                         <textarea name="description" rows="5" placeholder="Penjelasan naratif detail program (mendukung multi baris)..." required
-                            class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors resize-y"></textarea>
+                            class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors resize-y"></textarea>
                     </div>
 
-                    <div class="flex justify-end gap-3 pt-2 border-t border-zinc-900">
+                    <div class="flex justify-end gap-3 pt-2 border-t border-gray-700">
                         <button type="button" @click="showAddModal = false"
-                            class="px-5 py-3 bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 text-xs font-bold rounded-xl transition-all">Batal</button>
+                            class="px-5 py-3 bg-gray-700 border border-gray-600 hover:bg-gray-600 text-gray-300 hover:text-white text-xs font-bold rounded-xl transition-all">Batal</button>
                         <button type="submit"
-                            class="px-7 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-indigo-500/20 transition-all">Simpan
+                            class="px-7 py-3 bg-blue-700 hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow transition-all">Simpan
                             Program</button>
                     </div>
                 </form>
+                </div>
             </div>
         </div>
 
@@ -391,13 +394,15 @@
             class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" x-cloak>
             <div @click.away="showEditModal = false" x-transition:enter="transition ease-out duration-200"
                 x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
-                class="w-full max-w-2xl bg-zinc-950 border border-zinc-900 rounded-3xl p-7 space-y-6 shadow-2xl max-h-[90vh] overflow-y-auto">
-                <div class="flex items-center justify-between border-b border-zinc-900 pb-4">
-                    <h3 class="text-sm font-bold text-zinc-200 uppercase tracking-widest">✏️ Edit Program Akselerasi
+                class="w-full max-w-2xl bg-gray-800 border border-gray-700 rounded-3xl shadow-2xl max-h-[90vh] overflow-y-auto">
+                {{-- Blue Header --}}
+                <div class="flex items-center justify-between bg-blue-700 px-7 py-5 rounded-t-3xl">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-widest">✏️ Edit Program Akselerasi
                     </h3>
                     <button @click="showEditModal = false"
-                        class="text-zinc-500 hover:text-zinc-300 text-lg leading-none">✕</button>
+                        class="text-blue-200 hover:text-white text-xl leading-none transition-colors">✕</button>
                 </div>
+                <div class="px-7 pb-7 pt-6 space-y-6">
 
                 <form x-bind:action="'/admin/program/' + activeProgram.id" method="POST" class="space-y-5">
                     @csrf
@@ -405,24 +410,24 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Judul
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Judul
                                 Program</label>
                             <input type="text" name="title" x-model="activeProgram.title" required
-                                class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none transition-colors">
+                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Slug
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Slug
                                 (URL)</label>
                             <input type="text" name="slug" x-model="activeProgram.slug" required
-                                class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none transition-colors">
+                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Target
+                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Target
                             Pasar</label>
                         <input type="text" name="target_market" x-model="activeProgram.target_market" required
-                            class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none transition-colors">
+                            class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                     </div>
 
                     {{-- Outcome List Builder (Edit) --}}
@@ -451,10 +456,10 @@
                                     <div class="flex-1 space-y-1">
                                         <input type="text" :name="'outcome_text[' + i + ']'" x-model="item.text"
                                             required
-                                            class="w-full px-3 py-2 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-xs placeholder-zinc-600 focus:outline-none transition-colors">
+                                            class="w-full px-3 py-2 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-xs placeholder-gray-500 focus:outline-none transition-colors">
                                         <input type="text" :name="'outcome_custom_class[' + i + ']'"
                                             x-model="item.custom_class" placeholder="Custom Class CSS (Opsional)"
-                                            class="w-full px-3 py-1.5 bg-zinc-950 border border-zinc-800/80 focus:border-indigo-500/60 rounded-lg text-zinc-400 text-[10px] font-mono focus:outline-none transition-colors">
+                                            class="w-full px-3 py-1.5 bg-gray-900 border border-gray-700 focus:border-blue-400 rounded-lg text-gray-400 text-[10px] font-mono focus:outline-none transition-colors">
                                     </div>
                                     {{-- Remove Button --}}
                                     <button type="button" @click="removeEditOutcomeRow(i)"
@@ -468,26 +473,27 @@
                     </div>
 
                     <div>
-                        <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Deskripsi
+                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Deskripsi
                             Singkat</label>
                         <textarea name="short_description" rows="3" x-ref="editDescription" required
-                            class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none resize-none transition-colors"></textarea>
+                            class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none resize-none transition-colors"></textarea>
                     </div>
 
                     <div>
-                        <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Penjelasan Detail Program</label>
+                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Penjelasan Detail Program</label>
                         <textarea name="description" rows="5" x-ref="editLongDescription" required
-                            class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none resize-y transition-colors"></textarea>
+                            class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none resize-y transition-colors"></textarea>
                     </div>
 
-                    <div class="flex justify-end gap-3 pt-2 border-t border-zinc-900">
+                    <div class="flex justify-end gap-3 pt-2 border-t border-gray-700">
                         <button type="button" @click="showEditModal = false"
-                            class="px-5 py-3 bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 text-xs font-bold rounded-xl transition-all">Batal</button>
+                            class="px-5 py-3 bg-gray-700 border border-gray-600 hover:bg-gray-600 text-gray-300 hover:text-white text-xs font-bold rounded-xl transition-all">Batal</button>
                         <button type="submit"
-                            class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl shadow-lg shadow-indigo-500/20 transition-all">Simpan
+                            class="px-6 py-3 bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold rounded-xl shadow transition-all">Simpan
                             Perubahan</button>
                     </div>
                 </form>
+                </div>
             </div>
         </div>
 

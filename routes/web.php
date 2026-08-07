@@ -27,7 +27,7 @@ Route::redirect('/program', '/#program')->name('program.index');
 Route::get('/program/{slug}', [ProgramController::class, 'show'])->name('program.show');
 
 // Portfolio
-Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
+Route::redirect('/portfolio', '/#portfolio')->name('portfolio.index');
 Route::get('/portfolio/{slug}', [PortfolioController::class, 'show'])->name('portfolio.show');
 
 // Blog
@@ -38,6 +38,10 @@ Route::get('/blog/{article:slug}', [BlogController::class, 'show'])->name('blog.
 // Kontak
 Route::get('/kontak', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/kontak', [ContactController::class, 'store'])->name('contact.store');
+
+// Sitemap XML
+use App\Http\Controllers\SitemapController;
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // SEO Pages (halaman landing khusus keyword)
 Route::get('/website-untuk-seller-shopee', [LandingController::class, 'seoShopee'])->name('seo.shopee');

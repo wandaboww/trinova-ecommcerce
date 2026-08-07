@@ -58,6 +58,8 @@ Route::prefix('admin')
         // Blog Manager
         Route::prefix('blog')->name('blog.')->group(function () {
             Route::get('/', [BlogManagerController::class, 'index'])->name('index');
+            Route::post('/bulk-delete', [BlogManagerController::class, 'bulkDelete'])->name('bulk-delete');
+            Route::post('/{article}/duplicate', [BlogManagerController::class, 'duplicate'])->name('duplicate');
             Route::get('/create', [BlogManagerController::class, 'create'])->name('create');
             Route::post('/', [BlogManagerController::class, 'store'])->name('store');
             Route::get('/{article}/edit', [BlogManagerController::class, 'edit'])->name('edit');
@@ -88,7 +90,9 @@ Route::prefix('admin')
         Route::prefix('leads')->name('leads.')->group(function () {
             Route::get('/', [LeadManagerController::class, 'index'])->name('index');
             Route::get('/{lead}', [LeadManagerController::class, 'show'])->name('show');
+            Route::put('/{lead}', [LeadManagerController::class, 'update'])->name('update');
             Route::put('/{lead}/status', [LeadManagerController::class, 'updateStatus'])->name('status');
+            Route::put('/{lead}/update-status', [LeadManagerController::class, 'updateStatus'])->name('updateStatus');
             Route::post('/{lead}/activity', [LeadManagerController::class, 'addActivity'])->name('activity');
             Route::delete('/{lead}', [LeadManagerController::class, 'destroy'])->name('destroy');
         });

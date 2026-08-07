@@ -177,7 +177,7 @@
         {{-- Submit Button --}}
         <div class="flex justify-end pt-2">
             <button type="submit"
-                    class="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm rounded-xl shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/30 transition-all duration-200 hover:-translate-y-0.5">
+                    class="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm rounded-xl shadow transition-all duration-200 hover:-translate-y-0.5">
                 💾 Simpan Perubahan Landing Page
             </button>
         </div>

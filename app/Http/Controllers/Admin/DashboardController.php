@@ -12,19 +12,32 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $totalLeads = Lead::count();
+        $totalLeads    = Lead::count();
         $totalPrograms = Program::count();
         $totalArticles = Article::count();
-        $totalFaqs = Faq::count();
-        
+        $totalFaqs     = Faq::count();
+
         $recentLeads = Lead::latest()->take(5)->get();
+
+        // Blog scoreboard analytics
+        $topArticles       = Article::with('category')
+                                ->orderByDesc('views')
+                                ->take(5)
+                                ->get();
+        $totalPublished    = Article::where('status', 'published')->count();
+        $totalDraft        = Article::where('status', 'draft')->count();
+        $totalViews        = Article::sum('views');
 
         return view('admin.dashboard', compact(
             'totalLeads',
             'totalPrograms',
             'totalArticles',
             'totalFaqs',
-            'recentLeads'
+            'recentLeads',
+            'topArticles',
+            'totalPublished',
+            'totalDraft',
+            'totalViews'
         ));
     }
 }
