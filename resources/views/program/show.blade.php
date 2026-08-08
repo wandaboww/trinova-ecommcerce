@@ -5,7 +5,16 @@
     ]">
 
 @php
-    $topics = $program->effective_topics;
+    $topics = is_array($program->topics ?? null) && count($program->topics) > 0
+        ? $program->topics
+        : (is_object($program) && method_exists($program, 'getEffectiveTopicsAttribute')
+            ? $program->effective_topics
+            : ($program->effective_topics ?? [
+                ['key' => 'overview', 'icon' => '📌', 'title' => 'Gambaran Umum & Benefit', 'subtitle' => 'Deskripsi narasi lengkap & poin hasil utama', 'content' => '', 'custom_class' => ''],
+                ['key' => 'features', 'icon' => '⚡', 'title' => 'Fitur & Arsitektur Platform', 'subtitle' => 'Rincian modul teknis & integrasi sistem', 'content' => '', 'custom_class' => ''],
+                ['key' => 'workflow', 'icon' => '🚀', 'title' => 'Alur Kerja & Roadmap', 'subtitle' => 'Tahapan eksekusi dari ide hingga rilis', 'content' => '', 'custom_class' => ''],
+                ['key' => 'specs', 'icon' => '🛠️', 'title' => 'Spesifikasi Layanan & SLA', 'subtitle' => 'Infrastruktur server, enkripsi & garansi', 'content' => ''],
+            ]));
     $initialTab = $topics[0]['key'] ?? 'overview';
 @endphp
 
@@ -96,19 +105,19 @@
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/5">
                     <div class="p-3.5 bg-zinc-900/40 border border-white/5 rounded-2xl">
                         <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-wider block mb-1">Garansi Sistem</span>
-                        <span class="text-xs font-extrabold text-zinc-200 font-heading">100% Turnkey Ready</span>
+                        <span class="text-xs font-extrabold text-zinc-200 font-heading">{{ $program->spec_warranty ?? '100% Turnkey Ready' }}</span>
                     </div>
                     <div class="p-3.5 bg-zinc-900/40 border border-white/5 rounded-2xl">
                         <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-wider block mb-1">Kecepatan Muat</span>
-                        <span class="text-xs font-extrabold text-indigo-400 font-heading">&lt; 1.5 Detik</span>
+                        <span class="text-xs font-extrabold text-indigo-400 font-heading">{!! $program->spec_speed ?? '&lt; 1.5 Detik' !!}</span>
                     </div>
                     <div class="p-3.5 bg-zinc-900/40 border border-white/5 rounded-2xl">
                         <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-wider block mb-1">Dukungan Support</span>
-                        <span class="text-xs font-extrabold text-emerald-400 font-heading">Tim Dedicated CS</span>
+                        <span class="text-xs font-extrabold text-emerald-400 font-heading">{{ $program->spec_support ?? 'Tim Dedicated CS' }}</span>
                     </div>
                     <div class="p-3.5 bg-zinc-900/40 border border-white/5 rounded-2xl">
                         <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-wider block mb-1">Status Lisensi</span>
-                        <span class="text-xs font-extrabold text-amber-400 font-heading">Full Mandiri (100% Hak Milik)</span>
+                        <span class="text-xs font-extrabold text-amber-400 font-heading">{{ $program->spec_license ?? 'Full Mandiri (100% Hak Milik)' }}</span>
                     </div>
                 </div>
             </div>
@@ -229,7 +238,7 @@
                         <span>📖</span> Penjelasan Detail Program
                     </h3>
                     <p class="text-zinc-300 text-sm sm:text-base leading-relaxed font-normal whitespace-pre-line">
-                        {{ $program->description }}
+                        {{ collect($topics)->firstWhere('key', 'overview')['content'] ?? $program->description }}
                     </p>
                 </div>
 
@@ -328,22 +337,32 @@
                         <p class="text-xs text-zinc-400 mt-1">Standar infrastruktur server dan perlindungan sistem yang Anda dapatkan.</p>
                     </div>
 
+                    @php
+                        $specsContent = collect($topics)->firstWhere('key', 'specs')['content'] ?? '';
+                        // Hapus empty line tapi pertahankan urutan array
+                        $specLines = array_values(array_filter(array_map('trim', explode("\n", $specsContent))));
+                        
+                        $serverSpec = $specLines[0] ?? 'Cloud High-Speed SSD, SSL HTTPS Encrypted';
+                        $assetSpec = $specLines[1] ?? '100% Hak Milik Klien (Domain & Database Full Access)';
+                        $maintenanceSpec = $specLines[2] ?? 'Backup Database Otomatis & Free Technical Maintenance';
+                        $supportSpec = $specLines[3] ?? 'Bantuan Teknis Fast Response via WhatsApp';
+                    @endphp
                     <div class="space-y-3">
                         <div class="p-4 bg-zinc-900/40 border border-white/5 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                             <span class="text-xs font-bold text-zinc-300">Server &amp; Hosting Architecture</span>
-                            <span class="text-xs text-indigo-400 font-semibold">Cloud High-Speed SSD, SSL HTTPS Encrypted</span>
+                            <span class="text-xs text-indigo-400 font-semibold">{{ $serverSpec }}</span>
                         </div>
                         <div class="p-4 bg-zinc-900/40 border border-white/5 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                             <span class="text-xs font-bold text-zinc-300">Kepemilikan Aset Digital</span>
-                            <span class="text-xs text-emerald-400 font-semibold">100% Hak Milik Klien (Domain &amp; Database Full Access)</span>
+                            <span class="text-xs text-emerald-400 font-semibold">{{ $assetSpec }}</span>
                         </div>
                         <div class="p-4 bg-zinc-900/40 border border-white/5 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                             <span class="text-xs font-bold text-zinc-300">Garansi Maintenance &amp; Backup</span>
-                            <span class="text-xs text-zinc-400 font-semibold">Backup Database Otomatis &amp; Free Technical Maintenance</span>
+                            <span class="text-xs text-zinc-400 font-semibold">{{ $maintenanceSpec }}</span>
                         </div>
                         <div class="p-4 bg-zinc-900/40 border border-white/5 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                             <span class="text-xs font-bold text-zinc-300">Respon Support CS</span>
-                            <span class="text-xs text-amber-400 font-semibold">Bantuan Teknis Fast Response via WhatsApp</span>
+                            <span class="text-xs text-amber-400 font-semibold">{{ $supportSpec }}</span>
                         </div>
                     </div>
                 </div>

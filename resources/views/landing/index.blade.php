@@ -722,14 +722,30 @@
                                 @endif
 
                                 <div>
-                                    <div
-                                        class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mb-6 font-bold text-lg font-heading">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-lg font-heading shrink-0">
                                         {{ strtoupper($program->title[0]) }}
                                     </div>
-                                    <h3 class="text-xl font-bold text-zinc-100 mb-2 font-heading">{{ $program->title }}</h3>
-                                    <p class="text-xs text-indigo-400 font-medium mb-4">Target: {{ $program->target_market }}
-                                    </p>
-                                    <p class="text-zinc-400 text-sm leading-relaxed mb-6">{{ $program->short_description }}</p>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-zinc-100 mb-1 font-heading">{{ $program->title }}</h3>
+                                        <p class="text-xs text-indigo-400 font-medium">Target: {{ $program->target_market }}</p>
+                                    </div>
+                                </div>
+
+                                @if($program->current_price || $program->original_price)
+                                    <div class="flex items-baseline gap-2 mb-4">
+                                        @if($program->original_price)
+                                            <span class="text-sm text-zinc-500 line-through decoration-zinc-500/50">{{ $program->original_price }}</span>
+                                        @endif
+                                        @if($program->current_price)
+                                            <span class="font-bold text-emerald-400">
+                                                {!! preg_replace('/^(Rp\s*)/i', '<span class="text-sm font-semibold">$1</span><span class="text-2xl font-black">', e($program->current_price)) !!}{!! preg_match('/^(Rp\s*)/i', $program->current_price) ? '</span>' : '' !!}
+                                            </span>
+                                        @endif
+                                    </div>
+                                @endif
+
+                                <p class="text-zinc-400 text-sm leading-relaxed mb-6">{{ $program->short_description }}</p>
 
                                     @if(!empty($program->outcome))
                                         <div class="border-t border-white/5 pt-6">
@@ -775,12 +791,15 @@
                         <div class="bg-zinc-950/80 border border-white/5 hover:border-indigo-500/25 rounded-3xl p-6 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300 relative group"
                             data-reveal data-delay="100">
                             <div>
-                                <div
-                                    class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mb-6 font-bold text-lg font-heading">
-                                    S
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-lg font-heading shrink-0">
+                                        S
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-zinc-100 mb-1 font-heading">START</h3>
+                                        <p class="text-xs text-indigo-400 font-medium">Target: Pemula / Brand Baru</p>
+                                    </div>
                                 </div>
-                                <h3 class="text-xl font-bold text-zinc-100 mb-2 font-heading">START</h3>
-                                <p class="text-xs text-indigo-400 font-medium mb-4">Target: Pemula / Brand Baru</p>
                                 <p class="text-zinc-400 text-sm leading-relaxed mb-6">Validasi produk dan buat funnel
                                     penjualan online pertama Anda dengan struktur yang matang.</p>
 
@@ -808,12 +827,15 @@
                                 Recommended
                             </div>
                             <div>
-                                <div
-                                    class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mb-6 font-bold text-lg font-heading">
-                                    G
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-lg font-heading shrink-0">
+                                        G
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-zinc-100 mb-1 font-heading">GROW</h3>
+                                        <p class="text-xs text-indigo-400 font-medium">Target: Seller Ingin Mandiri</p>
+                                    </div>
                                 </div>
-                                <h3 class="text-xl font-bold text-zinc-100 mb-2 font-heading">GROW</h3>
-                                <p class="text-xs text-indigo-400 font-medium mb-4">Target: Seller Ingin Mandiri</p>
                                 <p class="text-zinc-400 text-sm leading-relaxed mb-6">Mulai berpindah dari marketplace ke
                                     website mandiri dengan sistem pembayaran terintegrasi.</p>
 
@@ -837,12 +859,15 @@
                         <div class="bg-zinc-950/80 border border-white/5 hover:border-indigo-500/25 rounded-3xl p-6 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300 relative group"
                             data-reveal data-delay="300">
                             <div>
-                                <div
-                                    class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mb-6 font-bold text-lg font-heading">
-                                    S
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-lg font-heading shrink-0">
+                                        S
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-zinc-100 mb-1 font-heading">SCALE</h3>
+                                        <p class="text-xs text-indigo-400 font-medium">Target: Brand Ingin Tumbuh</p>
+                                    </div>
                                 </div>
-                                <h3 class="text-xl font-bold text-zinc-100 mb-2 font-heading">SCALE</h3>
-                                <p class="text-xs text-indigo-400 font-medium mb-4">Target: Brand Ingin Tumbuh</p>
                                 <p class="text-zinc-400 text-sm leading-relaxed mb-6">Tingkatkan profit bisnis dengan
                                     automasi pemasaran, CRM, SEO, dan kurir otomatis.</p>
 
@@ -866,12 +891,15 @@
                         <div class="bg-zinc-950/80 border border-white/5 hover:border-indigo-500/25 rounded-3xl p-6 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300 relative group"
                             data-reveal data-delay="400">
                             <div>
-                                <div
-                                    class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mb-6 font-bold text-lg font-heading">
-                                    E
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-lg font-heading shrink-0">
+                                        E
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-zinc-100 mb-1 font-heading">EMPIRE</h3>
+                                        <p class="text-xs text-indigo-400 font-medium">Target: Penguasa Pasar / Enterprise</p>
+                                    </div>
                                 </div>
-                                <h3 class="text-xl font-bold text-zinc-100 mb-2 font-heading">EMPIRE</h3>
-                                <p class="text-xs text-indigo-400 font-medium mb-4">Target: Penguasa Pasar / Enterprise</p>
                                 <p class="text-zinc-400 text-sm leading-relaxed mb-6">Membangun ekosistem ERP mandiri untuk
                                     mengelola multi-warehouse dan custom mobile apps.</p>
 

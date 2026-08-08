@@ -136,7 +136,14 @@
 
         {{-- WhatsApp CTA --}}
         <div class="bg-zinc-950 border border-zinc-900 rounded-2xl p-7 space-y-5">
-            <h3 class="text-sm font-bold text-zinc-200 uppercase tracking-widest border-b border-zinc-800 pb-4">💬 WhatsApp & Kontak</h3>
+            <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+                <h3 class="text-sm font-bold text-zinc-200 uppercase tracking-widest">💬 WhatsApp & Kontak</h3>
+                <label class="relative inline-flex items-center cursor-pointer select-none">
+                    <input type="checkbox" name="show_whatsapp_float" value="1" class="sr-only peer" {{ ($landingSetting->show_whatsapp_float ?? true) ? 'checked' : '' }}>
+                    <div class="w-8 h-4 bg-zinc-800 rounded-full peer peer-checked:bg-indigo-600 transition-colors relative after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-zinc-100 after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:after:translate-x-4"></div>
+                    <span class="ml-2 text-[9px] font-bold text-zinc-500 uppercase tracking-wider">Tampilkan Float WA</span>
+                </label>
+            </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>

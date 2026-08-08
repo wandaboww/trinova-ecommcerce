@@ -26,6 +26,12 @@ class ProgramManagerController extends Controller
             'outcome_text'      => 'required|array|min:1',
             'outcome_text.*'    => 'required|string',
             'outcome_icon'      => 'required|array',
+            'spec_warranty'     => 'nullable|string|max:100',
+            'spec_speed'        => 'nullable|string|max:100',
+            'spec_support'      => 'nullable|string|max:100',
+            'spec_license'      => 'nullable|string|max:100',
+            'original_price'    => 'nullable|string|max:100',
+            'current_price'     => 'nullable|string|max:100',
         ]);
 
         $outcomeItems = [];
@@ -48,6 +54,12 @@ class ProgramManagerController extends Controller
             'outcome'           => $outcomeItems,
             'is_active'         => true,
             'sort_order'        => Program::max('sort_order') + 1,
+            'spec_warranty'     => $request->spec_warranty ?? '100% Turnkey Ready',
+            'spec_speed'        => $request->spec_speed ?? '< 1.5 Detik',
+            'spec_support'      => $request->spec_support ?? 'Tim Dedicated CS',
+            'spec_license'      => $request->spec_license ?? 'Full Mandiri (100% Hak Milik)',
+            'original_price'    => $request->original_price,
+            'current_price'     => $request->current_price,
         ]);
 
         return redirect()->route('admin.program.index')->with('success', 'Program berhasil ditambahkan.');
@@ -64,6 +76,12 @@ class ProgramManagerController extends Controller
             'outcome_text'      => 'required|array|min:1',
             'outcome_text.*'    => 'required|string',
             'outcome_icon'      => 'required|array',
+            'spec_warranty'     => 'nullable|string|max:100',
+            'spec_speed'        => 'nullable|string|max:100',
+            'spec_support'      => 'nullable|string|max:100',
+            'spec_license'      => 'nullable|string|max:100',
+            'original_price'    => 'nullable|string|max:100',
+            'current_price'     => 'nullable|string|max:100',
         ]);
 
         $outcomeItems = [];
@@ -84,6 +102,12 @@ class ProgramManagerController extends Controller
             'description'       => $request->description,
             'target_market'     => $request->target_market,
             'outcome'           => $outcomeItems,
+            'spec_warranty'     => $request->spec_warranty ?? '100% Turnkey Ready',
+            'spec_speed'        => $request->spec_speed ?? '< 1.5 Detik',
+            'spec_support'      => $request->spec_support ?? 'Tim Dedicated CS',
+            'spec_license'      => $request->spec_license ?? 'Full Mandiri (100% Hak Milik)',
+            'original_price'    => $request->original_price,
+            'current_price'     => $request->current_price,
         ]);
 
         return redirect()->route('admin.program.index')->with('success', 'Program berhasil diperbarui.');

@@ -11,6 +11,8 @@ class Program extends Model
         'title', 'slug', 'short_description', 'description',
         'target_market', 'outcome', 'topics', 'icon', 'thumbnail',
         'sort_order', 'is_active', 'is_best_value',
+        'spec_warranty', 'spec_speed', 'spec_support', 'spec_license',
+        'original_price', 'current_price'
     ];
 
     protected $casts = [

@@ -8,6 +8,8 @@
     }
     $waMessage = $landing->whatsapp_message ?? $general->whatsapp_message ?? 'Halo Trinova Digital, saya ingin konsultasi strategi bisnis.';
 @endphp
+
+@if($landing->show_whatsapp_float ?? true)
 <a href="https://wa.me/{{ $waNumber }}?text={{ urlencode($waMessage) }}"
    class="fixed bottom-6 left-6 z-50 w-14 h-14 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-xl shadow-green-500/30 hover:scale-110 hover:shadow-green-500/50 transition-all duration-200 group"
    target="_blank"
@@ -27,3 +29,4 @@
     </span>
 
 </a>
+@endif

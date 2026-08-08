@@ -45,6 +45,7 @@ class LandingManagerController extends Controller
                 'show_hero_cta_primary'   => $request->boolean('show_hero_cta_primary'),
                 'show_hero_cta_secondary' => $request->boolean('show_hero_cta_secondary'),
                 'show_statistics'         => $request->boolean('show_statistics'),
+                'show_whatsapp_float'     => $request->boolean('show_whatsapp_float'),
             ]
         );
 

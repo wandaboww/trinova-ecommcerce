@@ -16,7 +16,19 @@
     <div x-data="{
         showAddModal: false,
         showEditModal: false,
-        activeProgram: { id: '', title: '', slug: '', target_market: '', outcome: [], short_description: '', description: '' },
+        activeProgram: { 
+            id: '', 
+            title: '', 
+            slug: '', 
+            target_market: '', 
+            outcome: [], 
+            short_description: '', 
+            description: '',
+            spec_warranty: '',
+            spec_speed: '',
+            spec_support: '',
+            spec_license: ''
+        },
 
         addOutcomeItems: [{ icon: 'check', text: '', custom_class: '' }],
         editOutcomeItems: [],
@@ -86,12 +98,34 @@
                             class="absolute -top-2.5 left-4 px-3 py-0.5 bg-indigo-600 text-[10px] font-bold rounded-full text-white uppercase tracking-wider">Recommended</span>
                     @endif
                     <div>
-                        <div
-                            class="w-10 h-10 bg-indigo-500/10 border border-indigo-500/20 rounded-xl flex items-center justify-center font-extrabold text-indigo-400 text-sm mb-4">
-                            {{ strtoupper($prog->title[0]) }}
+                        <div class="flex items-center gap-3 mb-2">
+                            <div
+                                class="w-10 h-10 bg-indigo-500/10 border border-indigo-500/20 rounded-xl flex shrink-0 items-center justify-center font-extrabold text-indigo-400 text-sm">
+                                {{ strtoupper($prog->title[0]) }}
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-zinc-100 text-base leading-tight">{{ $prog->title }}</h3>
+                                <p class="text-[10px] text-indigo-400 font-semibold mt-0.5">Target:
+                                    {{ $prog->target_market }}</p>
+                            </div>
                         </div>
-                        <h3 class="font-extrabold text-zinc-100 text-base mb-1">{{ $prog->title }}</h3>
-                        <p class="text-[10px] text-indigo-400 font-semibold mb-3">Target: {{ $prog->target_market }}</p>
+
+                        @if($prog->current_price || $prog->original_price)
+                            <div class="flex items-baseline gap-2 mb-4 px-1">
+                                @if($prog->original_price)
+                                    <span
+                                        class="text-xs text-zinc-500 line-through decoration-zinc-500/50">{{ $prog->original_price }}</span>
+                                @endif
+                                @if($prog->current_price)
+                                    <span class="font-bold text-emerald-400">
+                                        {!! preg_replace('/^(Rp\s*)/i', '<span class="text-xs font-semibold">$1</span><span class="text-lg font-black">', e($prog->current_price)) !!}{!! preg_match('/^(Rp\s*)/i', $prog->current_price) ? '</span>' : '' !!}
+                                    </span>
+                                @endif
+                            </div>
+                        @else
+                            <div class="mb-4"></div>
+                        @endif
+
                         <ul class="space-y-1.5 mb-4">
                             @foreach($outcomeItems as $item)
                                 <li class="flex items-start gap-1.5 text-[11px] text-zinc-400 leading-relaxed">
@@ -121,13 +155,20 @@
                     </div>
                     <div class="flex gap-2 mt-auto">
                         <button @click="openEdit({
-                                            id: '{{ $prog->id }}',
-                                            title: {{ Js::from($prog->title) }},
-                                            slug: {{ Js::from($prog->slug) }},
-                                            target_market: {{ Js::from($prog->target_market) }},
-                                            outcome: {{ Js::from(json_encode($outcomeItems)) }},
-                                            short_description: {{ Js::from($prog->short_description) }}
-                                        })"
+                                                                id: '{{ $prog->id }}',
+                                                                title: {{ Js::from($prog->title) }},
+                                                                slug: {{ Js::from($prog->slug) }},
+                                                                target_market: {{ Js::from($prog->target_market) }},
+                                                                outcome: {{ Js::from(json_encode($outcomeItems)) }},
+                                                                short_description: {{ Js::from($prog->short_description) }},
+                                                                description: {{ Js::from($prog->description) }},
+                                                                spec_warranty: {{ Js::from($prog->spec_warranty) }},
+                                                                spec_speed: {{ Js::from($prog->spec_speed) }},
+                                                                spec_support: {{ Js::from($prog->spec_support) }},
+                                                                spec_license: {{ Js::from($prog->spec_license) }},
+                                                                original_price: {{ Js::from($prog->original_price) }},
+                                                                current_price: {{ Js::from($prog->current_price) }}
+                                                            })"
                             class="flex-1 text-center py-2 bg-zinc-900 border border-zinc-800 hover:border-indigo-500/40 text-zinc-300 hover:text-white text-[10px] font-bold rounded-lg transition-all">
                             Edit
                         </button>
@@ -146,7 +187,7 @@
 
         {{-- Kelola Navigasi Topik Detail Program (Elemen Baru CRUD) --}}
         <div class="bg-zinc-950 border border-zinc-900 rounded-3xl p-7 mb-10 shadow-2xl space-y-6" x-data="{
-                 selectedProgramId: '{{ $programs->first()?->id ?? '' }}',
+                 selectedProgramId: '{{ request('program_id') ?? $programs->first()?->id ?? '' }}',
                  programsMap: {{ Js::from($programs->keyBy('id')->map(function ($p) {
     return ['id' => $p->id, 'title' => $p->title, 'topics' => $p->effective_topics]; })) }},
                  topicItems: [],
@@ -160,6 +201,22 @@
                              { key: 'features', icon: '⚡', title: 'Fitur & Arsitektur Platform', subtitle: 'Rincian modul teknis & integrasi sistem', content: '' }
                          ];
                      }
+                     
+                     // Siapkan data terpisah untuk 4 input specs khusus agar mudah di-bind di UI
+                     this.topicItems.forEach(item => {
+                         if (item.key === 'specs') {
+                             let lines = (item.content || '').split('\n').map(l => l.trim()).filter(l => l !== '');
+                             item.spec_1 = lines[0] || 'Cloud High-Speed SSD, SSL HTTPS Encrypted';
+                             item.spec_2 = lines[1] || '100% Hak Milik Klien (Domain & Database Full Access)';
+                             item.spec_3 = lines[2] || 'Backup Database Otomatis & Free Technical Maintenance';
+                             item.spec_4 = lines[3] || 'Bantuan Teknis Fast Response via WhatsApp';
+                             // Pastikan default masuk ke content
+                             this.updateSpecsContent(item);
+                         }
+                     });
+                 },
+                 updateSpecsContent(item) {
+                     item.content = [item.spec_1, item.spec_2, item.spec_3, item.spec_4].join('\n');
                  },
                  onProgramChange() {
                      this.initTopics();
@@ -222,43 +279,67 @@
                                         placeholder="📌" required
                                         class="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-zinc-100 text-xs font-bold text-center">
                                 </div>
-                                <div class="sm:col-span-4">
+                                <div class="sm:col-span-10">
                                     <label class="block text-[10px] font-bold text-zinc-500 uppercase mb-1">Judul
                                         Topik</label>
                                     <input type="text" :name="'topic_title[' + i + ']'" x-model="item.title"
                                         placeholder="cth: Fitur Khusus" required
                                         class="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-zinc-100 text-xs font-semibold">
-                                </div>
-                                <div class="sm:col-span-3">
-                                    <label class="block text-[10px] font-bold text-zinc-500 uppercase mb-1">Key / Slug
-                                        Unik</label>
-                                    <input type="text" :name="'topic_key[' + i + ']'" x-model="item.key"
-                                        placeholder="cth: overview / features" required
-                                        class="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-indigo-300 text-xs font-mono">
-                                </div>
-                                <div class="sm:col-span-3">
-                                    <label class="block text-[10px] font-bold text-zinc-500 uppercase mb-1">Sub-Judul /
-                                        Keterangan Singkat</label>
-                                    <input type="text" :name="'topic_subtitle[' + i + ']'" x-model="item.subtitle"
-                                        placeholder="cth: Penjelasan lengkap modul..."
-                                        class="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-zinc-100 text-xs">
-                                </div>
-                                <div class="sm:col-span-12">
-                                    <label class="block text-[10px] font-bold text-zinc-500 uppercase mb-1">Custom Class
-                                        CSS (Opsional)</label>
-                                    <input type="text" :name="'topic_custom_class[' + i + ']'"
-                                        x-model="item.custom_class" placeholder="cth: text-emerald-400"
-                                        class="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-zinc-100 text-xs font-mono">
+
+                                    {{-- Hidden inputs to preserve existing data --}}
+                                    <input type="hidden" :name="'topic_key[' + i + ']'" x-model="item.key">
+                                    <input type="hidden" :name="'topic_subtitle[' + i + ']'" x-model="item.subtitle">
+                                    <input type="hidden" :name="'topic_custom_class[' + i + ']'"
+                                        x-model="item.custom_class">
                                 </div>
                             </div>
 
-                            <div>
-                                <label class="block text-[10px] font-bold text-zinc-500 uppercase mb-1">Isi Konten Topik
-                                    (Tampil Saat Tab Dipilih)</label>
-                                <textarea :name="'topic_content[' + i + ']'" x-model="item.content" rows="2"
-                                    placeholder="Tuliskan deskripsi/penjelasan detail untuk topik ini..."
-                                    class="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-zinc-100 text-xs resize-none"></textarea>
-                            </div>
+                            <template x-if="item.key === 'specs'">
+                                <div class="bg-indigo-950/20 border border-indigo-500/20 rounded-xl p-4 space-y-3">
+                                    <h4
+                                        class="text-[10px] font-bold text-indigo-400 uppercase flex items-center gap-2 mb-3">
+                                        <span>⚙️</span> Atur Spesifikasi & SLA (4 Poin)
+                                    </h4>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-[10px] font-bold text-zinc-500 mb-1">1. Server &
+                                                Hosting</label>
+                                            <input type="text" x-model="item.spec_1" @input="updateSpecsContent(item)"
+                                                class="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 focus:border-indigo-500/50 rounded-xl text-zinc-100 text-xs transition-colors">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[10px] font-bold text-zinc-500 mb-1">2. Kepemilikan
+                                                Aset</label>
+                                            <input type="text" x-model="item.spec_2" @input="updateSpecsContent(item)"
+                                                class="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 focus:border-indigo-500/50 rounded-xl text-zinc-100 text-xs transition-colors">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[10px] font-bold text-zinc-500 mb-1">3. Garansi &
+                                                Backup</label>
+                                            <input type="text" x-model="item.spec_3" @input="updateSpecsContent(item)"
+                                                class="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 focus:border-indigo-500/50 rounded-xl text-zinc-100 text-xs transition-colors">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[10px] font-bold text-zinc-500 mb-1">4. Respon
+                                                Support CS</label>
+                                            <input type="text" x-model="item.spec_4" @input="updateSpecsContent(item)"
+                                                class="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 focus:border-indigo-500/50 rounded-xl text-zinc-100 text-xs transition-colors">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" :name="'topic_content[' + i + ']'" :value="item.content">
+                                </div>
+                            </template>
+
+                            <template x-if="item.key !== 'specs'">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-zinc-500 uppercase mb-1">
+                                        Penjelasan Detail Program
+                                    </label>
+                                    <textarea :name="'topic_content[' + i + ']'" x-model="item.content" rows="5"
+                                        placeholder="Tuliskan deskripsi/penjelasan detail untuk topik ini..."
+                                        class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none resize-y transition-colors"></textarea>
+                                </div>
+                            </template>
                         </div>
                     </template>
                 </div>
@@ -294,94 +375,156 @@
                 </div>
                 <div class="px-7 pb-7 pt-6 space-y-6">
 
-                <form action="{{ route('admin.program.store') }}" method="POST" class="space-y-5">
-                    @csrf
+                    <form action="{{ route('admin.program.store') }}" method="POST" class="space-y-5">
+                        @csrf
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Judul
+                                    Program</label>
+                                <input type="text" name="title" placeholder="cth: START" required
+                                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Slug
+                                    (URL)</label>
+                                <input type="text" name="slug" placeholder="cth: start" required
+                                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
+                            </div>
+                        </div>
+
                         <div>
-                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Judul
-                                Program</label>
-                            <input type="text" name="title" placeholder="cth: START" required
+                            <label
+                                class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Target
+                                Pasar</label>
+                            <input type="text" name="target_market" placeholder="cth: Pemula / Brand Baru" required
                                 class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
                         </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Harga
+                                    Coret (Opsional)</label>
+                                <input type="text" name="original_price" placeholder="cth: Rp 5.000.000"
+                                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Harga
+                                    Saat Ini</label>
+                                <input type="text" name="current_price" placeholder="cth: Rp 3.500.000"
+                                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
+                            </div>
+                        </div>
+
+                        {{-- Outcome List Builder --}}
                         <div>
-                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Slug
-                                (URL)</label>
-                            <input type="text" name="slug" placeholder="cth: start" required
-                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Target
-                            Pasar</label>
-                        <input type="text" name="target_market" placeholder="cth: Pemula / Brand Baru" required
-                            class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
-                    </div>
-
-                    {{-- Outcome List Builder --}}
-                    <div>
-                        <div class="flex items-center justify-between mb-2">
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Outcome /
-                                Hasil Program</label>
-                            <button type="button" @click="addOutcomeRow()"
-                                class="text-[10px] font-bold text-indigo-400 hover:text-indigo-300 transition-colors">+
-                                Tambah Item</button>
-                        </div>
-                        <p class="text-[10px] text-zinc-600 mb-3">Klik ikon ✓/✗ untuk toggle antara checklist (hijau)
-                            dan cross (merah).</p>
-                        <div class="space-y-2">
-                            <template x-for="(item, i) in addOutcomeItems" :key="i">
-                                <div class="flex items-center gap-2">
-                                    {{-- Icon Toggle Button --}}
-                                    <button type="button" @click="toggleAddIcon(i)"
-                                        :class="item.icon === 'check' ? 'text-green-400 border-green-500/30 bg-green-500/10 hover:bg-green-500/20' : 'text-red-400 border-red-500/30 bg-red-500/10 hover:bg-red-500/20'"
-                                        class="w-9 h-9 shrink-0 rounded-lg border flex items-center justify-center font-bold text-sm transition-all">
-                                        <span x-text="item.icon === 'check' ? '✓' : '✗'"></span>
-                                    </button>
-                                    {{-- Hidden inputs --}}
-                                    <input type="hidden" :name="'outcome_icon[' + i + ']'" :value="item.icon">
-                                    {{-- Text & Class input --}}
-                                    <div class="flex-1 space-y-1">
-                                        <input type="text" :name="'outcome_text[' + i + ']'" x-model="item.text"
-                                            placeholder="cth: Landing Page siap konversi" required
-                                            class="w-full px-3 py-2 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-xs placeholder-gray-500 focus:outline-none transition-colors">
-                                        <input type="text" :name="'outcome_custom_class[' + i + ']'"
-                                            x-model="item.custom_class" placeholder="Custom Class CSS (Opsional)"
-                                            class="w-full px-3 py-1.5 bg-gray-900 border border-gray-700 focus:border-blue-400 rounded-lg text-gray-400 text-[10px] font-mono focus:outline-none transition-colors">
+                            <div class="flex items-center justify-between mb-2">
+                                <label
+                                    class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Outcome /
+                                    Hasil Program</label>
+                                <button type="button" @click="addOutcomeRow()"
+                                    class="text-[10px] font-bold text-indigo-400 hover:text-indigo-300 transition-colors">+
+                                    Tambah Item</button>
+                            </div>
+                            <p class="text-[10px] text-zinc-600 mb-3">Klik ikon ✓/✗ untuk toggle antara checklist
+                                (hijau)
+                                dan cross (merah).</p>
+                            <div class="space-y-2">
+                                <template x-for="(item, i) in addOutcomeItems" :key="i">
+                                    <div class="flex items-center gap-2">
+                                        {{-- Icon Toggle Button --}}
+                                        <button type="button" @click="toggleAddIcon(i)"
+                                            :class="item.icon === 'check' ? 'text-green-400 border-green-500/30 bg-green-500/10 hover:bg-green-500/20' : 'text-red-400 border-red-500/30 bg-red-500/10 hover:bg-red-500/20'"
+                                            class="w-9 h-9 shrink-0 rounded-lg border flex items-center justify-center font-bold text-sm transition-all">
+                                            <span x-text="item.icon === 'check' ? '✓' : '✗'"></span>
+                                        </button>
+                                        {{-- Hidden inputs --}}
+                                        <input type="hidden" :name="'outcome_icon[' + i + ']'" :value="item.icon">
+                                        {{-- Text & Class input --}}
+                                        <div class="flex-1 space-y-1">
+                                            <input type="text" :name="'outcome_text[' + i + ']'" x-model="item.text"
+                                                placeholder="cth: Landing Page siap konversi" required
+                                                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-xs placeholder-gray-500 focus:outline-none transition-colors">
+                                            <input type="text" :name="'outcome_custom_class[' + i + ']'"
+                                                x-model="item.custom_class" placeholder="Custom Class CSS (Opsional)"
+                                                class="w-full px-3 py-1.5 bg-gray-900 border border-gray-700 focus:border-blue-400 rounded-lg text-gray-400 text-[10px] font-mono focus:outline-none transition-colors">
+                                        </div>
+                                        {{-- Remove Button --}}
+                                        <button type="button" @click="removeAddOutcomeRow(i)"
+                                            x-show="addOutcomeItems.length > 1"
+                                            class="w-9 h-9 shrink-0 rounded-lg border border-zinc-800 text-zinc-600 hover:text-red-400 hover:border-red-500/30 flex items-center justify-center transition-all text-sm">
+                                            ✕
+                                        </button>
                                     </div>
-                                    {{-- Remove Button --}}
-                                    <button type="button" @click="removeAddOutcomeRow(i)"
-                                        x-show="addOutcomeItems.length > 1"
-                                        class="w-9 h-9 shrink-0 rounded-lg border border-zinc-800 text-zinc-600 hover:text-red-400 hover:border-red-500/30 flex items-center justify-center transition-all text-sm">
-                                        ✕
-                                    </button>
-                                </div>
-                            </template>
+                                </template>
+                            </div>
                         </div>
-                    </div>
 
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Deskripsi
-                            Singkat</label>
-                        <textarea name="short_description" rows="2" placeholder="Deskripsi singkat program..." required
-                            class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors resize-none"></textarea>
-                    </div>
+                        <div>
+                            <label
+                                class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Deskripsi
+                                Singkat</label>
+                            <textarea name="short_description" rows="2" placeholder="Deskripsi singkat program..."
+                                required
+                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors resize-none"></textarea>
+                        </div>
 
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Penjelasan Detail Program</label>
-                        <textarea name="description" rows="5" placeholder="Penjelasan naratif detail program (mendukung multi baris)..." required
-                            class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors resize-y"></textarea>
-                    </div>
+                        {{-- Metric Highlights --}}
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Garansi
+                                    Sistem</label>
+                                <input type="text" name="spec_warranty" placeholder="cth: 100% Turnkey Ready"
+                                    value="100% Turnkey Ready"
+                                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Kecepatan
+                                    Muat</label>
+                                <input type="text" name="spec_speed" placeholder="cth: < 1.5 Detik" value="< 1.5 Detik"
+                                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Dukungan
+                                    Support</label>
+                                <input type="text" name="spec_support" placeholder="cth: Tim Dedicated CS"
+                                    value="Tim Dedicated CS"
+                                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Status
+                                    Lisensi</label>
+                                <input type="text" name="spec_license" placeholder="cth: Full Mandiri (100% Hak Milik)"
+                                    value="Full Mandiri (100% Hak Milik)"
+                                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
+                            </div>
+                        </div>
 
-                    <div class="flex justify-end gap-3 pt-2 border-t border-gray-700">
-                        <button type="button" @click="showAddModal = false"
-                            class="px-5 py-3 bg-gray-700 border border-gray-600 hover:bg-gray-600 text-gray-300 hover:text-white text-xs font-bold rounded-xl transition-all">Batal</button>
-                        <button type="submit"
-                            class="px-7 py-3 bg-blue-700 hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow transition-all">Simpan
-                            Program</button>
-                    </div>
-                </form>
+                        <div>
+                            <label
+                                class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Penjelasan
+                                Detail Program</label>
+                            <textarea name="description" rows="5"
+                                placeholder="Penjelasan naratif detail program (mendukung multi baris)..." required
+                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors resize-y"></textarea>
+                        </div>
+
+                        <div class="flex justify-end gap-3 pt-2 border-t border-gray-700">
+                            <button type="button" @click="showAddModal = false"
+                                class="px-5 py-3 bg-gray-700 border border-gray-600 hover:bg-gray-600 text-gray-300 hover:text-white text-xs font-bold rounded-xl transition-all">Batal</button>
+                            <button type="submit"
+                                class="px-7 py-3 bg-blue-700 hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow transition-all">Simpan
+                                Program</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -404,95 +547,158 @@
                 </div>
                 <div class="px-7 pb-7 pt-6 space-y-6">
 
-                <form x-bind:action="'/admin/program/' + activeProgram.id" method="POST" class="space-y-5">
-                    @csrf
-                    <input type="hidden" name="_method" value="PUT">
+                    <form x-bind:action="'/admin/program/' + activeProgram.id" method="POST" class="space-y-5">
+                        @csrf
+                        <input type="hidden" name="_method" value="PUT">
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Judul
+                                    Program</label>
+                                <input type="text" name="title" x-model="activeProgram.title" required
+                                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Slug
+                                    (URL)</label>
+                                <input type="text" name="slug" x-model="activeProgram.slug" required
+                                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
+                            </div>
+                        </div>
+
                         <div>
-                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Judul
-                                Program</label>
-                            <input type="text" name="title" x-model="activeProgram.title" required
+                            <label
+                                class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Target
+                                Pasar</label>
+                            <input type="text" name="target_market" x-model="activeProgram.target_market" required
                                 class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                         </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Harga
+                                    Coret (Opsional)</label>
+                                <input type="text" name="original_price" x-model="activeProgram.original_price"
+                                    placeholder="cth: Rp 5.000.000"
+                                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Harga
+                                    Saat Ini</label>
+                                <input type="text" name="current_price" x-model="activeProgram.current_price"
+                                    placeholder="cth: Rp 3.500.000"
+                                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
+                            </div>
+                        </div>
+
+                        {{-- Outcome List Builder (Edit) --}}
                         <div>
-                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Slug
-                                (URL)</label>
-                            <input type="text" name="slug" x-model="activeProgram.slug" required
-                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Target
-                            Pasar</label>
-                        <input type="text" name="target_market" x-model="activeProgram.target_market" required
-                            class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
-                    </div>
-
-                    {{-- Outcome List Builder (Edit) --}}
-                    <div>
-                        <div class="flex items-center justify-between mb-2">
-                            <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Outcome /
-                                Hasil Program</label>
-                            <button type="button" @click="addEditOutcomeRow()"
-                                class="text-[10px] font-bold text-indigo-400 hover:text-indigo-300 transition-colors">+
-                                Tambah Item</button>
-                        </div>
-                        <p class="text-[10px] text-zinc-600 mb-3">Klik ikon ✓/✗ untuk toggle antara checklist (hijau)
-                            dan cross (merah).</p>
-                        <div class="space-y-2">
-                            <template x-for="(item, i) in editOutcomeItems" :key="i">
-                                <div class="flex items-center gap-2">
-                                    {{-- Icon Toggle Button --}}
-                                    <button type="button" @click="toggleEditIcon(i)"
-                                        :class="item.icon === 'check' ? 'text-green-400 border-green-500/30 bg-green-500/10 hover:bg-green-500/20' : 'text-red-400 border-red-500/30 bg-red-500/10 hover:bg-red-500/20'"
-                                        class="w-9 h-9 shrink-0 rounded-lg border flex items-center justify-center font-bold text-sm transition-all">
-                                        <span x-text="item.icon === 'check' ? '✓' : '✗'"></span>
-                                    </button>
-                                    {{-- Hidden inputs --}}
-                                    <input type="hidden" :name="'outcome_icon[' + i + ']'" :value="item.icon">
-                                    {{-- Text & Class input --}}
-                                    <div class="flex-1 space-y-1">
-                                        <input type="text" :name="'outcome_text[' + i + ']'" x-model="item.text"
-                                            required
-                                            class="w-full px-3 py-2 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-xs placeholder-gray-500 focus:outline-none transition-colors">
-                                        <input type="text" :name="'outcome_custom_class[' + i + ']'"
-                                            x-model="item.custom_class" placeholder="Custom Class CSS (Opsional)"
-                                            class="w-full px-3 py-1.5 bg-gray-900 border border-gray-700 focus:border-blue-400 rounded-lg text-gray-400 text-[10px] font-mono focus:outline-none transition-colors">
+                            <div class="flex items-center justify-between mb-2">
+                                <label
+                                    class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Outcome /
+                                    Hasil Program</label>
+                                <button type="button" @click="addEditOutcomeRow()"
+                                    class="text-[10px] font-bold text-indigo-400 hover:text-indigo-300 transition-colors">+
+                                    Tambah Item</button>
+                            </div>
+                            <p class="text-[10px] text-zinc-600 mb-3">Klik ikon ✓/✗ untuk toggle antara checklist
+                                (hijau)
+                                dan cross (merah).</p>
+                            <div class="space-y-2">
+                                <template x-for="(item, i) in editOutcomeItems" :key="i">
+                                    <div class="flex items-center gap-2">
+                                        {{-- Icon Toggle Button --}}
+                                        <button type="button" @click="toggleEditIcon(i)"
+                                            :class="item.icon === 'check' ? 'text-green-400 border-green-500/30 bg-green-500/10 hover:bg-green-500/20' : 'text-red-400 border-red-500/30 bg-red-500/10 hover:bg-red-500/20'"
+                                            class="w-9 h-9 shrink-0 rounded-lg border flex items-center justify-center font-bold text-sm transition-all">
+                                            <span x-text="item.icon === 'check' ? '✓' : '✗'"></span>
+                                        </button>
+                                        {{-- Hidden inputs --}}
+                                        <input type="hidden" :name="'outcome_icon[' + i + ']'" :value="item.icon">
+                                        {{-- Text & Class input --}}
+                                        <div class="flex-1 space-y-1">
+                                            <input type="text" :name="'outcome_text[' + i + ']'" x-model="item.text"
+                                                required
+                                                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-xs placeholder-gray-500 focus:outline-none transition-colors">
+                                            <input type="text" :name="'outcome_custom_class[' + i + ']'"
+                                                x-model="item.custom_class" placeholder="Custom Class CSS (Opsional)"
+                                                class="w-full px-3 py-1.5 bg-gray-900 border border-gray-700 focus:border-blue-400 rounded-lg text-gray-400 text-[10px] font-mono focus:outline-none transition-colors">
+                                        </div>
+                                        {{-- Remove Button --}}
+                                        <button type="button" @click="removeEditOutcomeRow(i)"
+                                            x-show="editOutcomeItems.length > 1"
+                                            class="w-9 h-9 shrink-0 rounded-lg border border-zinc-800 text-zinc-600 hover:text-red-400 hover:border-red-500/30 flex items-center justify-center transition-all text-sm">
+                                            ✕
+                                        </button>
                                     </div>
-                                    {{-- Remove Button --}}
-                                    <button type="button" @click="removeEditOutcomeRow(i)"
-                                        x-show="editOutcomeItems.length > 1"
-                                        class="w-9 h-9 shrink-0 rounded-lg border border-zinc-800 text-zinc-600 hover:text-red-400 hover:border-red-500/30 flex items-center justify-center transition-all text-sm">
-                                        ✕
-                                    </button>
-                                </div>
-                            </template>
+                                </template>
+                            </div>
                         </div>
-                    </div>
 
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Deskripsi
-                            Singkat</label>
-                        <textarea name="short_description" rows="3" x-ref="editDescription" required
-                            class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none resize-none transition-colors"></textarea>
-                    </div>
+                        <div>
+                            <label
+                                class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Deskripsi
+                                Singkat</label>
+                            <textarea name="short_description" rows="3" x-ref="editDescription" required
+                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none resize-none transition-colors"></textarea>
+                        </div>
 
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Penjelasan Detail Program</label>
-                        <textarea name="description" rows="5" x-ref="editLongDescription" required
-                            class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none resize-y transition-colors"></textarea>
-                    </div>
+                        {{-- Metric Highlights --}}
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Garansi
+                                    Sistem</label>
+                                <input type="text" name="spec_warranty" x-model="activeProgram.spec_warranty"
+                                    placeholder="cth: 100% Turnkey Ready"
+                                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Kecepatan
+                                    Muat</label>
+                                <input type="text" name="spec_speed" x-model="activeProgram.spec_speed"
+                                    placeholder="cth: < 1.5 Detik"
+                                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Dukungan
+                                    Support</label>
+                                <input type="text" name="spec_support" x-model="activeProgram.spec_support"
+                                    placeholder="cth: Tim Dedicated CS"
+                                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Status
+                                    Lisensi</label>
+                                <input type="text" name="spec_license" x-model="activeProgram.spec_license"
+                                    placeholder="cth: Full Mandiri (100% Hak Milik)"
+                                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
+                            </div>
+                        </div>
 
-                    <div class="flex justify-end gap-3 pt-2 border-t border-gray-700">
-                        <button type="button" @click="showEditModal = false"
-                            class="px-5 py-3 bg-gray-700 border border-gray-600 hover:bg-gray-600 text-gray-300 hover:text-white text-xs font-bold rounded-xl transition-all">Batal</button>
-                        <button type="submit"
-                            class="px-6 py-3 bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold rounded-xl shadow transition-all">Simpan
-                            Perubahan</button>
-                    </div>
-                </form>
+                        <div>
+                            <label
+                                class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Penjelasan
+                                Detail Program</label>
+                            <textarea name="description" rows="5" x-ref="editLongDescription" required
+                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none resize-y transition-colors"></textarea>
+                        </div>
+
+                        <div class="flex justify-end gap-3 pt-2 border-t border-gray-700">
+                            <button type="button" @click="showEditModal = false"
+                                class="px-5 py-3 bg-gray-700 border border-gray-600 hover:bg-gray-600 text-gray-300 hover:text-white text-xs font-bold rounded-xl transition-all">Batal</button>
+                            <button type="submit"
+                                class="px-6 py-3 bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold rounded-xl shadow transition-all">Simpan
+                                Perubahan</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
