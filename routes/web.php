@@ -49,6 +49,9 @@ Route::get('/website-untuk-seller-tokopedia', [LandingController::class, 'seoTok
 Route::get('/website-untuk-online-shop', [LandingController::class, 'seoOnlineShop'])->name('seo.online-shop');
 Route::get('/website-untuk-umkm', [LandingController::class, 'seoUmkm'])->name('seo.umkm');
 
+// Legal Pages
+Route::get('/kebijakan-privasi', [LandingController::class, 'privacy'])->name('privacy');
+
 // Authentication Routes
 use App\Http\Controllers\Auth\LoginController;
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -56,4 +59,4 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Load Admin/CMS Routes
-require __DIR__.'/admin.php';
+require __DIR__ . '/admin.php';

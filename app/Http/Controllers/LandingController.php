@@ -14,11 +14,11 @@ class LandingController extends Controller
 {
     public function index()
     {
-        $programs       = Program::active()->ordered()->get();
-        $portfolios     = Portfolio::featured()->latest()->take(6)->get();
-        $testimonials   = Testimonial::active()->ordered()->get();
-        $faqs           = Faq::active()->ordered()->take(10)->get();
-        $setting        = LandingSetting::first();
+        $programs = Program::active()->ordered()->get();
+        $portfolios = Portfolio::featured()->latest()->take(6)->get();
+        $testimonials = Testimonial::active()->ordered()->get();
+        $faqs = Faq::active()->ordered()->take(10)->get();
+        $setting = LandingSetting::first();
         $generalSetting = Setting::first();
 
         return view('landing.index', compact(
@@ -49,5 +49,10 @@ class LandingController extends Controller
     public function seoUmkm()
     {
         return view('landing.seo.umkm');
+    }
+
+    public function privacy()
+    {
+        return view('landing.privacy');
     }
 }
