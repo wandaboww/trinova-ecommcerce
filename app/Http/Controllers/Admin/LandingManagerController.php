@@ -25,6 +25,8 @@ class LandingManagerController extends Controller
                 'hero_badge'         => $request->input('hero_badge'),
                 'hero_title'         => $request->input('hero_headline'),
                 'hero_subtitle'      => $request->input('hero_sub'),
+                'hero_subtitle_size' => $request->input('hero_subtitle_size'),
+                'hero_title_size'    => $request->input('hero_title_size'),
                 'hero_cta'           => $request->input('hero_cta_primary'),
                 'hero_cta_secondary' => $request->input('hero_cta_secondary'),
                 'pain_description'   => $request->input('hero_description'),

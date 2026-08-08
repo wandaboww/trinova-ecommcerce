@@ -37,8 +37,12 @@
                             <span class="ml-2 text-[9px] font-bold text-zinc-500 uppercase tracking-wider">Tampilkan</span>
                         </label>
                     </div>
-                    <input type="text" name="hero_sub" value="{{ $landingSetting->hero_subtitle ?? 'Tapi margin terasa jalan di tempat?' }}"
-                           class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
+                    <div class="flex items-center gap-3">
+                        <input type="text" name="hero_sub" value="{{ $landingSetting->hero_subtitle ?? 'Tapi margin terasa jalan di tempat?' }}"
+                               class="flex-1 px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
+                        <input type="text" name="hero_subtitle_size" value="{{ $landingSetting->hero_subtitle_size ?? '' }}" placeholder="Ukuran Font (opsional, cth: 20px)"
+                               class="w-1/3 px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
+                    </div>
                 </div>
             </div>
 
@@ -51,8 +55,12 @@
                         <span class="ml-2 text-[9px] font-bold text-zinc-500 uppercase tracking-wider">Tampilkan</span>
                     </label>
                 </div>
-                <input type="text" name="hero_headline" value="{{ $landingSetting->hero_title ?? 'Order makin ramai...' }}"
-                       class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
+                <div class="flex items-center gap-3">
+                    <input type="text" name="hero_headline" value="{{ $landingSetting->hero_title ?? 'Order makin ramai...' }}"
+                           class="flex-1 px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
+                    <input type="text" name="hero_title_size" value="{{ $landingSetting->hero_title_size ?? '' }}" placeholder="Ukuran Font (opsional, cth: 48px)"
+                           class="w-1/3 px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
+                </div>
             </div>
 
             <div>

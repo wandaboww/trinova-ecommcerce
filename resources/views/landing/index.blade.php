@@ -53,17 +53,30 @@
                 @endif
 
                 {{-- Headline --}}
+                @php
+                    $parseFontSize = function($val) {
+                        if (empty($val)) return null;
+                        $val = trim($val);
+                        return is_numeric($val) ? $val . 'px' : $val;
+                    };
+                    $heroTitleSize = $parseFontSize($setting->hero_title_size ?? null);
+                    $heroSubtitleSize = $parseFontSize($setting->hero_subtitle_size ?? null);
+                @endphp
+
                 <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-6 font-heading"
                     data-reveal data-delay="100">
                     @if($setting->show_hero_title ?? true)
-                        {{ $setting->hero_title ?? 'Order makin ramai...' }}
+                        <span style="{{ $heroTitleSize ? 'font-size: ' . $heroTitleSize . ' !important; line-height: 1.15;' : '' }}">
+                            {{ $setting->hero_title ?? 'Order makin ramai...' }}
+                        </span>
                     @endif
                     @if(($setting->show_hero_title ?? true) && ($setting->show_hero_subtitle ?? true))
                         <br />
                     @endif
                     @if($setting->show_hero_subtitle ?? true)
                         <span
-                            class="bg-gradient-to-r from-indigo-400 via-violet-400 to-indigo-300 bg-clip-text text-transparent">
+                            class="bg-gradient-to-r from-indigo-400 via-violet-400 to-indigo-300 bg-clip-text text-transparent inline-block"
+                            style="{{ $heroSubtitleSize ? 'font-size: ' . $heroSubtitleSize . ' !important; line-height: 1.15;' : '' }}">
                             {!! $setting->hero_subtitle ?? 'Tapi <span class="text-red-400">margin</span> terasa jalan di tempat?' !!}
                         </span>
                     @endif

@@ -14,6 +14,7 @@ class LandingSetting extends Model
         'stat_clients', 'stat_growth', 'audit_quota', 'whatsapp_message',
         'show_hero_badge', 'show_hero_subtitle', 'show_hero_title', 'show_hero_description',
         'show_hero_cta_primary', 'show_hero_cta_secondary', 'show_statistics',
+        'hero_subtitle_size', 'hero_title_size',
     ];
 
     protected $casts = [
