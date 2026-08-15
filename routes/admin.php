@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\TestimonialManagerController;
 use App\Http\Controllers\Admin\LeadManagerController;
 use App\Http\Controllers\Admin\MediaLibraryController;
 use App\Http\Controllers\Admin\WebsiteSettingsController;
+use App\Http\Controllers\Admin\LegalManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,4 +108,14 @@ Route::prefix('admin')
         // Website Settings
         Route::get('/settings', [WebsiteSettingsController::class, 'index'])->name('settings.index');
         Route::put('/settings', [WebsiteSettingsController::class, 'update'])->name('settings.update');
+
+        // Legal Manager (Syarat & Ketentuan)
+        Route::prefix('legal')->name('legal.')->group(function () {
+            Route::get('/', [LegalManagerController::class, 'index'])->name('index');
+            Route::post('/document', [LegalManagerController::class, 'updateDocument'])->name('document.update');
+            Route::post('/document/publish', [LegalManagerController::class, 'publish'])->name('document.publish');
+            Route::post('/sections', [LegalManagerController::class, 'storeSection'])->name('sections.store');
+            Route::put('/sections/{section}', [LegalManagerController::class, 'updateSection'])->name('sections.update');
+            Route::delete('/sections/{section}', [LegalManagerController::class, 'destroySection'])->name('sections.destroy');
+        });
     });

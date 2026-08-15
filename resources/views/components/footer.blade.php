@@ -90,7 +90,8 @@
                     <li><a href="{{ route('privacy') }}"
                             class="text-sm {{ request()->routeIs('privacy') ? 'text-indigo-400 font-semibold' : 'text-zinc-500 hover:text-zinc-200' }} transition-colors"
                             id="footer-privacy">Kebijakan Privasi</a></li>
-                    <li><a href="#" class="text-sm text-zinc-500 hover:text-zinc-200 transition-colors"
+                    <li><a href="{{ route('terms') }}"
+                            class="text-sm {{ request()->routeIs('terms') ? 'text-indigo-400 font-semibold' : 'text-zinc-500 hover:text-zinc-200' }} transition-colors"
                             id="footer-terms">Syarat &amp; Ketentuan</a></li>
                 </ul>
             </div>

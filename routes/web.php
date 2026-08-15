@@ -7,6 +7,7 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\LegalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +51,8 @@ Route::get('/website-untuk-online-shop', [LandingController::class, 'seoOnlineSh
 Route::get('/website-untuk-umkm', [LandingController::class, 'seoUmkm'])->name('seo.umkm');
 
 // Legal Pages
-Route::get('/kebijakan-privasi', [LandingController::class, 'privacy'])->name('privacy');
+Route::get('/kebijakan-privasi', [LegalController::class, 'privacy'])->name('privacy');
+Route::get('/syarat-ketentuan', [LegalController::class, 'terms'])->name('terms');
 
 // Authentication Routes
 use App\Http\Controllers\Auth\LoginController;

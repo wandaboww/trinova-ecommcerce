@@ -95,6 +95,12 @@
                     📩 Kelola Leads (Audit)
                 </a>
 
+                {{-- Legal Manager --}}
+                <a href="{{ route('admin.legal.index') }}"
+                    class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold rounded-xl transition-all duration-150 {{ request()->routeIs('admin.legal.*') ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900/60' }}">
+                    📜 Dokumen Legal
+                </a>
+
             </nav>
         </div>
 
