@@ -22,7 +22,8 @@ RUN composer install \
     --no-progress \
     --prefer-dist \
     --optimize-autoloader \
-    --ignore-platform-reqs
+    --ignore-platform-reqs \
+    --no-scripts
 
 
 FROM dunglas/frankenphp:latest-php8.2-alpine
