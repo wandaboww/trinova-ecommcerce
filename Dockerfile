@@ -66,4 +66,9 @@ RUN mkdir -p storage/framework/{views,sessions,cache} \
 
 EXPOSE 8000
 
+RUN apk add --no-cache curl
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -sf http://localhost:8000/up || exit 1
+
 ENTRYPOINT ["/entrypoint.sh"]
