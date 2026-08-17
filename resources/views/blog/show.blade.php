@@ -1,5 +1,5 @@
 <x-layouts.app :seo="[
-    'title'       => $article->title . ' — Blog Trinova Digital',
+    'title'       => $article->title . ' — Blog Omset Digital',
     'description' => $article->excerpt,
     'canonical'   => route('blog.show', $article->slug),
     'og_type'     => 'article',
@@ -20,11 +20,11 @@
     "dateModified": "{{ date('c', strtotime($article->updated_at ?? now())) }}",
     "author": {
         "@@type": "Organization",
-        "name": "{{ $article->author->name ?? $article->author ?? 'Tim Trinova' }}"
+        "name": "{{ $article->author->name ?? $article->author ?? 'Tim Omset Digital' }}"
     },
     "publisher": {
         "@@type": "Organization",
-        "name": "Trinova Digital",
+        "name": "Omset Digital",
         "logo": {
             "@@type": "ImageObject",
             "url": "{{ asset('images/logo.png') }}"
@@ -99,7 +99,7 @@
                     📅 {{ date('d F Y', strtotime($article->published_at)) }}
                 </time>
                 <span class="text-zinc-500 font-semibold">
-                    👤 {{ $article->author->name ?? $article->author ?? 'Tim Trinova' }}
+                    👤 {{ $article->author->name ?? $article->author ?? 'Tim Omset Digital' }}
                 </span>
                 <span class="text-zinc-500 font-semibold">
                     👁️ {{ $article->views }} Pembaca

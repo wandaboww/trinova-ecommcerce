@@ -1,4 +1,4 @@
-# 🚀 Panduan Instalasi Trinova Digital
+# 🚀 Panduan Instalasi Omset Digital
 
 ## Stack
 
@@ -25,7 +25,7 @@ Pastikan sudah terinstall:
 
 ### 1. Install PHP Dependencies
 
-Buka terminal di folder `d:\Website\trinovadigital` dan jalankan:
+Buka terminal di folder project dan jalankan:
 
 ```bash
 composer install
@@ -48,12 +48,11 @@ php artisan key:generate
 Edit file `.env`, ubah bagian ini:
 
 ```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=trinova_digital
-DB_USERNAME=root
-DB_PASSWORD=          # kosong jika Laragon default
+DB_CONNECTION=sqlite
+# atau jika menggunakan MySQL:
+# DB_DATABASE=omset_digital
+# DB_USERNAME=root
+# DB_PASSWORD=
 ```
 
 Kemudian buat database MySQL bernama `trinova_digital` melalui phpMyAdmin atau HeidiSQL.
@@ -97,7 +96,7 @@ npm run dev
 - **Halaman Daftar Blog**: [http://localhost:8000/blog](http://localhost:8000/blog)
 
 ### Login Admin
-Email: [admin@trinovadigital.com]
+Email: [admin@omsetdigital.com]
 Password: [admin123]
 
 ---

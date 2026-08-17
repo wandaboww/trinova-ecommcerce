@@ -198,11 +198,13 @@
                      } else {
                          this.topicItems = [
                              { key: 'overview', icon: '📌', title: 'Gambaran Umum & Benefit', subtitle: 'Deskripsi narasi lengkap & poin hasil utama', content: '' },
-                             { key: 'features', icon: '⚡', title: 'Fitur & Arsitektur Platform', subtitle: 'Rincian modul teknis & integrasi sistem', content: '' }
+                             { key: 'features', icon: '⚡', title: 'Fitur & Arsitektur Platform', subtitle: 'Rincian modul teknis & integrasi sistem', content: '' },
+                             { key: 'workflow', icon: '🚀', title: 'Alur Kerja & Roadmap', subtitle: 'Tahapan eksekusi dari ide hingga rilis', content: '' },
+                             { key: 'specs', icon: '🛠️', title: 'Spesifikasi Layanan & SLA', subtitle: 'Infrastruktur server, enkripsi & garansi', content: '' }
                          ];
                      }
                      
-                     // Siapkan data terpisah untuk 4 input specs khusus agar mudah di-bind di UI
+                     // Siapkan data terpisah untuk specs dan features
                      this.topicItems.forEach(item => {
                          if (item.key === 'specs') {
                              let lines = (item.content || '').split('\n').map(l => l.trim()).filter(l => l !== '');
@@ -210,13 +212,58 @@
                              item.spec_2 = lines[1] || '100% Hak Milik Klien (Domain & Database Full Access)';
                              item.spec_3 = lines[2] || 'Backup Database Otomatis & Free Technical Maintenance';
                              item.spec_4 = lines[3] || 'Bantuan Teknis Fast Response via WhatsApp';
-                             // Pastikan default masuk ke content
                              this.updateSpecsContent(item);
+                         } else if (item.key === 'features') {
+                             try {
+                                 let parsed = JSON.parse(item.content || '[]');
+                                 if (Array.isArray(parsed) && parsed.length > 0) {
+                                     item.feature_items = parsed;
+                                 } else {
+                                     item.feature_items = [
+                                         { icon: 'check', text: 'Landing Page High-Converting & Mobile Responsive', custom_class: '' },
+                                         { icon: 'check', text: 'Integrasi Checkout & Form Pemesanan WhatsApp', custom_class: '' },
+                                         { icon: 'check', text: 'Sistem Katalog Produk & Manajemen Stok', custom_class: '' },
+                                         { icon: 'check', text: 'Dashboard Admin CMS Mandiri', custom_class: '' }
+                                     ];
+                                 }
+                             } catch (e) {
+                                 let lines = (item.content || '').split('\n').map(l => l.trim()).filter(l => l !== '');
+                                 if (lines.length > 0) {
+                                     item.feature_items = lines.map(line => ({ icon: 'check', text: line, custom_class: '' }));
+                                 } else {
+                                     item.feature_items = [
+                                         { icon: 'check', text: 'Landing Page High-Converting & Mobile Responsive', custom_class: '' },
+                                         { icon: 'check', text: 'Integrasi Checkout & Form Pemesanan WhatsApp', custom_class: '' },
+                                         { icon: 'check', text: 'Sistem Katalog Produk & Manajemen Stok', custom_class: '' },
+                                         { icon: 'check', text: 'Dashboard Admin CMS Mandiri', custom_class: '' }
+                                     ];
+                                 }
+                             }
+                             this.updateFeaturesContent(item);
                          }
                      });
                  },
                  updateSpecsContent(item) {
                      item.content = [item.spec_1, item.spec_2, item.spec_3, item.spec_4].join('\n');
+                 },
+                 updateFeaturesContent(item) {
+                     item.content = JSON.stringify(item.feature_items || []);
+                 },
+                 toggleFeatureIcon(item, idx) {
+                     if (!item.feature_items) item.feature_items = [];
+                     item.feature_items[idx].icon = item.feature_items[idx].icon === 'check' ? 'cross' : 'check';
+                     this.updateFeaturesContent(item);
+                 },
+                 addFeatureItem(item) {
+                     if (!item.feature_items) item.feature_items = [];
+                     item.feature_items.push({ icon: 'check', text: '', custom_class: '' });
+                     this.updateFeaturesContent(item);
+                 },
+                 removeFeatureItem(item, idx) {
+                     if (item.feature_items && item.feature_items.length > 1) {
+                         item.feature_items.splice(idx, 1);
+                         this.updateFeaturesContent(item);
+                     }
                  },
                  onProgramChange() {
                      this.initTopics();
@@ -330,16 +377,53 @@
                                 </div>
                             </template>
 
-                            <template x-if="item.key !== 'specs'">
-                                <div>
-                                    <label class="block text-[10px] font-bold text-zinc-500 uppercase mb-1">
-                                        Penjelasan Detail Program
-                                    </label>
-                                    <textarea :name="'topic_content[' + i + ']'" x-model="item.content" rows="5"
-                                        placeholder="Tuliskan deskripsi/penjelasan detail untuk topik ini..."
-                                        class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none resize-y transition-colors"></textarea>
+                            {{-- Fitur & Arsitektur Platform: Dynamic Point Builder --}}
+                            <template x-if="item.key === 'features'">
+                                <div class="bg-indigo-950/20 border border-indigo-500/20 rounded-xl p-4 space-y-4">
+                                    <div class="flex items-center justify-between border-b border-indigo-500/20 pb-3">
+                                        <h4 class="text-[10px] font-bold text-indigo-400 uppercase flex items-center gap-2">
+                                            <span>⚡</span> Poin-Poin Fitur &amp; Arsitektur Platform
+                                        </h4>
+                                        <button type="button" @click="addFeatureItem(item)"
+                                            class="text-[10px] font-bold text-indigo-400 hover:text-indigo-300 transition-colors">
+                                            + Tambah Poin Fitur
+                                        </button>
+                                    </div>
+                                    <p class="text-[10px] text-zinc-500">Klik ikon ✓/✗ untuk toggle checklist (hijau) atau cross (merah).</p>
+
+                                    <div class="space-y-2.5">
+                                        <template x-for="(fItem, fIdx) in item.feature_items" :key="fIdx">
+                                            <div class="flex items-center gap-2">
+                                                {{-- Toggle Icon Button --}}
+                                                <button type="button" @click="toggleFeatureIcon(item, fIdx)"
+                                                    :class="fItem.icon === 'check' ? 'text-green-400 border-green-500/30 bg-green-500/10 hover:bg-green-500/20' : 'text-red-400 border-red-500/30 bg-red-500/10 hover:bg-red-500/20'"
+                                                    class="w-9 h-9 shrink-0 rounded-lg border flex items-center justify-center font-bold text-sm transition-all">
+                                                    <span x-text="fItem.icon === 'check' ? '✓' : '✗'"></span>
+                                                </button>
+
+                                                <div class="flex-1 space-y-1">
+                                                    <input type="text" x-model="fItem.text" @input="updateFeaturesContent(item)" required
+                                                        placeholder="cth: Integrasi Payment Gateway Otomatis"
+                                                        class="w-full px-3 py-2 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-xs placeholder-gray-500 focus:outline-none transition-colors">
+                                                    <input type="text" x-model="fItem.custom_class" @input="updateFeaturesContent(item)"
+                                                        placeholder="Deskripsi / Penjelasan Fitur (Opsional)"
+                                                        class="w-full px-3 py-1.5 bg-gray-900 border border-gray-700 focus:border-blue-400 rounded-lg text-gray-400 text-[10px] focus:outline-none transition-colors">
+                                                </div>
+
+                                                {{-- Delete Row Button --}}
+                                                <button type="button" @click="removeFeatureItem(item, fIdx)" x-show="item.feature_items && item.feature_items.length > 1"
+                                                    class="w-9 h-9 shrink-0 rounded-lg border border-zinc-800 text-zinc-600 hover:text-red-400 hover:border-red-500/30 flex items-center justify-center transition-all text-sm">
+                                                    ✕
+                                                </button>
+                                            </div>
+                                        </template>
+                                    </div>
+
+                                    <input type="hidden" :name="'topic_content[' + i + ']'" :value="item.content">
                                 </div>
                             </template>
+
+
                         </div>
                     </template>
                 </div>
@@ -409,6 +493,7 @@
                                     class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Harga
                                     Coret (Opsional)</label>
                                 <input type="text" name="original_price" placeholder="cth: Rp 5.000.000"
+                                    oninput="let val = this.value.replace(/[^0-9]/g, ''); this.value = val ? 'Rp ' + val.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';"
                                     class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
                             </div>
                             <div>
@@ -416,6 +501,7 @@
                                     class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Harga
                                     Saat Ini</label>
                                 <input type="text" name="current_price" placeholder="cth: Rp 3.500.000"
+                                    oninput="let val = this.value.replace(/[^0-9]/g, ''); this.value = val ? 'Rp ' + val.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';"
                                     class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
                             </div>
                         </div>
@@ -508,14 +594,7 @@
                             </div>
                         </div>
 
-                        <div>
-                            <label
-                                class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Penjelasan
-                                Detail Program</label>
-                            <textarea name="description" rows="5"
-                                placeholder="Penjelasan naratif detail program (mendukung multi baris)..." required
-                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors resize-y"></textarea>
-                        </div>
+
 
                         <div class="flex justify-end gap-3 pt-2 border-t border-gray-700">
                             <button type="button" @click="showAddModal = false"
@@ -583,6 +662,7 @@
                                     Coret (Opsional)</label>
                                 <input type="text" name="original_price" x-model="activeProgram.original_price"
                                     placeholder="cth: Rp 5.000.000"
+                                    @input="let val = $event.target.value.replace(/[^0-9]/g, ''); activeProgram.original_price = val ? 'Rp ' + val.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';"
                                     class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                             </div>
                             <div>
@@ -591,6 +671,7 @@
                                     Saat Ini</label>
                                 <input type="text" name="current_price" x-model="activeProgram.current_price"
                                     placeholder="cth: Rp 3.500.000"
+                                    @input="let val = $event.target.value.replace(/[^0-9]/g, ''); activeProgram.current_price = val ? 'Rp ' + val.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';"
                                     class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                             </div>
                         </div>
@@ -683,13 +764,7 @@
                             </div>
                         </div>
 
-                        <div>
-                            <label
-                                class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Penjelasan
-                                Detail Program</label>
-                            <textarea name="description" rows="5" x-ref="editLongDescription" required
-                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none resize-y transition-colors"></textarea>
-                        </div>
+
 
                         <div class="flex justify-end gap-3 pt-2 border-t border-gray-700">
                             <button type="button" @click="showEditModal = false"

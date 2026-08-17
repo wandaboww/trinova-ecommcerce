@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'CMS Admin — Trinova Digital' }}</title>
+    <title>{{ $title ?? 'CMS Admin — Omset Digital' }}</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,9 +37,9 @@
                 <a href="/" class="flex items-center gap-3">
                     <div
                         class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center font-extrabold text-white text-xs">
-                        T
+                        O
                     </div>
-                    <span class="font-extrabold text-zinc-100 text-sm tracking-tight">Trinova <span
+                    <span class="font-extrabold text-zinc-100 text-sm tracking-tight">Omset <span
                             class="text-indigo-400">Admin</span></span>
                 </a>
             </div>
@@ -151,7 +151,7 @@
 
         {{-- Footer --}}
         <footer class="border-t border-zinc-900 py-6 text-center text-[10px] text-zinc-600 shrink-0 bg-zinc-950/20">
-            &copy; 2026 Trinova Digital. CMS Dashboard System.
+            &copy; 2026 Omset Digital. CMS Dashboard System.
         </footer>
 
     </div>

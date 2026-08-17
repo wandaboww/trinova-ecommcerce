@@ -1,6 +1,6 @@
 <x-layouts.app :seo="[
-    'title'       => 'Pengajuan Berhasil — Trinova Digital',
-    'description' => 'Terima kasih telah mengajukan Analisa Bisnis Gratis. Tim analis kami akan segera menghubungi Anda.',
+    'title'       => 'Pengajuan Berhasil — Omset Digital',
+    'description' => 'Terima kasih telah mengajukan konsultasi toko online. Tim Omset Digital akan segera menghubungi Anda.',
     'canonical'   => route('home'),
 ]">
 
@@ -27,7 +27,7 @@
 
             {{-- Message --}}
             <p class="text-zinc-400 text-sm sm:text-base leading-relaxed mb-8">
-                Terima kasih telah mengajukan Analisa Bisnis Gratis. Data Anda telah kami terima dengan aman. Tim analis senior Trinova Digital akan mempelajari profil toko Anda dan menghubungi Anda melalui WhatsApp dalam waktu maksimal 24 jam untuk menjadwalkan sesi konsultasi.
+                Terima kasih telah mengajukan formulir konsultasi. Data Anda telah kami terima dengan aman. Tim Omset Digital akan mempelajari profil toko Anda dan menghubungi Anda melalui WhatsApp dalam waktu maksimal 24 jam untuk menjadwalkan sesi konsultasi.
             </p>
 
             {{-- Action Buttons --}}
@@ -40,7 +40,7 @@
                 </a>
 
                 {{-- WhatsApp instant check --}}
-                <a href="https://wa.me/{{ config('app.whatsapp', '628xxxxxxxxxx') }}?text=Halo%20Trinova%20Digital%2C%20saya%20baru%20saja%20mengisi%20form%20audit%20bisnis%20gratis%20dan%20ingin%20melakukan%20konfirmasi." 
+                <a href="https://wa.me/{{ config('app.whatsapp', '628xxxxxxxxxx') }}?text=Halo%20Omset%20Digital%2C%20saya%20baru%20saja%20mengisi%20form%20konsultasi%20toko%20online%20dan%20ingin%20melakukan%20konfirmasi." 
                    target="_blank" 
                    rel="noopener"
                    class="w-full sm:w-auto px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm rounded-xl shadow-lg shadow-indigo-500/25 transition-all">

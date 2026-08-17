@@ -4,19 +4,19 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 mb-12">
 
             {{-- Brand --}}
-            <div class="lg:col-span-1">
-                <a href="{{ route('home') }}" class="inline-flex items-center gap-3 mb-4" aria-label="Trinova Digital">
+            <div class="md:row-span-2 lg:row-span-1 lg:col-span-1">
+                <a href="{{ route('home') }}" class="inline-flex items-center gap-3 mb-4" aria-label="Omset Digital">
                     <div
                         class="w-9 h-9 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-xl flex items-center justify-center font-extrabold text-sm text-white">
-                        T</div>
-                    <span class="font-extrabold text-lg tracking-tight text-zinc-100">Trinova<span
+                        O</div>
+                    <span class="font-extrabold text-lg tracking-tight text-zinc-100">Omset<span
                             class="text-indigo-400">Digital</span></span>
                 </a>
                 <p class="text-sm text-zinc-500 leading-relaxed max-w-xs mb-6">
-                    Partner transformasi digital untuk seller marketplace dan UMKM Indonesia.
-                    Dari marketplace, menuju brand mandiri yang Anda miliki sepenuhnya.
+                    Omset Digital membantu UMKM dan seller membangun website e-commerce
+                    dan toko online milik sendiri untuk mengembangkan brand secara mandiri.
                 </p>
-                <div class="flex gap-3" aria-label="Media sosial Trinova Digital">
+                <div class="flex gap-3" aria-label="Media sosial Omset Digital">
                     <a href="https://tiktok.com/@trinova.id"
                         class="w-9 h-9 rounded-lg bg-zinc-800 border border-white/6 flex items-center justify-center text-zinc-500 hover:border-indigo-500 hover:text-indigo-400 transition-all duration-150"
                         target="_blank" rel="noopener" aria-label="TikTok" id="footer-tiktok">
@@ -71,7 +71,7 @@
                     <li><a href="{{ route('home') }}#portfolio"
                             class="text-sm text-zinc-500 hover:text-zinc-200 transition-colors"
                             id="footer-portfolio">Portfolio</a></li>
-                    <li><a href="{{ route('blog.index') }}"
+                    <li><a href="/blog"
                             class="text-sm text-zinc-500 hover:text-zinc-200 transition-colors"
                             id="footer-blog">Blog</a></li>
                     <li><a href="{{ route('home') }}#faq"
@@ -109,7 +109,7 @@
                             if (str_starts_with($footerWaNum, '0')) {
                                 $footerWaNum = '62' . substr($footerWaNum, 1);
                             }
-                            $footerWaMsg = $footerLand->whatsapp_message ?? $footerGen->whatsapp_message ?? 'Halo Trinova Digital, saya ingin konsultasi strategi bisnis.';
+                            $footerWaMsg = $footerLand->whatsapp_message ?? $footerGen->whatsapp_message ?? 'Halo Omset Digital, saya ingin konsultasi pembuatan toko online.';
                         @endphp
                         <a href="https://wa.me/{{ $footerWaNum }}?text={{ urlencode($footerWaMsg) }}"
                             class="text-sm text-zinc-500 hover:text-zinc-200 transition-colors" target="_blank"
@@ -118,9 +118,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="mailto:halo@trinova.id"
+                        <a href="mailto:halo@omsetdigital.com"
                             class="text-sm text-zinc-500 hover:text-zinc-200 transition-colors" id="footer-email-link">
-                            ✉️ halo@trinova.id
+                            ✉️ halo@omsetdigital.com
                         </a>
                     </li>
                 </ul>
@@ -131,7 +131,7 @@
         {{-- Bottom Bar --}}
         <div class="pt-8 border-t border-white/5 flex flex-col items-center justify-center text-center gap-4">
             <p class="text-xs text-zinc-600">
-                &copy; {{ date('Y') }} Trinova Digital. Hak cipta dilindungi.
+                &copy; {{ date('Y') }} Omset Digital. Hak cipta dilindungi.
             </p>
         </div>
 

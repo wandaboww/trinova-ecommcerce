@@ -11,7 +11,7 @@ use App\Http\Controllers\LegalController;
 
 /*
 |--------------------------------------------------------------------------
-| PUBLIC ROUTES — Trinova Digital
+| PUBLIC ROUTES — Omset Digital
 |--------------------------------------------------------------------------
 */
 

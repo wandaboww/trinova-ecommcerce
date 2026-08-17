@@ -1,5 +1,5 @@
 <x-layouts.app :seo="[
-        'title' => $program->title . ' — Detail Layanan & Spesifikasi Trinova Digital',
+        'title' => $program->title . ' — Detail Layanan & Spesifikasi Omset Digital',
         'description' => $program->short_description,
         'canonical' => route('program.show', $program->slug),
     ]">
@@ -245,6 +245,22 @@
             </div>
 
             {{-- TAB 2: FITUR & ARSITEKTUR PLATFORM --}}
+            @php
+                $featuresTopic = collect($topics)->firstWhere('key', 'features');
+                $featuresRaw = $featuresTopic['content'] ?? '';
+                $featurePoints = [];
+                if (!empty($featuresRaw)) {
+                    $decoded = json_decode($featuresRaw, true);
+                    if (is_array($decoded) && count($decoded) > 0) {
+                        $featurePoints = $decoded;
+                    } else {
+                        $lines = array_filter(array_map('trim', explode("\n", $featuresRaw)));
+                        foreach ($lines as $line) {
+                            $featurePoints[] = ['icon' => 'check', 'text' => $line, 'custom_class' => ''];
+                        }
+                    }
+                }
+            @endphp
             <div x-show="activeTab === 'features'" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" class="space-y-6" x-cloak>
                 <div class="bg-zinc-950/80 border border-white/10 p-8 sm:p-10 rounded-3xl shadow-xl space-y-6">
                     <div class="border-b border-white/5 pb-4">
@@ -254,8 +270,28 @@
                         <p class="text-xs text-zinc-400 mt-1">Daftar spesifikasi teknologi dan modul fungsional yang akan dibangun pada paket {{ $program->title }}.</p>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        @if(isset($program->features) && count($program->features) > 0)
+                    @if(!empty($featurePoints))
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            @foreach($featurePoints as $idx => $fPoint)
+                                <div class="p-5 bg-zinc-900/40 border border-white/5 rounded-2xl hover:border-indigo-500/30 transition-all duration-200 flex items-start gap-3.5">
+                                    <div class="mt-0.5 w-7 h-7 rounded-xl shrink-0 flex items-center justify-center font-bold text-xs {{ ($fPoint['icon'] ?? 'check') === 'check' ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20' }}">
+                                        {{ ($fPoint['icon'] ?? 'check') === 'check' ? '✓' : '✗' }}
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="text-zinc-200 text-sm leading-relaxed font-bold">
+                                            {{ $fPoint['text'] ?? '' }}
+                                        </p>
+                                        @if(!empty($fPoint['custom_class']))
+                                            <p class="text-zinc-400 text-xs mt-1 leading-relaxed">
+                                                {{ $fPoint['custom_class'] }}
+                                            </p>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @elseif(isset($program->features) && count($program->features) > 0)
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             @foreach($program->features as $idx => $feature)
                                 <div class="p-6 bg-zinc-900/40 border border-white/5 rounded-2xl hover:border-indigo-500/30 transition-all duration-200 flex flex-col justify-between group">
                                     <div>
@@ -274,12 +310,12 @@
                                     </div>
                                 </div>
                             @endforeach
-                        @else
-                            <div class="col-span-full p-8 text-center text-zinc-500 text-xs bg-zinc-900/20 border border-white/5 rounded-2xl">
-                                Belum ada rincian fitur tambahan yang dimasukkan ke dalam paket ini.
-                            </div>
-                        @endif
-                    </div>
+                        </div>
+                    @else
+                        <div class="col-span-full p-8 text-center text-zinc-500 text-xs bg-zinc-900/20 border border-white/5 rounded-2xl">
+                            Belum ada rincian fitur tambahan yang dimasukkan ke dalam paket ini.
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -404,7 +440,7 @@
                            class="w-full sm:w-auto py-4 px-9 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-sm rounded-xl shadow-xl shadow-amber-500/20 hover:shadow-amber-500/35 transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2">
                             <span>🚀 Mulai Analisa Bisnis Gratis</span>
                         </a>
-                        <a href="https://wa.me/{{ config('app.whatsapp', '628xxxxxxxxxx') }}?text=Halo%20Trinova%2C%20saya%20tertarik%20dengan%20{{ urlencode($program->title) }}."
+                        <a href="https://wa.me/{{ config('app.whatsapp', '628xxxxxxxxxx') }}?text=Halo%20Omset%20Digital%2C%20saya%20tertarik%20dengan%20{{ urlencode($program->title) }}."
                            target="_blank" rel="noopener"
                            class="w-full sm:w-auto py-4 px-9 border border-white/10 hover:border-indigo-500/40 text-zinc-300 hover:text-zinc-100 font-bold text-sm rounded-xl transition-all duration-200 hover:bg-indigo-500/10 flex items-center justify-center gap-2">
                             <span>💬 Diskusi via WhatsApp</span>

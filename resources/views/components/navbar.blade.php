@@ -10,12 +10,12 @@
             {{-- Logo --}}
             <a href="{{ route('home') }}"
                class="flex items-center gap-3 shrink-0"
-               aria-label="Trinova Digital - Beranda">
+               aria-label="Omset Digital - Beranda">
                 <div class="w-9 h-9 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-xl flex items-center justify-center font-extrabold text-sm text-white shadow-lg shadow-indigo-500/25">
-                    T
+                    O
                 </div>
                 <span class="font-extrabold text-lg tracking-tight text-zinc-100 font-heading">
-                    Trinova<span class="text-indigo-400">Digital</span>
+                    Omset<span class="text-indigo-400">Digital</span>
                 </span>
             </a>
 
@@ -36,7 +36,7 @@
                 <a href="{{ route('home') }}#faq"
                    class="px-4 py-2 text-sm font-medium text-zinc-400 hover:text-zinc-100 hover:bg-indigo-500/8 rounded-lg transition-all duration-150"
                    id="nav-faq">FAQ</a>
-                <a href="{{ route('blog.index') }}"
+                <a href="/blog"
                    class="px-4 py-2 text-sm font-medium text-zinc-400 hover:text-zinc-100 hover:bg-indigo-500/8 rounded-lg transition-all duration-150 {{ request()->routeIs('blog.*') ? 'text-zinc-100 bg-indigo-500/8' : '' }}"
                    id="nav-blog">Blog</a>
             </nav>
@@ -70,7 +70,7 @@
             <a href="{{ route('home') }}#programs" @click="open=false" class="px-4 py-3 text-sm font-medium text-zinc-400 hover:text-zinc-100 rounded-lg transition-colors" id="mobile-nav-program">Program</a>
             <a href="{{ route('home') }}#portfolio" @click="open=false" class="px-4 py-3 text-sm font-medium text-zinc-400 hover:text-zinc-100 rounded-lg transition-colors" id="mobile-nav-portfolio">Portfolio</a>
             <a href="{{ route('home') }}#faq"      @click="open=false" class="px-4 py-3 text-sm font-medium text-zinc-400 hover:text-zinc-100 rounded-lg transition-colors" id="mobile-nav-faq">FAQ</a>
-            <a href="{{ route('blog.index') }}"    @click="open=false" class="px-4 py-3 text-sm font-medium text-zinc-400 hover:text-zinc-100 rounded-lg transition-colors" id="mobile-nav-blog">Blog</a>
+            <a href="/blog"    @click="open=false" class="px-4 py-3 text-sm font-medium text-zinc-400 hover:text-zinc-100 rounded-lg transition-colors" id="mobile-nav-blog">Blog</a>
 
         </nav>
 

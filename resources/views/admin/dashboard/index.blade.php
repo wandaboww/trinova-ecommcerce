@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CMS Admin Dashboard — Trinova Digital</title>
+    <title>CMS Admin Dashboard — Omset Digital</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,9 +22,9 @@
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center font-extrabold text-white text-xs">
-                    T
+                    O
                 </div>
-                <span class="font-bold text-zinc-200">Trinova <span class="text-indigo-400">CMS Admin</span></span>
+                <span class="font-bold text-zinc-200">Omset <span class="text-indigo-400">CMS Admin</span></span>
             </div>
             <a href="/" class="text-xs text-zinc-500 hover:text-zinc-300 font-semibold transition-colors">
                 Lihat Website →
@@ -53,7 +53,7 @@
                 </h1>
                 
                 <p class="text-zinc-400 text-sm max-w-md mx-auto leading-relaxed">
-                    Selamat datang di Panel Kontrol CMS Trinova Digital. Rute admin telah terdaftar sukses di file rute aplikasi.
+                    Selamat datang di Panel Kontrol CMS Omset Digital. Rute admin telah terdaftar sukses di file rute aplikasi.
                 </p>
 
                 {{-- Status Cards --}}
@@ -87,7 +87,7 @@
 
     {{-- Footer --}}
     <footer class="border-t border-zinc-900 py-6 text-center text-xs text-zinc-600">
-        &copy; 2026 Trinova Digital. All rights reserved.
+        &copy; 2026 Omset Digital. All rights reserved.
     </footer>
 
 </body>

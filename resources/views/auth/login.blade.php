@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin-Trinova Digital</title>
+    <title>Admin — Omset Digital</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,10 +40,10 @@
         <div class="text-center mb-8">
             <div
                 class="inline-flex w-12 h-12 bg-indigo-600 rounded-2xl items-center justify-center font-extrabold text-white text-xl shadow-lg shadow-indigo-500/25 mb-4">
-                T
+                O
             </div>
             <h2 class="text-xl font-bold text-zinc-100 tracking-tight font-heading">
-                Trinova <span class="text-indigo-400">Admin</span>
+                Omset <span class="text-indigo-400">Admin</span>
             </h2>
             <p class="text-xs text-zinc-500 mt-2">Masuk untuk mengelola konten dan statistik platform</p>
         </div>
@@ -66,7 +66,7 @@
                 <label for="email"
                     class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Alamat Email</label>
                 <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus
-                    placeholder="cth: admin@trinovadigital.com"
+                    placeholder="cth: admin@omsetdigital.com"
                     class="w-full px-4 py-3 bg-zinc-900/60 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
             </div>
 

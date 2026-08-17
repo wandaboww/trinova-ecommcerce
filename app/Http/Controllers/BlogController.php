@@ -33,7 +33,8 @@ class BlogController extends Controller
                     'content' => '<p>Di era digital saat ini, jualan di Shopee, Tokopedia, atau TikTok Shop memang menggiurkan. Namun, tahukah Anda bahaya di baliknya? Kenaikan biaya admin sepihak, perang harga tiada akhir, serta risiko penutupan akun adalah momok menakutkan bagi seller.</p><p>Melalui website mandiri, Anda tidak hanya mengamankan bisnis Anda, tetapi juga memegang penuh kendali data pelanggan Anda sendiri untuk repeat order berkali-kali tanpa iklan berbayar.</p>',
                     'published_at' => now(),
                     'category' => $categoryMock,
-                    'author' => 'Tim Trinova',
+                    'author' => 'Tim Omset Digital',
+                    'featured_image' => null,
                     'views' => 124
                 ],
                 (object) [
@@ -44,7 +45,8 @@ class BlogController extends Controller
                     'content' => '<p>Perang harga hanya menyisakan satu pemenang: marketplace yang memungut biaya admin. Sebagai seller, Anda harus membangun brand value sendiri agar produk dinilai dari kualitas, bukan harga termurah.</p>',
                     'published_at' => now()->subDay(),
                     'category' => $categoryMock,
-                    'author' => 'Tim Trinova',
+                    'author' => 'Tim Omset Digital',
+                    'featured_image' => null,
                     'views' => 98
                 ]
             ];
@@ -74,7 +76,8 @@ class BlogController extends Controller
                     'content' => '',
                     'published_at' => now(),
                     'category' => $category,
-                    'author' => 'Tim Trinova',
+                    'author' => 'Tim Omset Digital',
+                    'featured_image' => null,
                     'views' => 124
                 ]
             ];
@@ -107,7 +110,7 @@ class BlogController extends Controller
                 'content' => '<p>Di era digital saat ini, jualan di Shopee, Tokopedia, atau TikTok Shop memang menggiurkan. Namun, tahukah Anda bahaya di baliknya? Kenaikan biaya admin sepihak, perang harga tiada akhir, serta risiko penutupan akun adalah momok menakutkan bagi seller.</p><p>Melalui website mandiri, Anda tidak hanya mengamankan bisnis Anda, tetapi juga memegang penuh kendali data pelanggan Anda sendiri untuk repeat order berkali-kali tanpa iklan berbayar.</p>',
                 'published_at' => now(),
                 'category' => $categoryMock,
-                'author' => 'Tim Trinova',
+                'author' => 'Tim Omset Digital',
                 'views' => 125
             ];
             $relatedArticles = collect([

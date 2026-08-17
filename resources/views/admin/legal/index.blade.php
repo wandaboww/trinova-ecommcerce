@@ -91,7 +91,7 @@
                         <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-1.5">Deskripsi Singkat (Subtitle)</label>
                         <textarea name="subtitle" rows="2"
                             class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none resize-none transition-colors"
-                            placeholder="Deskripsi singkat dokumen...">{{ old('subtitle', $document?->subtitle ?? ($type === 'privacy_policy' ? 'Kami menghargai privasi Anda. Halaman ini menjelaskan bagaimana Trinova Digital mengumpulkan, menggunakan, menyimpan, dan melindungi informasi yang diberikan ketika Anda menggunakan website dan layanan kami.' : 'Ketentuan penggunaan website dan layanan Trinova Digital.')) }}</textarea>
+                            placeholder="Deskripsi singkat dokumen...">{{ old('subtitle', $document?->subtitle ?? ($type === 'privacy_policy' ? 'Kami menghargai privasi Anda. Halaman ini menjelaskan bagaimana Omset Digital mengumpulkan, menggunakan, menyimpan, dan melindungi informasi yang diberikan ketika Anda menggunakan website dan layanan kami.' : 'Ketentuan penggunaan website dan layanan Omset Digital.')) }}</textarea>
                     </div>
 
                     <div>
@@ -118,7 +118,7 @@
                             <label class="block text-[10px] font-bold text-zinc-500 mb-1.5">Meta Title</label>
                             <input type="text" name="meta_title"
                                 value="{{ old('meta_title', $document?->meta_title ?? '') }}"
-                                placeholder="{{ $type === 'privacy_policy' ? 'Kebijakan Privasi | Trinova Digital' : 'Syarat & Ketentuan | Trinova Digital' }}"
+                                placeholder="{{ $type === 'privacy_policy' ? 'Kebijakan Privasi | Omset Digital' : 'Syarat & Ketentuan | Omset Digital' }}"
                                 class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                         </div>
                         <div>

@@ -1,6 +1,6 @@
-# 🚀 Trinova Digital — Landing Page & CMS Platform
+# 🚀 Omset Digital — Jasa Pembuatan Website E-Commerce & Toko Online UMKM
 
-Platform Landing Page modern, super-cepat, dan interaktif yang dibangun menggunakan ekosistem PHP/Laravel untuk membantu brand e-commerce/UMKM naik kelas.
+Platform Website E-Commerce & CMS modern, super-cepat, dan interaktif yang dibangun menggunakan ekosistem PHP/Laravel untuk membantu UMKM dan seller produk membangun toko online mandiri.
 
 ## 🛠️ Tech Stack
 *   **Framework**: Laravel 12
@@ -36,11 +36,11 @@ npm run dev
 ## 🔗 Daftar URL Akses Halaman (Lokal)
 
 *   **Landing Page Utama**: [http://localhost:8000](http://localhost:8000)
-*   **Form Analisa Bisnis**: [http://localhost:8000/analisa-bisnis-gratis](http://localhost:8000/analisa-bisnis-gratis)
+*   **Form Konsultasi Toko Online**: [http://localhost:8000/analisa-bisnis-gratis](http://localhost:8000/analisa-bisnis-gratis)
 *   **Dashboard Admin / CMS**: [http://localhost:8000/admin](http://localhost:8000/admin)
 *   **Halaman Daftar Program**: [http://localhost:8000/program](http://localhost:8000/program)
 *   **Halaman Daftar Blog**: [http://localhost:8000/blog](http://localhost:8000/blog)
 
 ---
 
-> Rincian lengkap langkah instalasi dari awal dapat dilihat pada file **[INSTALL.md](file:///d:/Website/trinovadigital/INSTALL.md)**.
+> Rincian lengkap langkah instalasi dari awal dapat dilihat pada file **[INSTALL.md](file:///f:/trinova-ecommcerce/INSTALL.md)**.

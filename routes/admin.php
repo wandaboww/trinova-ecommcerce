@@ -15,7 +15,7 @@ use App\Http\Controllers\Admin\LegalManagerController;
 
 /*
 |--------------------------------------------------------------------------
-| ADMIN / CMS ROUTES — Trinova Digital
+| ADMIN / CMS ROUTES — Omset Digital
 | Semua route di sini dilindungi middleware: auth + role:admin
 |--------------------------------------------------------------------------
 */

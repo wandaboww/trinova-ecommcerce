@@ -103,7 +103,7 @@
         {{-- Action Bar --}}
         <div class="flex items-center justify-between mb-6">
             <div class="flex items-center gap-4">
-                <p class="text-xs text-zinc-500">Kelola artikel edukatif blog bisnis dan e-commerce Trinova Digital.</p>
+                <p class="text-xs text-zinc-500">Kelola artikel edukatif blog bisnis dan e-commerce Omset Digital.</p>
                 
                 {{-- Bulk Action --}}
                 <div x-show="selectedIds.length > 0" class="flex items-center gap-2" x-cloak x-transition>

@@ -26,8 +26,8 @@ class LegalController extends Controller
         $sections = $document->activeSections()->get();
 
         $seo = [
-            'title'       => $document->meta_title ?: ($document->title . ' | Trinova Digital'),
-            'description' => $document->meta_description ?: 'Syarat dan ketentuan penggunaan website serta layanan Trinova Digital.',
+            'title'       => $document->meta_title ?: ($document->title . ' | Omset Digital'),
+            'description' => $document->meta_description ?: 'Syarat dan ketentuan penggunaan website serta layanan Omset Digital.',
             'canonical'   => route('terms'),
         ];
 
@@ -51,8 +51,8 @@ class LegalController extends Controller
         $sections = $document->activeSections()->get();
 
         $seo = [
-            'title'       => $document->meta_title ?: ($document->title . ' | Trinova Digital'),
-            'description' => $document->meta_description ?: 'Kebijakan Privasi Trinova Digital yang menjelaskan bagaimana kami mengumpulkan, menggunakan, menyimpan, dan melindungi data pribadi pengguna.',
+            'title'       => $document->meta_title ?: ($document->title . ' | Omset Digital'),
+            'description' => $document->meta_description ?: 'Kebijakan Privasi Omset Digital yang menjelaskan bagaimana kami mengumpulkan, menggunakan, menyimpan, dan melindungi data pribadi pengguna.',
             'canonical'   => route('privacy'),
         ];
 

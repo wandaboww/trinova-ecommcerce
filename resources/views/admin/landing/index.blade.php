@@ -73,7 +73,7 @@
                     </label>
                 </div>
                 <textarea name="hero_description" rows="3"
-                          class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors resize-none">{{ $landingSetting->pain_description ?? 'Marketplace membantu Anda mendapatkan pelanggan. Website membantu Anda memiliki pelanggan. Trinova membantu Anda membangun keduanya.' }}</textarea>
+                          class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors resize-none">{{ $landingSetting->pain_description ?? 'Omset Digital membantu UMKM membangun website e-commerce milik sendiri untuk menjual produk, menerima pesanan, membangun database pelanggan, dan mengembangkan brand tanpa bergantung sepenuhnya pada marketplace.' }}</textarea>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -86,7 +86,7 @@
                             <span class="ml-2 text-[9px] font-bold text-zinc-500 uppercase tracking-wider">Tampilkan</span>
                         </label>
                     </div>
-                    <input type="text" name="hero_cta_primary" value="{{ $landingSetting->hero_cta ?? 'Analisa Bisnis Gratis' }}"
+                    <input type="text" name="hero_cta_primary" value="{{ $landingSetting->hero_cta ?? 'Konsultasi Gratis' }}"
                            class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
                 </div>
                 <div>
@@ -153,7 +153,7 @@
                 </div>
                 <div>
                     <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Pesan Default WhatsApp</label>
-                    <input type="text" name="whatsapp_message" value="{{ $landingSetting->whatsapp_message ?? 'Halo Trinova Digital, saya ingin konsultasi strategi bisnis.' }}"
+                    <input type="text" name="whatsapp_message" value="{{ $landingSetting->whatsapp_message ?? 'Halo Omset Digital, saya ingin konsultasi pembuatan toko online.' }}"
                            class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
                 </div>
             </div>
@@ -172,13 +172,13 @@
             <div>
                 <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Deskripsi / Subheadline CTA Final</label>
                 <textarea name="cta_description" rows="3"
-                          class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors resize-none">{{ $landingSetting->cta_description ?? 'Dapatkan evaluasi eksklusif 1-on-1 bersama tim analis senior Trinova Digital secara gratis. Cari tahu di mana potensi kebocoran margin keuntungan bisnis Anda hari ini.' }}</textarea>
+                          class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors resize-none">{{ $landingSetting->cta_description ?? 'Dapatkan evaluasi eksklusif 1-on-1 bersama tim Omset Digital secara gratis. Cari tahu di mana potensi kebocoran margin keuntungan bisnis Anda hari ini.' }}</textarea>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Teks Tombol CTA Final</label>
-                    <input type="text" name="cta_button_text" value="{{ $landingSetting->cta_button_text ?? 'Konsultasikan Gratis Bisnis Anda' }}"
+                    <input type="text" name="cta_button_text" value="{{ $landingSetting->cta_button_text ?? 'Konsultasi Gratis Sekarang' }}"
                            class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
                 </div>
                 <div>

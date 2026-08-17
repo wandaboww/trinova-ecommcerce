@@ -1,6 +1,6 @@
 <x-layouts.app :seo="[
-    'title' => 'Kebijakan Privasi | Trinova Digital',
-    'description' => 'Kebijakan Privasi Trinova Digital yang menjelaskan bagaimana kami mengumpulkan, menggunakan, menyimpan, dan melindungi data pribadi pengguna.',
+    'title' => 'Kebijakan Privasi | Omset Digital',
+    'description' => 'Kebijakan Privasi Omset Digital yang menjelaskan bagaimana kami mengumpulkan, menggunakan, menyimpan, dan melindungi data pribadi pengguna.',
     'canonical' => route('privacy'),
 ]">
 
@@ -24,7 +24,7 @@
                     Kebijakan Privasi
                 </h1>
                 <p class="text-zinc-400 text-base sm:text-lg leading-relaxed mb-6 text-center">
-                    Kami menghargai privasi Anda. Halaman ini menjelaskan bagaimana Trinova Digital mengumpulkan, menggunakan, menyimpan, dan melindungi informasi yang diberikan ketika Anda menggunakan website dan layanan kami.
+                    Kami menghargai privasi Anda. Halaman ini menjelaskan bagaimana Omset Digital mengumpulkan, menggunakan, menyimpan, dan melindungi informasi yang diberikan ketika Anda menggunakan website dan layanan kami.
                 </p>
             </div>
         </div>
@@ -143,10 +143,10 @@
                         </header>
                         <div class="space-y-4 text-zinc-300 text-sm sm:text-base leading-relaxed">
                             <p>
-                                Selamat datang di Trinova Digital. Kami sangat menghargai kepercayaan Anda dan berkomitmen untuk melindungi hak privasi serta data pribadi pengguna yang mengakses website dan menggunakan layanan kami.
+                                Selamat datang di Omset Digital. Kami sangat menghargai kepercayaan Anda dan berkomitmen untuk melindungi hak privasi serta data pribadi pengguna yang mengakses website dan menggunakan layanan kami.
                             </p>
-                            <p>
-                                Kebijakan Privasi ini menjelaskan jenis informasi pribadi yang kami kumpulkan melalui website Trinova Digital (termasuk formulir komunikasi dan layanan terkait), bagaimana informasi tersebut diolah, disimpan, dilindungi, serta hak-hak Anda atas informasi pribadi tersebut berdasarkan hukum yang berlaku di Indonesia.
+                            <p class="text-zinc-400 text-sm sm:text-base leading-relaxed">
+                                Kebijakan Privasi ini menjelaskan jenis informasi pribadi yang kami kumpulkan melalui website Omset Digital (termasuk formulir komunikasi dan layanan terkait), bagaimana informasi tersebut diolah, disimpan, dilindungi, serta hak-hak Anda atas informasi pribadi tersebut berdasarkan hukum yang berlaku di Indonesia.
                             </p>
                             <p>
                                 Dengan mengakses website kami atau memberikan informasi pribadi Anda melalui saluran komunikasi yang tersedia, Anda menyatakan telah membaca, memahami, dan menyetujui praktik pemrosesan data yang dijelaskan dalam dokumen ini.
@@ -162,7 +162,7 @@
                         </header>
                         <div class="space-y-4 text-zinc-300 text-sm sm:text-base leading-relaxed">
                             <p>
-                                Berdasarkan inspeksi fitur dan formulir interaktif di website Trinova Digital, kami hanya mengumpulkan informasi pribadi yang Anda berikan secara sukarela serta data teknis dasar saat Anda menggunakan website:
+                                Berdasarkan inspeksi fitur dan formulir interaktif di website Omset Digital, kami hanya mengumpulkan informasi pribadi yang Anda berikan secara sukarela serta data teknis dasar saat Anda menggunakan website:
                             </p>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
@@ -216,8 +216,8 @@
                         <div class="space-y-4 text-zinc-300 text-sm sm:text-base leading-relaxed">
                             <p>Kami mengumpulkan data pribadi Anda melalui beberapa cara berikut:</p>
                             <ol class="list-decimal pl-5 space-y-2 text-zinc-300">
-                                >Pengisian Formulir Sukarela:</strong> Ketika Anda mengisi formulir "Analisa Bisnis Gratis", formulir kontak, atau berlangganan berita berkala di website Trinova Digital.</li>
-                                <li><strong>Komunikasi Langsung:</strong> Ketika Anda secara aktif mengirimkan pesan via email resmi (`halo@trinova.id`) atau mengklik tautan chat WhatsApp resmi kami.</li>
+                                <li><strong>Pengisian Formulir Sukarela:</strong> Ketika Anda mengisi formulir "Konsultasi Gratis", formulir kontak, atau berlangganan berita berkala di website Omset Digital.</li>
+                                <li><strong>Komunikasi Langsung:</strong> Ketika Anda secara aktif mengirimkan pesan via email resmi (`halo@omsetdigital.com`) atau mengklik tautan chat WhatsApp resmi kami.</li>
                                 <li><strong>Pengumpulan Otomatis:</strong> Data log teknis dikumpulkan secara otomatis oleh server web kami saat sesi kunjungan berlangsung untuk keperluan audit keamanan dan kestabilan trafik.</li>
                             </ol>
                         </div>
@@ -251,7 +251,7 @@
                         </header>
                         <div class="space-y-4 text-zinc-300 text-sm sm:text-base leading-relaxed">
                             <p>
-                                Pemrosesan data pribadi oleh Trinova Digital dilaksanakan berdasarkan kerangka hukum yang berlaku di Indonesia, khususnya <strong>Undang-Undang Republik Indonesia Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP)</strong>.
+                                Pemrosesan data pribadi oleh Omset Digital dilaksanakan berdasarkan kerangka hukum yang berlaku di Indonesia, khususnya <strong>Undang-Undang Republik Indonesia Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP)</strong>.
                             </p>
                             <p>Dasar hukum pemrosesan data kami meliputi:</p>
                             <ul class="list-disc pl-5 space-y-2 text-zinc-300">
@@ -297,7 +297,7 @@
                         </header>
                         <div class="space-y-4 text-zinc-300 text-sm sm:text-base leading-relaxed">
                             <p>
-                                Trinova Digital <strong class="text-zinc-100">tidak pernah menjual, menyewakan, atau memperdagangkan data pribadi Anda</strong> kepada pihak manapun untuk kepentingan pemasaran mereka.
+                                Omset Digital <strong class="text-zinc-100">tidak pernah menjual, menyewakan, atau memperdagangkan data pribadi Anda</strong> kepada pihak manapun untuk kepentingan pemasaran mereka.
                             </p>
                             <p>
                                 Data hanya dapat diakses atau diproses oleh pihak ketiga tepercaya dalam kondisi berikut:
@@ -387,7 +387,7 @@
                         </header>
                         <div class="space-y-4 text-zinc-300 text-sm sm:text-base leading-relaxed">
                             <p>
-                                Website kami dapat berisi tautan menuju situs web pihak ketiga (seperti media sosial TikTok, Instagram, atau platform marketplace). Kebijakan Privasi ini hanya berlaku untuk website Trinova Digital.
+                                Website kami dapat berisi tautan menuju situs web pihak ketiga (seperti media sosial TikTok, Instagram, atau platform marketplace). Kebijakan Privasi ini hanya berlaku untuk website Omset Digital.
                             </p>
                             <p>
                                 Kami tidak memiliki kendali dan tidak bertanggung jawab atas konten, kebijakan privasi, atau praktik keamanan dari situs web pihak ketiga tersebut. Kami menyarankan Anda untuk membaca Kebijakan Privasi masing-masing situs yang Anda kunjungi.
@@ -403,7 +403,7 @@
                         </header>
                         <div class="space-y-4 text-zinc-300 text-sm sm:text-base leading-relaxed">
                             <p>
-                                Layanan dan informasi di website Trinova Digital ditujukan untuk pengguna dewasa dan pelaku usaha/UMKM. Kami tidak secara sengaja mengumpulkan atau meminta data pribadi dari anak-anak di bawah usia 18 tahun.
+                                Layanan dan informasi di website Omset Digital ditujukan untuk pengguna dewasa dan pelaku usaha/UMKM. Kami tidak secara sengaja mengumpulkan atau meminta data pribadi dari anak-anak di bawah usia 18 tahun.
                             </p>
                             <p>
                                 Jika Anda adalah orang tua atau wali yang mengetahui bahwa anak Anda telah memberikan data pribadi kepada kami tanpa persetujuan, silakan hubungi kami agar kami dapat segera mengambil langkah-langkah penghapusan data tersebut.
@@ -419,7 +419,7 @@
                         </header>
                         <div class="space-y-4 text-zinc-300 text-sm sm:text-base leading-relaxed">
                             <p>
-                                Trinova Digital berhak untuk memperbarui atau mengubah Kebijakan Privasi ini sewaktu-waktu guna mencerminkan perubahan pada layanan kami atau penyesuaian dengan regulasi perundang-undangan.
+                                Omset Digital berhak untuk memperbarui atau mengubah Kebijakan Privasi ini sewaktu-waktu guna mencerminkan perubahan pada layanan kami atau penyesuaian dengan regulasi perundang-undangan.
                             </p>
                             <p>
                                 Setiap pembaruan akan dipublikasikan pada halaman ini dengan memperbarui keterangan tanggal "Terakhir diperbarui" di bagian atas dokumen. Kami menyarankan Anda untuk meninjau halaman ini secara berkala untuk tetap mendapatkan informasi terbaru mengenai komitmen privasi kami.
@@ -435,13 +435,13 @@
                         </header>
                         <div class="space-y-4 text-zinc-300 text-sm sm:text-base leading-relaxed">
                             <p>
-                                Jika Anda memiliki pertanyaan, saran, atau ingin menggunakan hak-hak Anda terkait data pribadi di bawah Kebijakan Privasi ini, silakan hubungi Trinova Digital melalui saluran resmi berikut:
+                                Jika Anda memiliki pertanyaan, saran, atau ingin menggunakan hak-hak Anda terkait data pribadi di bawah Kebijakan Privasi ini, silakan hubungi Omset Digital melalui saluran resmi berikut:
                             </p>
                             
                             @php
                                 $genSetting = \App\Models\Setting::getCached();
-                                $contactEmail = $genSetting->email ?? 'halo@trinova.id';
-                                $contactPhone = $genSetting->whatsapp ?? $genSetting->phone ?? '6281234567890';
+                                $contactEmail = $genSetting->email ?? 'halo@omsetdigital.com';
+                                $contactPhone = $genSetting->phone ?? config('app.whatsapp', '6281234567890');
                                 $waNum = preg_replace('/[^0-9]/', '', $contactPhone);
                                 if (str_starts_with($waNum, '0')) {
                                     $waNum = '62' . substr($waNum, 1);
@@ -458,7 +458,7 @@
                                     </span>
                                 </a>
 
-                                <a href="https://wa.me/{{ $waNum }}?text={{ urlencode('Halo Trinova Digital, saya ingin bertanya mengenai Kebijakan Privasi.') }}"
+                                <a href="https://wa.me/{{ $waNum }}?text={{ urlencode('Halo Omset Digital, saya ingin bertanya mengenai Kebijakan Privasi.') }}"
                                    target="_blank" rel="noopener"
                                    class="bg-zinc-950/80 border border-white/5 hover:border-indigo-500/40 p-4 rounded-xl flex flex-col items-start transition-colors group">
                                     <span class="text-xs text-zinc-500 mb-1 flex items-center gap-1.5">

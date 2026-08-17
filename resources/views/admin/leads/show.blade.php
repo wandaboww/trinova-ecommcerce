@@ -149,7 +149,7 @@
                 <button type="button" @click="isEditing = !isEditing" class="w-full py-3 bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/30 text-indigo-400 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
                     ✏️ <span x-text="isEditing ? 'Batal Edit Data' : 'Edit Data Lead'"></span>
                 </button>
-                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $lead->phone) }}?text={{ urlencode('Halo ' . $lead->name . ' dari Trinova Digital...') }}"
+                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $lead->phone) }}?text={{ urlencode('Halo ' . $lead->name . ' dari Omset Digital...') }}"
                    target="_blank"
                    class="w-full py-3 bg-green-600/20 hover:bg-green-600/30 border border-green-500/30 hover:border-green-500/50 text-green-400 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
                     📞 Hubungi via WhatsApp

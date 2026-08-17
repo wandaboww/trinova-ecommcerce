@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
     {
         // 1. Admin User
         User::updateOrCreate(
-            ['email' => 'admin@trinovadigital.com'],
+            ['email' => 'admin@omsetdigital.com'],
             [
-                'name' => 'Admin Trinova',
+                'name' => 'Admin Omset Digital',
                 'password' => Hash::make('admin123'),
                 'role' => 'admin',
             ]
@@ -36,10 +36,10 @@ class DatabaseSeeder extends Seeder
                 'pain_title' => 'Mengapa Penjualan Online Anda Stagnan?',
                 'pain_description' => 'Banyak bisnis terjebak pada iklan mahal tanpa konversi, website lambat, dan funnel whatsapp manual yang melelahkan.',
                 'paradigm_title' => 'Dari Manual Menuju Otomatisasi Penjualan',
-                'paradigm_description' => 'Trinova mengubah cara Anda berjualan dengan sistem landing page mandiri, payment gateway terintegrasi, dan CRM otomatis.',
+                'paradigm_description' => 'Omset Digital mengubah cara Anda berjualan dengan sistem landing page mandiri, payment gateway terintegrasi, dan CRM otomatis.',
                 'cta_title' => 'Siap Mengubah Bisnis E-Commerce Anda?',
-                'cta_description' => 'Dapatkan Analisa Bisnis Gratis senilai Rp2.500.000 sekarang juga. Kuota terbatas setiap bulan!',
-                'footer_description' => 'Trinova Digital membantu brand e-commerce dan UMKM Indonesia tumbuh lewat sistem website konversi tinggi dan otomatisasi penjualan.',
+                'cta_description' => 'Dapatkan Konsultasi Gratis senilai Rp2.500.000 sekarang juga. Kuota terbatas setiap bulan!',
+                'footer_description' => 'Omset Digital membantu UMKM dan seller membangun website e-commerce dan toko online milik sendiri untuk mengembangkan brand secara mandiri.',
             ]
         );
 
@@ -93,7 +93,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Rina Cahyani',
                 'company' => 'Hijab Nisa',
                 'position' => 'Founder',
-                'content' => 'Omzet kami naik 3x lipat dalam 4 bulan setelah menggunakan sistem dari Trinova. Tim-nya profesional dan hasil website-nya benar-benar konversi tinggi!',
+                'content' => 'Omzet kami naik 3x lipat dalam 4 bulan setelah menggunakan sistem dari Omset Digital. Tim-nya profesional dan hasil website-nya benar-benar konversi tinggi!',
                 'rating' => 5,
                 'sort_order' => 1,
                 'is_active' => true,
@@ -125,7 +125,7 @@ class DatabaseSeeder extends Seeder
         // 5. FAQs
         $faqs = [
             [
-                'question' => 'Apakah Trinova Digital hanya untuk bisnis online?',
+                'question' => 'Apakah Omset Digital hanya untuk bisnis online?',
                 'answer' => 'Tidak. Kami melayani bisnis offline maupun online yang ingin membangun kehadiran digital yang profesional dan menghasilkan omzet nyata.',
                 'sort_order' => 1,
                 'is_active' => true,
@@ -205,9 +205,9 @@ class DatabaseSeeder extends Seeder
         Setting::updateOrCreate(
             ['id' => 1],
             [
-                'site_name' => 'Trinova Digital',
-                'site_tagline' => 'Digital Growth Platform',
-                'email' => 'hello@trinovadigital.com',
+                'site_name' => 'Omset Digital',
+                'site_tagline' => 'Jasa Pembuatan Website E-Commerce UMKM',
+                'email' => 'halo@omsetdigital.com',
                 'phone' => '6281234567890',
                 'whatsapp' => '6281234567890',
                 'address' => 'Jakarta, Indonesia',

@@ -1,4 +1,4 @@
-<x-layouts.admin :title="'CMS Dashboard — Trinova Digital'" :headerTitle="'Ringkasan Dashboard'">
+<x-layouts.admin :title="'CMS Dashboard — Omset Digital'" :headerTitle="'Ringkasan Dashboard'">
 
     {{-- Main Light Canvas Wrapper --}}
     <div class="-m-8 p-6 sm:p-8 bg-slate-100/95 min-h-[calc(100vh-4rem)] text-slate-800 space-y-8">
@@ -22,7 +22,7 @@
                         Selamat Datang Kembali, Administrator! 👋
                     </h2>
                     <p class="text-slate-600 text-sm max-w-xl leading-relaxed">
-                        Di sini Anda dapat mengelola seluruh kebutuhan data marketing &amp; e-commerce landing page Trinova Digital secara instan, aman, dan visual.
+                        Di sini Anda dapat mengelola seluruh kebutuhan data marketing &amp; e-commerce landing page Omset Digital secara instan, aman, dan visual.
                     </p>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                                     </span>
                                     {{-- Title --}}
                                     <div class="flex-grow min-w-0">
-                                        <a href="{{ route('admin.blog.edit', $art->slug) }}" class="text-xs font-bold text-slate-800 group-hover:text-indigo-700 truncate block transition-colors">
+                                        <a href="{{ route('blog.show', $art->slug) }}" target="_blank" class="text-xs font-bold text-slate-800 group-hover:text-indigo-700 truncate block transition-colors">
                                             {{ $art->title }}
                                         </a>
                                         <span class="text-[10px] text-slate-400">{{ $art->category->name ?? '—' }}</span>

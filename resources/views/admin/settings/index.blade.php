@@ -16,12 +16,12 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Nama Perusahaan</label>
-                    <input type="text" name="company_name" value="{{ $setting->site_name ?? 'Trinova Digital' }}"
+                    <input type="text" name="company_name" value="{{ $setting->site_name ?? 'Omset Digital' }}"
                            class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none transition-colors">
                 </div>
                 <div>
                     <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Email Kontak Utama</label>
-                    <input type="email" name="contact_email" value="{{ $setting->email ?? 'hello@trinovadigital.com' }}" placeholder="hello@domain.com"
+                    <input type="email" name="contact_email" value="{{ $setting->email ?? 'halo@omsetdigital.com' }}" placeholder="halo@omsetdigital.com"
                            class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
                 </div>
                 <div>
@@ -31,14 +31,14 @@
                 </div>
                 <div>
                     <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Pesan Default WhatsApp</label>
-                    <input type="text" name="whatsapp_message" value="{{ $setting->whatsapp_message ?? 'Halo Trinova Digital, saya ingin konsultasi strategi bisnis.' }}"
+                    <input type="text" name="whatsapp_message" value="{{ $setting->whatsapp_message ?? 'Halo Omset Digital, saya ingin konsultasi pembuatan toko online.' }}"
                            class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                     <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Instagram URL</label>
-                    <input type="url" name="social_instagram" value="{{ $setting->instagram ?? 'https://instagram.com/trinovadigital' }}" placeholder="https://instagram.com/..."
+                    <input type="url" name="social_instagram" value="{{ $setting->instagram ?? '' }}" placeholder="https://instagram.com/..."
                            class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
                 </div>
                 <div>
@@ -59,13 +59,13 @@
             <h3 class="text-sm font-bold text-zinc-200 uppercase tracking-widest border-b border-zinc-800 pb-4">🔍 Pengaturan SEO Global</h3>
             <div>
                 <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Meta Title (Judul Tab Browser)</label>
-                <input type="text" name="meta_title" value="{{ $setting->site_tagline ?? 'Trinova Digital — Akselerasi Bisnis E-Commerce & UMKM Indonesia' }}"
+                <input type="text" name="meta_title" value="{{ $setting->site_tagline ?? 'Website E-Commerce untuk UMKM | Omset Digital' }}"
                        class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm focus:outline-none transition-colors">
             </div>
             <div>
                 <label class="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Meta Description (Deskripsi Google)</label>
                 <textarea name="meta_description" rows="3"
-                          class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none resize-none transition-colors">Trinova Digital membantu brand e-commerce dan UMKM Indonesia tumbuh lewat sistem website konversi tinggi, funnel WhatsApp otomatis, dan program akselerasi bisnis berbasis data.</textarea>
+                          class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none resize-none transition-colors">Bangun website e-commerce dan toko online milik sendiri untuk bisnis Anda. Omset Digital membantu UMKM menjual produk, mengelola pesanan, membangun pelanggan, dan mengembangkan brand.</textarea>
             </div>
         </div>
 

@@ -1,6 +1,6 @@
 <x-layouts.app :seo="[
-    'title'       => 'Kategori: ' . $category->name . ' — Blog Trinova Digital',
-    'description' => 'Lihat semua artikel dalam kategori ' . $category->name . ' di blog Trinova Digital.',
+    'title'       => 'Kategori: ' . $category->name . ' — Blog Omset Digital',
+    'description' => 'Lihat semua artikel dalam kategori ' . $category->name . ' di blog Omset Digital.',
     'canonical'   => route('blog.category', $category->slug),
 ]">
 
@@ -49,7 +49,7 @@
                             <article class="bg-zinc-950 border border-white rounded-2xl overflow-hidden hover:border-indigo-400 transition-all duration-300 flex flex-col justify-between group">
                                 <div>
                                     <div class="aspect-video bg-zinc-900 flex items-center justify-center border-b border-white/5 relative overflow-hidden">
-                                        @if($article->featured_image)
+                                        @if(!empty($article->featured_image))
                                             <img src="{{ asset($article->featured_image) }}" alt="{{ $article->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                         @else
                                             <div class="absolute inset-0 bg-gradient-to-br from-indigo-600/10 to-zinc-950/20"></div>

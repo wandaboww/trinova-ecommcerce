@@ -1,32 +1,32 @@
 <x-layouts.app :seo="[
-        'title' => 'Trinova Digital — Partner Transformasi Digital untuk Seller Marketplace',
-        'description' => 'Trinova Digital membantu seller Shopee, Tokopedia, dan TikTok Shop membangun aset digital sendiri. Dari marketplace menjadi brand mandiri. Mulai dengan Analisa Bisnis Gratis.',
+        'title' => 'Website E-Commerce untuk UMKM | Omset Digital',
+        'description' => 'Bangun website e-commerce dan toko online milik sendiri untuk bisnis Anda. Omset Digital membantu UMKM menjual produk, mengelola pesanan, membangun pelanggan, dan mengembangkan brand.',
         'canonical' => route('home'),
     ]">
 
     @push('schema')
         <script type="application/ld+json">
-                                                                                                                                            {
-                                                                                                                                                "@@context": "https://schema.org",
-                                                                                                                                                "@type": "LocalBusiness",
-                                                                                                                                                "name": "Trinova Digital",
-                                                                                                                                                "description": "Partner transformasi digital untuk seller marketplace dan UMKM Indonesia",
-                                                                                                                                                "url": "{{ config('app.url') }}",
-                                                                                                                                                "logo": "{{ asset('images/logo.png') }}",
-                                                                                                                                                "contactPoint": {
-                                                                                                                                                    "@type": "ContactPoint",
-                                                                                                                                                    "contactType": "customer service",
-                                                                                                                                                    "availableLanguage": "Indonesian"
-                                                                                                                                                }
-                                                                                                                                            }
-                                                                                                                                            </script>
+        {
+            "@@context": "https://schema.org",
+            "@@type": "LocalBusiness",
+            "name": "Omset Digital",
+            "description": "Jasa pembuatan website e-commerce dan toko online untuk UMKM dan brand produk fisik di Indonesia",
+            "url": "{{ config('app.url') }}",
+            "logo": "{{ asset('images/logo.png') }}",
+            "contactPoint": {
+                "@@type": "ContactPoint",
+                "contactType": "customer service",
+                "availableLanguage": "Indonesian"
+            }
+        }
+        </script>
     @endpush
 
     {{-- =========================================================
     SECTION 1: HERO
-    Tujuan: Menghentikan perhatian dalam < 5 detik=========================================================--}} <section
+    Tujuan: Menghentikan perhatian dalam < 5 detik=========================================================--}}    <section
         id="hero" class="min-h-screen flex items-center pt-20 relative overflow-hidden"
-        aria-label="Hero — Pesan utama Trinova Digital">
+        aria-label="Hero — Pesan utama Omset Digital">
 
         {{-- Background Effects --}}
         <div
@@ -48,7 +48,7 @@
                     <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-xs font-semibold text-indigo-300 uppercase tracking-widest mb-8"
                         data-reveal>
                         <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
-                        {{ $setting->hero_badge ?? 'Partner Transformasi Digital' }}
+                        {{ $setting->hero_badge ?? 'WEBSITE E-COMMERCE UNTUK UMKM' }}
                     </div>
                 @endif
 
@@ -67,7 +67,7 @@
                     data-reveal data-delay="100">
                     @if($setting->show_hero_title ?? true)
                         <span style="{{ $heroTitleSize ? 'font-size: ' . $heroTitleSize . ' !important; line-height: 1.15;' : '' }}">
-                            {{ $setting->hero_title ?? 'Order makin ramai...' }}
+                            {{ $setting->hero_title ?? 'Sudah Jualan di Marketplace?' }}
                         </span>
                     @endif
                     @if(($setting->show_hero_title ?? true) && ($setting->show_hero_subtitle ?? true))
@@ -77,7 +77,7 @@
                         <span
                             class="bg-gradient-to-r from-indigo-400 via-violet-400 to-indigo-300 bg-clip-text text-transparent inline-block"
                             style="{{ $heroSubtitleSize ? 'font-size: ' . $heroSubtitleSize . ' !important; line-height: 1.15;' : '' }}">
-                            {!! $setting->hero_subtitle ?? 'Tapi <span class="text-red-400">margin</span> terasa jalan di tempat?' !!}
+                            {!! $setting->hero_subtitle ?? 'Saatnya Punya Toko Online Sendiri.' !!}
                         </span>
                     @endif
                 </h1>
@@ -86,7 +86,7 @@
                 @if($setting->show_hero_description ?? true)
                     <p class="text-lg sm:text-xl text-zinc-400 leading-relaxed max-w-2xl mx-auto mb-10" data-reveal
                         data-delay="200">
-                        {!! nl2br(e($setting->pain_description ?? "Marketplace membantu Anda mendapatkan pelanggan.\nWebsite membantu Anda memiliki pelanggan.\nTrinova membantu Anda membangun keduanya.")) !!}
+                        {!! nl2br(e($setting->pain_description ?? "Omset Digital membantu UMKM membangun website e-commerce milik sendiri untuk menjual produk, menerima pesanan, membangun database pelanggan, dan mengembangkan brand tanpa bergantung sepenuhnya pada marketplace.")) !!}
                     </p>
                 @endif
 
@@ -99,7 +99,7 @@
                             <a href="{{ route('audit.index') }}"
                                 class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-zinc-900 font-bold text-lg rounded-full shadow-2xl shadow-amber-500/20 hover:shadow-amber-500/40 transition-all duration-200 hover:-translate-y-1 w-full sm:w-auto justify-center"
                                 id="hero-audit-cta">
-                                {{ $setting->hero_cta ?? 'Analisa Bisnis Gratis' }}
+                                {{ $setting->hero_cta ?? 'Konsultasi Gratis' }} →
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                                     aria-hidden="true">
@@ -194,9 +194,9 @@
                     </span>
                     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 font-heading"
                         data-reveal data-delay="100">
-                        Realita Pahit Jualan di<br />
+                        Marketplace Membantu Anda Jualan.<br />
                         <span
-                            class="bg-gradient-to-r from-red-400 to-amber-500 bg-clip-text text-transparent">Marketplace</span>
+                            class="bg-gradient-to-r from-red-400 to-amber-500 bg-clip-text text-transparent">Tapi Jangan Biarkan Seluruh Bisnis Anda Bergantung di Sana.</span>
                     </h2>
                     <p class="text-zinc-400 text-base sm:text-lg" data-reveal data-delay="200">
                         Apakah Anda merasakan jualan semakin ramai, tetapi uang di rekening justru tidak bertambah
@@ -378,8 +378,7 @@
                     </span>
                     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 font-heading"
                         data-reveal data-delay="100">
-                        Marketplace untuk <span class="text-indigo-400">Mendapatkan</span> Pelanggan.<br />
-                        Website untuk <span class="text-amber-400">Memiliki</span> Pelanggan.
+                        Marketplace atau Toko Online Sendiri?
                     </h2>
                     <p class="text-zinc-400 text-base sm:text-lg leading-relaxed" data-reveal data-delay="200">
                         Gunakan marketplace sebagai <strong class="text-zinc-200">pintu masuk (akuisisi)</strong> pelanggan baru, arahkan mereka ke ekosistem <strong class="text-[oklch(82.8%_0.189_84.429)]">Website Mandiri Anda</strong>, bangun database WhatsApp mereka, dan nikmati repeat order dengan profit bersih 100%.
@@ -521,9 +520,8 @@
                     </span>
                     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 font-heading"
                         data-reveal data-delay="100">
-                        Membangun Mesin Keuntungan<br />
-                        <span class="bg-gradient-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">Milik
-                            Anda Sendiri</span>
+                        Anda Bukan Sekadar Membeli Website.<br />
+                        <span class="bg-gradient-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">Anda Sedang Membangun Aset Bisnis.</span>
                     </h2>
                     <p class="text-zinc-400 text-base sm:text-lg" data-reveal data-delay="200">
                         Fokus kami adalah hasil bisnis (outcome), bukan sekadar urusan teknis seperti coding, hosting,
@@ -697,9 +695,9 @@
                     </span>
                     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 font-heading"
                         data-reveal data-delay="100">
-                        Naik Level Sesuai<br />
+                        Bangun Toko Online yang Bekerja<br />
                         <span
-                            class="text-[oklch(82.8%_0.189_84.429)]">Pertumbuhan Bisnis Anda?</span>
+                            class="text-[oklch(82.8%_0.189_84.429)]">untuk Bisnis Anda.</span>
                     </h2>
                     <p class="text-zinc-400 text-lg" data-reveal data-delay="200">
                         Mulai dari toko online untuk brand baru hingga ekosistem e-commerce untuk bisnis berskala besar. Pilih fitur yang sesuai dengan kebutuhan Anda hari ini, dan siap berkembang ketika bisnis Anda naik level.
@@ -731,14 +729,20 @@
                                 </div>
 
                                 @if($program->current_price || $program->original_price)
-                                    <div class="flex items-baseline gap-2 mb-4">
+                                    <div class="flex flex-col gap-1 mb-4">
                                         @if($program->original_price)
-                                            <span class="text-sm text-zinc-500 line-through decoration-zinc-500/50">{{ $program->original_price }}</span>
+                                            <div class="relative inline-block w-max">
+                                                <span class="text-2xl font-semibold text-zinc-500">Rp {{ $program->original_price }}</span>
+                                                <div class="absolute left-[-5%] top-1/2 w-[110%] h-[3px] bg-red-500/80 -translate-y-1/2 -rotate-12 origin-center pointer-events-none rounded-full"></div>
+                                            </div>
                                         @endif
                                         @if($program->current_price)
-                                            <span class="font-bold text-emerald-400">
-                                                {!! preg_replace('/^(Rp\s*)/i', '<span class="text-sm font-semibold">$1</span><span class="text-2xl font-black">', e($program->current_price)) !!}{!! preg_match('/^(Rp\s*)/i', $program->current_price) ? '</span>' : '' !!}
-                                            </span>
+                                            <div class="flex items-baseline gap-2">
+                                                <span class="text-zinc-300 font-semibold text-xl">Rp</span>
+                                                <span class="text-4xl xl:text-4xl font-black text-emerald-400 tracking-tight">
+                                                    {{ trim(preg_replace('/^(Rp\s*)/i', '', $program->current_price)) }}
+                                                </span>
+                                            </div>
                                         @endif
                                     </div>
                                 @endif
@@ -928,7 +932,7 @@
         {{-- =========================================================
         SECTION 6: PORTFOLIO
         ========================================================= --}}
-        <section id="portfolio" class="py-24 relative" aria-label="Portfolio — Studi kasus klien Trinova Digital">
+        <section id="portfolio" class="py-24 relative" aria-label="Portfolio — Studi kasus klien Omset Digital">
             <div class="max-w-7xl mx-auto px-4 sm:px-6">
 
                 {{-- Section Header --}}
@@ -940,10 +944,9 @@
                     </span>
                     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 font-heading"
                         data-reveal data-delay="100">
-                        Bukti Nyata Hasil<br />
+                        Lihat Bagaimana Brand Berjualan<br />
                         <span
-                            class="bg-gradient-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">Pertumbuhan
-                            Bisnis</span>
+                            class="bg-gradient-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">dengan Toko Online Sendiri</span>
                     </h2>
                     <p class="text-zinc-400 text-lg" data-reveal data-delay="200">
                         Bagaimana kami mendampingi seller bertransformasi dari ketergantungan penuh menjadi pemilik
@@ -973,7 +976,7 @@
                                             <p class="text-zinc-300 text-sm mt-1">{{ $portfolio->problem }}</p>
                                         </div>
                                         <div>
-                                            <h4 class="text-xs font-bold text-indigo-400 uppercase">Solusi Trinova:</h4>
+                                            <h4 class="text-xs font-bold text-indigo-400 uppercase">Solusi Omset Digital:</h4>
                                             <p class="text-zinc-300 text-sm mt-1">{{ $portfolio->solution }}</p>
                                         </div>
                                     </div>
@@ -1026,7 +1029,7 @@
                                             bersih &amp; perang harga tiada akhir.</p>
                                     </div>
                                     <div>
-                                        <h4 class="text-xs font-bold text-indigo-400 uppercase">Solusi Trinova:</h4>
+                                        <h4 class="text-xs font-bold text-indigo-400 uppercase">Solusi Omset Digital:</h4>
                                         <p class="text-zinc-300 text-sm mt-1">Membangun website e-commerce brand sendiri
                                             &amp; setup kampanye retensi via WhatsApp broadcast.</p>
                                     </div>
@@ -1073,7 +1076,7 @@
                                             follow up &amp; tingkat repeat order rendah.</p>
                                     </div>
                                     <div>
-                                        <h4 class="text-xs font-bold text-indigo-400 uppercase">Solusi Trinova:</h4>
+                                        <h4 class="text-xs font-bold text-indigo-400 uppercase">Solusi Omset Digital:</h4>
                                         <p class="text-zinc-300 text-sm mt-1">Website e-commerce kustom terintegrasi
                                             WhatsApp CRM otomatis pasca-transaksi.</p>
                                     </div>
@@ -1120,7 +1123,7 @@
                                             &amp; akun rentan dibatasi kompetitor.</p>
                                     </div>
                                     <div>
-                                        <h4 class="text-xs font-bold text-indigo-400 uppercase">Solusi Trinova:</h4>
+                                        <h4 class="text-xs font-bold text-indigo-400 uppercase">Solusi Omset Digital:</h4>
                                         <p class="text-zinc-300 text-sm mt-1">Pengembangan website dengan audit arsitektur
                                             SEO super-cepat &amp; content strategy.</p>
                                     </div>
@@ -1155,7 +1158,7 @@
         SECTION 7: TESTIMONIALS & FAQ (Combined 50:50)
         ========================================================= --}}
         <section id="faq" class="py-24 relative overflow-hidden bg-zinc-900/10"
-            aria-label="Testimoni dan FAQ Trinova Digital">
+            aria-label="Testimoni dan FAQ Omset Digital">
             <div class="max-w-7xl mx-auto px-4 sm:px-6">
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-start">
@@ -1170,12 +1173,12 @@
                             </span>
                             <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4 font-heading" data-reveal
                                 data-delay="100">
-                                Pertanyaan <span
-                                    class="bg-gradient-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">Umum</span>
+                                Pertanyaan yang <span
+                                    class="bg-gradient-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">Sering Ditanyakan</span>
                             </h2>
                             <p class="text-zinc-400 text-sm leading-relaxed" data-reveal data-delay="150">
                                 Jawaban cepat mengenai estimasi waktu, kebutuhan teknis, dan langkah awal pengerjaan
-                                aset digital Anda.
+                                website e-commerce Anda.
                             </p>
                         </div>
 
@@ -1351,12 +1354,11 @@
                             </span>
                             <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4 font-heading" data-reveal
                                 data-delay="100">
-                                Meraih <span
-                                    class="bg-gradient-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">Kebebasan
-                                    Digital</span>
+                                Dari Ide Sampai <span
+                                    class="bg-gradient-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">Toko Online Siap Berjualan</span>
                             </h2>
                             <p class="text-zinc-400 text-sm leading-relaxed" data-reveal data-delay="150">
-                                Cerita nyata para pemilik bisnis yang sukses membangun aset digital mandiri dan lepas
+                                Cerita nyata para pemilik bisnis yang sukses membangun toko online mandiri dan lepas
                                 dari ketergantungan algoritma marketplace.
                             </p>
                         </div>
@@ -1377,8 +1379,8 @@
                                         <div x-show="activeIndex === {{ $index }}"
                                             x-transition:enter="transition ease-out duration-300"
                                             x-transition:enter-start="opacity-0 translate-x-6"
-                                            x-transition:enter-end="opacity-100 translate-x-0" class="space-y-6" @if($index > 0)
-                                            style="display: none;" @endif>
+                                            x-transition:enter-end="opacity-100 translate-x-0" class="space-y-6"
+                                            {!! $index > 0 ? 'style="display: none;"' : '' !!}>
                                             <div class="flex items-center gap-1 text-amber-400">
                                                 @for($i = 0; $i < $t->rating; $i++)
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -1421,7 +1423,7 @@
                                         </div>
                                         <blockquote class="text-sm sm:text-base text-zinc-200 leading-relaxed font-medium">
                                             "Sebelumnya kami pasrah dengan kenaikan biaya admin marketplace yang memotong
-                                            margin hingga 10%. Setelah dibikinkan website oleh Trinova, sekarang repeat
+                                            margin hingga 10%. Setelah dibikinkan website oleh Omset Digital, sekarang repeat
                                             order pelanggan langsung lari ke web. Kami menghemat puluhan juta rupiah tiap
                                             bulan!"
                                         </blockquote>
@@ -1453,7 +1455,7 @@
                                         </div>
                                         <blockquote class="text-sm sm:text-base text-zinc-200 leading-relaxed font-medium">
                                             "Masalah terbesar kami dulu adalah tidak tahu siapa pembeli kami karena data
-                                            diblokir. Berkat solusi CRM dari Trinova, kami punya database 15.000+ pelanggan
+                                            diblokir. Berkat solusi CRM dari Omset Digital, kami punya database 15.000+ pelanggan
                                             WhatsApp. Promo produk baru sekarang tinggal sekali klik tanpa bayar iklan!"
                                         </blockquote>
                                         <div class="flex items-center gap-4 border-t border-white/5 pt-4">
@@ -1485,7 +1487,7 @@
                                         </div>
                                         <blockquote class="text-sm sm:text-base text-zinc-200 leading-relaxed font-medium">
                                             "Akun toko kami di marketplace sempat dibekukan sepihak. Untung saat itu kami
-                                            sudah punya website mandiri dari Trinova. Bisnis tetap jalan, orderan tetap
+                                            sudah punya website mandiri dari Omset Digital. Bisnis tetap jalan, orderan tetap
                                             masuk, dan kami menyadari pentingnya memiliki rumah digital sendiri."
                                         </blockquote>
                                         <div class="flex items-center gap-4 border-t border-white/5 pt-4">
@@ -1583,12 +1585,12 @@
                         {{-- Headline --}}
                         <h2
                             class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-6 font-heading">
-                            {{ $setting->cta_title ?? 'Siap Lepas dari Ketergantungan Algoritma & Mulai Membangun Brand Mandiri Anda?' }}
+                            {{ $setting->cta_title ?? 'Sudah Saatnya Brand Anda Memiliki Rumah Sendiri di Internet.' }}
                         </h2>
 
                         {{-- Subheadline --}}
                         <p class="text-zinc-400 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-10">
-                            {{ $setting->cta_description ?? 'Dapatkan evaluasi eksklusif 1-on-1 bersama tim analis senior Trinova Digital secara gratis. Cari tahu di mana potensi kebocoran margin keuntungan bisnis Anda hari ini.' }}
+                            {{ $setting->cta_description ?? 'Dapatkan evaluasi eksklusif 1-on-1 bersama tim Omset Digital secara gratis. Cari tahu di mana potensi kebocoran margin keuntungan bisnis Anda hari ini.' }}
                         </p>
 
                         {{-- Action Button --}}
@@ -1596,7 +1598,7 @@
                             <a href="{{ route('audit.index') }}"
                                 class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-zinc-900 font-bold text-lg rounded-full shadow-2xl shadow-amber-500/25 transition-all duration-200 hover:-translate-y-1 w-full sm:w-auto justify-center"
                                 id="final-cta-btn">
-                                {{ $setting->cta_button_text ?? 'Konsultasikan Gratis Bisnis Anda' }}
+                                {{ $setting->cta_button_text ?? 'Konsultasi Gratis Sekarang' }}
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="2.5" stroke="currentColor" class="w-5 h-5" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"

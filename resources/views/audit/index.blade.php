@@ -1,6 +1,6 @@
 <x-layouts.app :seo="[
-    'title'       => 'Form Analisa Bisnis Gratis — Trinova Digital',
-    'description' => 'Isi data bisnis Anda untuk mendapatkan analisa eksklusif 1-on-1 bersama tim analis Trinova secara gratis.',
+    'title'       => 'Form Konsultasi & Analisa Toko Online — Omset Digital',
+    'description' => 'Isi data bisnis Anda untuk mendapatkan analisa dan konsultasi pembuatan website e-commerce 1-on-1 bersama tim Omset Digital secara gratis.',
     'canonical'   => route('audit.index'),
 ]">
 

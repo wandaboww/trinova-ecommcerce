@@ -1,5 +1,5 @@
 <x-layouts.app :seo="[
-    'title'       => $portfolio->title . ' — Studi Kasus Klien Trinova Digital',
+    'title'       => $portfolio->title . ' — Studi Kasus Klien Omset Digital',
     'description' => \Illuminate\Support\Str::limit(strip_tags($portfolio->problem), 160),
     'canonical'   => route('portfolio.show', $portfolio->slug),
 ]">
@@ -58,7 +58,7 @@
                     <div class="space-y-3 pt-6 border-t border-white/5">
                         <div class="flex items-center gap-2 text-indigo-400">
                             <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
-                            <h2 class="text-sm font-bold uppercase tracking-wider font-heading">Solusi Trinova Digital</h2>
+                            <h2 class="text-sm font-bold uppercase tracking-wider font-heading">Solusi Omset Digital</h2>
                         </div>
                         <div class="text-zinc-300 text-sm sm:text-base leading-relaxed pl-4 border-l border-indigo-500/20 whitespace-pre-line">
                             {!! nl2br(e($portfolio->solution)) !!}

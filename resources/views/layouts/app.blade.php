@@ -8,7 +8,7 @@
 
     {{-- SEO Meta --}}
     <title>{{ $seo['title'] ?? config('app.name') }}</title>
-    <meta name="description" content="{{ $seo['description'] ?? 'Partner transformasi digital untuk seller marketplace dan UMKM Indonesia.' }}" />
+    <meta name="description" content="{{ $seo['description'] ?? 'Omset Digital membantu UMKM dan seller membangun website e-commerce dan toko online milik sendiri.' }}" />
     @if(!empty($seo['canonical']))
         <link rel="canonical" href="{{ $seo['canonical'] }}" />
     @else

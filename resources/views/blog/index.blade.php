@@ -1,5 +1,5 @@
 <x-layouts.app :seo="[
-    'title'       => 'Blog & Wawasan Bisnis Digital — Trinova Digital',
+    'title'       => 'Blog & Wawasan Bisnis E-Commerce — Omset Digital',
     'description' => 'Temukan artikel edukasi, studi kasus, tips meningkatkan profit, menghindari perang harga, dan optimalisasi e-commerce.',
     'canonical'   => route('blog.index'),
 ]">
@@ -11,13 +11,13 @@
     "@@type": "BreadcrumbList",
     "itemListElement": [
         {
-            "@type": "ListItem",
+            "@@type": "ListItem",
             "position": 1,
             "name": "Beranda",
             "item": "{{ route('home') }}"
         },
         {
-            "@type": "ListItem",
+            "@@type": "ListItem",
             "position": 2,
             "name": "Blog",
             "item": "{{ route('blog.index') }}"
@@ -27,7 +27,7 @@
 </script>
 @endpush
 
-<section class="pt-32 pb-24 relative overflow-hidden" aria-label="Blog Trinova Digital">
+<section class="pt-32 pb-24 relative overflow-hidden" aria-label="Blog Omset Digital">
     
     {{-- Background Glows --}}
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(99,102,241,0.08),transparent)]"></div>
@@ -65,7 +65,7 @@
                                 <div>
                                     {{-- Placeholder / Dynamic Image --}}
                                     <div class="aspect-video bg-zinc-900 flex items-center justify-center border-b border-white/5 relative overflow-hidden">
-                                        @if($article->featured_image)
+                                        @if(!empty($article->featured_image))
                                             <img src="{{ asset($article->featured_image) }}" alt="{{ $article->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                         @else
                                             <div class="absolute inset-0 bg-gradient-to-br from-indigo-600/10 to-zinc-950/20"></div>

@@ -195,7 +195,7 @@
                     {{-- Document Footer Meta --}}
                     <div class="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-zinc-600">
                         <p>
-                            Dokumen ini adalah Kebijakan Privasi resmi Trinova Digital
+                            Dokumen ini adalah Kebijakan Privasi resmi Omset Digital
                             @if($document->version) · Versi {{ $document->version }} @endif
                         </p>
                         @if($document->effective_date)
@@ -213,7 +213,7 @@
     <section class="py-12 bg-zinc-950 border-t border-white/5" aria-label="Hubungi Kami">
         <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center">
             <p class="text-zinc-500 text-sm mb-3">Punya pertanyaan mengenai Kebijakan Privasi ini?</p>
-            <h2 class="text-xl font-bold text-zinc-200 mb-5">Hubungi Tim Trinova Digital</h2>
+            <h2 class="text-xl font-bold text-zinc-200 mb-5">Hubungi Tim Omset Digital</h2>
             <a href="{{ route('contact.index') }}"
                class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm rounded-xl shadow-lg shadow-indigo-500/20 transition-all hover:-translate-y-0.5 duration-200">
                 💬 Hubungi Kami
