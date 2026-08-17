@@ -56,7 +56,7 @@
                             class="text-sm text-zinc-500 hover:text-zinc-200 transition-colors"
                             id="footer-program-empire">Program EMPIRE</a></li>
                     @php
-                        $footerSetting = \App\Models\LandingSetting::first();
+                        $footerSetting = \App\Models\LandingSetting::getCached();
                     @endphp
                     <li><a href="{{ route('audit.index') }}"
                             class="text-sm text-zinc-500 hover:text-zinc-200 transition-colors"
@@ -102,8 +102,8 @@
                 <ul class="flex flex-col gap-3" role="list">
                     <li>
                         @php
-                            $footerGen = \App\Models\Setting::first();
-                            $footerLand = \App\Models\LandingSetting::first();
+                            $footerGen = \App\Models\Setting::getCached();
+                            $footerLand = \App\Models\LandingSetting::getCached();
                             $footerRawPhone = $footerGen->whatsapp ?? $footerGen->phone ?? config('app.whatsapp', '6281234567890');
                             $footerWaNum = preg_replace('/[^0-9]/', '', $footerRawPhone);
                             if (str_starts_with($footerWaNum, '0')) {

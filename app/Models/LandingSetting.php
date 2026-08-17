@@ -27,4 +27,24 @@ class LandingSetting extends Model
         'show_statistics'         => 'boolean',
         'show_whatsapp_float'     => 'boolean',
     ];
+
+    protected static function booted(): void
+    {
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('landing_setting');
+            \Illuminate\Support\Facades\Cache::forget('landing_page_data');
+        });
+
+        static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('landing_setting');
+            \Illuminate\Support\Facades\Cache::forget('landing_page_data');
+        });
+    }
+
+    public static function getCached(): ?self
+    {
+        return \Illuminate\Support\Facades\Cache::remember('landing_setting', 86400, function () {
+            return self::first();
+        });
+    }
 }

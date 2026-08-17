@@ -59,6 +59,10 @@ class LandingManagerController extends Controller
             ]
         );
 
+        \Illuminate\Support\Facades\Cache::forget('landing_page_data');
+        \Illuminate\Support\Facades\Cache::forget('landing_setting');
+        \Illuminate\Support\Facades\Cache::forget('site_setting');
+
         return redirect()->back()->with('success', 'Konten Landing Page berhasil diperbarui.');
     }
 }

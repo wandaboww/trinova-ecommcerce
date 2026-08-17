@@ -9,26 +9,24 @@ use App\Models\Faq;
 use App\Models\LandingSetting;
 
 use App\Models\Setting;
+use Illuminate\Support\Facades\Cache;
 
 class LandingController extends Controller
 {
     public function index()
     {
-        $programs = Program::active()->ordered()->get();
-        $portfolios = Portfolio::featured()->latest()->take(6)->get();
-        $testimonials = Testimonial::active()->ordered()->get();
-        $faqs = Faq::active()->ordered()->take(10)->get();
-        $setting = LandingSetting::first();
-        $generalSetting = Setting::first();
+        $data = Cache::remember('landing_page_data', 86400, function () {
+            return [
+                'programs'       => Program::active()->ordered()->get(),
+                'portfolios'     => Portfolio::featured()->latest()->take(6)->get(),
+                'testimonials'   => Testimonial::active()->ordered()->get(),
+                'faqs'           => Faq::active()->ordered()->take(10)->get(),
+                'setting'        => LandingSetting::first(),
+                'generalSetting' => Setting::first(),
+            ];
+        });
 
-        return view('landing.index', compact(
-            'programs',
-            'portfolios',
-            'testimonials',
-            'faqs',
-            'setting',
-            'generalSetting'
-        ));
+        return view('landing.index', $data);
     }
 
     public function seoShopee()

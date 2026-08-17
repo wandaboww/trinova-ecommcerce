@@ -41,18 +41,6 @@
                    id="nav-blog">Blog</a>
             </nav>
  
-            {{-- Desktop CTA --}}
-            <div class="hidden lg:flex items-center gap-3 shrink-0">
-                @php
-                    $navSetting = \App\Models\LandingSetting::first();
-                @endphp
-                <a href="{{ route('audit.index') }}"
-                   class="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-semibold text-sm rounded-full shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-200 hover:-translate-y-0.5"
-                   id="navbar-audit-cta">
-                    {{ $navSetting->hero_cta ?? 'Analisa Bisnis Gratis' }}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </a>
-            </div>
  
             {{-- Mobile Hamburger --}}
             <button @click="open = !open"
@@ -83,11 +71,7 @@
             <a href="{{ route('home') }}#portfolio" @click="open=false" class="px-4 py-3 text-sm font-medium text-zinc-400 hover:text-zinc-100 rounded-lg transition-colors" id="mobile-nav-portfolio">Portfolio</a>
             <a href="{{ route('home') }}#faq"      @click="open=false" class="px-4 py-3 text-sm font-medium text-zinc-400 hover:text-zinc-100 rounded-lg transition-colors" id="mobile-nav-faq">FAQ</a>
             <a href="{{ route('blog.index') }}"    @click="open=false" class="px-4 py-3 text-sm font-medium text-zinc-400 hover:text-zinc-100 rounded-lg transition-colors" id="mobile-nav-blog">Blog</a>
-            <a href="{{ route('audit.index') }}"
-               class="mt-2 px-4 py-3 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white font-semibold text-sm rounded-xl text-center"
-               id="mobile-audit-cta">
-                {{ $navSetting->hero_cta ?? 'Analisa Bisnis Gratis' }} →
-            </a>
+
         </nav>
 
     </div>

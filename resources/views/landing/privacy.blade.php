@@ -439,7 +439,7 @@
                             </p>
                             
                             @php
-                                $genSetting = \App\Models\Setting::first();
+                                $genSetting = \App\Models\Setting::getCached();
                                 $contactEmail = $genSetting->email ?? 'halo@trinova.id';
                                 $contactPhone = $genSetting->whatsapp ?? $genSetting->phone ?? '6281234567890';
                                 $waNum = preg_replace('/[^0-9]/', '', $contactPhone);

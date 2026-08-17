@@ -18,6 +18,17 @@ class Portfolio extends Model
         'published_at' => 'datetime',
     ];
 
+    protected static function booted(): void
+    {
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('landing_page_data');
+        });
+
+        static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('landing_page_data');
+        });
+    }
+
     public function scopeFeatured(Builder $query): Builder
     {
         return $query->where('is_featured', true)->whereNotNull('published_at');

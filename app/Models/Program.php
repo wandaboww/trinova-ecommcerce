@@ -23,6 +23,17 @@ class Program extends Model
         'topics'        => 'array',
     ];
 
+    protected static function booted(): void
+    {
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('landing_page_data');
+        });
+
+        static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('landing_page_data');
+        });
+    }
+
     public function getEffectiveTopicsAttribute()
     {
         if (is_array($this->topics) && count($this->topics) > 0) {

@@ -1,6 +1,6 @@
 @php
-    $general = \App\Models\Setting::first();
-    $landing = \App\Models\LandingSetting::first();
+    $general = \App\Models\Setting::getCached();
+    $landing = \App\Models\LandingSetting::getCached();
     $rawPhone = $general->whatsapp ?? $general->phone ?? config('app.whatsapp', '6281234567890');
     $waNumber = preg_replace('/[^0-9]/', '', $rawPhone);
     if (str_starts_with($waNumber, '0')) {

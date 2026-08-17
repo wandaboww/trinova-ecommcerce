@@ -16,6 +16,17 @@ class Faq extends Model
         'sort_order' => 'integer',
     ];
 
+    protected static function booted(): void
+    {
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('landing_page_data');
+        });
+
+        static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('landing_page_data');
+        });
+    }
+
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true);

@@ -382,7 +382,7 @@
                         Website untuk <span class="text-amber-400">Memiliki</span> Pelanggan.
                     </h2>
                     <p class="text-zinc-400 text-base sm:text-lg leading-relaxed" data-reveal data-delay="200">
-                        Gunakan marketplace sebagai <strong class="text-zinc-200">pintu masuk (akuisisi)</strong> pelanggan baru, arahkan mereka ke ekosistem <strong class="text-indigo-300">Website Mandiri Anda</strong>, bangun database WhatsApp mereka, dan nikmati repeat order dengan profit bersih 100%.
+                        Gunakan marketplace sebagai <strong class="text-zinc-200">pintu masuk (akuisisi)</strong> pelanggan baru, arahkan mereka ke ekosistem <strong class="text-[oklch(82.8%_0.189_84.429)]">Website Mandiri Anda</strong>, bangun database WhatsApp mereka, dan nikmati repeat order dengan profit bersih 100%.
                     </p>
                 </div>
 
@@ -456,7 +456,7 @@
                 <div class="mt-14 text-center" data-reveal data-delay="300">
                     <a href="{{ route('audit.index') }}"
                         class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm rounded-full transition-all duration-200 shadow-lg shadow-indigo-500/25">
-                        Konsultasi Strategi Gratis
+                        Konsultasi Gratis
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -697,14 +697,12 @@
                     </span>
                     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 font-heading"
                         data-reveal data-delay="100">
-                        Pilih Fase Transformasi<br />
+                        Naik Level Sesuai<br />
                         <span
-                            class="bg-gradient-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">Bisnis
-                            Anda</span>
+                            class="text-[oklch(82.8%_0.189_84.429)]">Pertumbuhan Bisnis Anda?</span>
                     </h2>
                     <p class="text-zinc-400 text-lg" data-reveal data-delay="200">
-                        Setiap fase bisnis memiliki tantangan berbeda. Pilih program akselerasi yang sesuai dengan skala
-                        bisnis Anda saat ini.
+                        Mulai dari toko online untuk brand baru hingga ekosistem e-commerce untuk bisnis berskala besar. Pilih fitur yang sesuai dengan kebutuhan Anda hari ini, dan siap berkembang ketika bisnis Anda naik level.
                     </p>
                 </div>
 
@@ -728,7 +726,7 @@
                                     </div>
                                     <div>
                                         <h3 class="text-xl font-bold text-zinc-100 mb-1 font-heading">{{ $program->title }}</h3>
-                                        <p class="text-xs text-indigo-400 font-medium">Target: {{ $program->target_market }}</p>
+                                        <p class="text-xs font-bold text-zinc-300 tracking-wider mb-4">Target: <span class="text-indigo-400 font-medium">{{ $program->target_market }}</span></p>
                                     </div>
                                 </div>
 
@@ -797,7 +795,7 @@
                                     </div>
                                     <div>
                                         <h3 class="text-xl font-bold text-zinc-100 mb-1 font-heading">START</h3>
-                                        <p class="text-xs text-indigo-400 font-medium">Target: Pemula / Brand Baru</p>
+                                        <p class="text-xs font-bold text-zinc-300 tracking-wider mb-4">Target: <span class="text-indigo-400 font-medium">Pemula / Brand Baru</span></p>
                                     </div>
                                 </div>
                                 <p class="text-zinc-400 text-sm leading-relaxed mb-6">Validasi produk dan buat funnel
@@ -833,7 +831,7 @@
                                     </div>
                                     <div>
                                         <h3 class="text-xl font-bold text-zinc-100 mb-1 font-heading">GROW</h3>
-                                        <p class="text-xs text-indigo-400 font-medium">Target: Seller Ingin Mandiri</p>
+                                        <p class="text-xs font-bold text-zinc-300 tracking-wider mb-4">Target: <span class="text-indigo-400 font-medium">Seller Ingin Mandiri</span></p>
                                     </div>
                                 </div>
                                 <p class="text-zinc-400 text-sm leading-relaxed mb-6">Mulai berpindah dari marketplace ke
@@ -865,7 +863,7 @@
                                     </div>
                                     <div>
                                         <h3 class="text-xl font-bold text-zinc-100 mb-1 font-heading">SCALE</h3>
-                                        <p class="text-xs text-indigo-400 font-medium">Target: Brand Ingin Tumbuh</p>
+                                        <p class="text-xs font-bold text-zinc-300 tracking-wider mb-4">Target: <span class="text-indigo-400 font-medium">Brand Ingin Tumbuh</span></p>
                                     </div>
                                 </div>
                                 <p class="text-zinc-400 text-sm leading-relaxed mb-6">Tingkatkan profit bisnis dengan
@@ -897,7 +895,7 @@
                                     </div>
                                     <div>
                                         <h3 class="text-xl font-bold text-zinc-100 mb-1 font-heading">EMPIRE</h3>
-                                        <p class="text-xs text-indigo-400 font-medium">Target: Penguasa Pasar / Enterprise</p>
+                                        <p class="text-xs font-bold text-zinc-300 tracking-wider mb-4">Target: <span class="text-indigo-400 font-medium">Penguasa Pasar / Enterprise</span></p>
                                     </div>
                                 </div>
                                 <p class="text-zinc-400 text-sm leading-relaxed mb-6">Membangun ekosistem ERP mandiri untuk

@@ -71,10 +71,10 @@ return [
             EnsureUploadedFilesCanBeMoved::class,
         ],
 
-        RequestReceived::class => [
+        RequestReceived::class => class_exists(Octane::class) ? [
             ...Octane::prepareApplicationForNextOperation(),
             ...Octane::prepareApplicationForNextRequest(),
-        ],
+        ] : [],
 
         RequestHandled::class => [
             //
@@ -84,17 +84,17 @@ return [
             FlushUploadedFiles::class,
         ],
 
-        TaskReceived::class => [
+        TaskReceived::class => class_exists(Octane::class) ? [
             ...Octane::prepareApplicationForNextOperation(),
-        ],
+        ] : [],
 
         TaskTerminated::class => [
             //
         ],
 
-        TickReceived::class => [
+        TickReceived::class => class_exists(Octane::class) ? [
             ...Octane::prepareApplicationForNextOperation(),
-        ],
+        ] : [],
 
         TickTerminated::class => [
             //
@@ -123,9 +123,9 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'warm' => [
+    'warm' => class_exists(Octane::class) ? [
         ...Octane::defaultServicesToWarm(),
-    ],
+    ] : [],
 
     'flush' => [
         //

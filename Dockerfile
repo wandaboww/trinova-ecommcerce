@@ -62,7 +62,8 @@ RUN mkdir -p storage/framework/{views,sessions,cache} \
              bootstrap/cache \
              database \
  && chown -R www-data:www-data storage bootstrap/cache database \
- && chmod -R 775 storage bootstrap/cache
+ && chmod -R 775 storage bootstrap/cache \
+ && ln -sf /usr/local/bin/frankenphp /var/www/html/frankenphp
 
 EXPOSE 8000
 
