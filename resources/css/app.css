@@ -115,6 +115,43 @@
     list-style-type: decimal !important;
 }
 
+/* Quill emits nested list items as siblings with ql-indent-N classes,
+   not as child <ul>/<ol>. Restore correct marker types per indent level. */
+.prose ol > li.ql-indent-1,
+.prose ol > li.ql-indent-3,
+.prose ol > li.ql-indent-5,
+.prose ol > li.ql-indent-7,
+.prose ol > li.ql-indent-9 {
+    list-style-type: circle !important;
+    margin-left: 1.5rem !important;
+}
+
+.prose ol > li.ql-indent-2,
+.prose ol > li.ql-indent-4,
+.prose ol > li.ql-indent-6,
+.prose ol > li.ql-indent-8 {
+    list-style-type: square !important;
+    margin-left: 3rem !important;
+}
+
+/* Nested bullet items inside a bullet list */
+.prose ul > li.ql-indent-1,
+.prose ul > li.ql-indent-3,
+.prose ul > li.ql-indent-5,
+.prose ul > li.ql-indent-7,
+.prose ul > li.ql-indent-9 {
+    list-style-type: circle !important;
+    margin-left: 1.5rem !important;
+}
+
+.prose ul > li.ql-indent-2,
+.prose ul > li.ql-indent-4,
+.prose ul > li.ql-indent-6,
+.prose ul > li.ql-indent-8 {
+    list-style-type: square !important;
+    margin-left: 3rem !important;
+}
+
 .prose li {
     margin-bottom: 0.5rem !important;
 }
