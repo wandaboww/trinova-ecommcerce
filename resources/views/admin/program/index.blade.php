@@ -1,5 +1,54 @@
 <x-layouts.admin :title="'Kelola Program — CMS Admin'" :headerTitle="'Kelola Program Akselerasi Bisnis'">
 
+    {{-- Quill Rich Text Editor Style --}}
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+    <style>
+        .ql-toolbar.ql-snow {
+            border-color: #27272a !important;
+            background-color: #18181b !important;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+        }
+        .ql-container.ql-snow {
+            border-color: #27272a !important;
+            background-color: #09090b !important;
+            border-bottom-left-radius: 0.75rem;
+            border-bottom-right-radius: 0.75rem;
+            height: 200px !important;
+            overflow-y: auto;
+        }
+        .ql-snow .ql-stroke { stroke: #a1a1aa !important; }
+        .ql-snow .ql-fill  { fill:   #a1a1aa !important; }
+        .ql-snow .ql-picker { color: #a1a1aa !important; }
+        .ql-snow .ql-picker-options {
+            background-color: #18181b !important;
+            border-color: #27272a !important;
+        }
+        .ql-editor {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            color: #d4d4d8 !important;
+            font-size: 0.875rem !important;
+            line-height: 1.75 !important;
+            background-color: #09090b !important;
+        }
+        .ql-editor p { margin-bottom: 1rem !important; }
+        .ql-editor h1, .ql-editor h2, .ql-editor h3 {
+            color: #f4f4f5 !important;
+            font-weight: 800 !important;
+            margin-top: 1.25rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        .ql-editor h1 { font-size: 1.5rem !important; }
+        .ql-editor h2 { font-size: 1.25rem !important; }
+        .ql-editor h3 { font-size: 1.1rem !important; }
+        .ql-editor ul, .ql-editor ol {
+            margin-bottom: 1rem !important;
+            padding-left: 1.5rem !important;
+        }
+        .ql-editor ul { list-style-type: disc !important; }
+        .ql-editor ol { list-style-type: decimal !important; }
+    </style>
+
     @if(session('success'))
         <div
             class="mb-6 px-5 py-4 bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-semibold rounded-xl">
@@ -197,6 +246,7 @@
                  programsMap: {{ Js::from($programs->keyBy('id')->map(function ($p) {
     return ['id' => $p->id, 'title' => $p->title, 'topics' => $p->effective_topics]; })) }},
                  topicItems: [],
+                 quillInstances: {},
 
                  initTopics() {
                      if (this.selectedProgramId && this.programsMap[this.selectedProgramId]) {
@@ -272,15 +322,62 @@
                      }
                  },
                  onProgramChange() {
+                     this.destroyAllTopicQuills();
                      this.initTopics();
+                     this.$nextTick(() => this.reloadTopicQuills());
                  },
                  addTopicRow() {
                      this.topicItems.push({ key: 'topic_' + (this.topicItems.length + 1), icon: '💡', title: '', subtitle: '', content: '', custom_class: '' });
                  },
                  removeTopicRow(i) {
                      if (this.topicItems.length > 1) {
+                         if (this.quillInstances[i]) {
+                             this.quillInstances[i] = null;
+                             delete this.quillInstances[i];
+                         }
                          this.topicItems.splice(i, 1);
                      }
+                 },
+                 destroyAllTopicQuills() {
+                     Object.keys(this.quillInstances).forEach(k => {
+                         this.quillInstances[k] = null;
+                         delete this.quillInstances[k];
+                     });
+                 },
+                 reloadTopicQuills() {
+                     this.topicItems.forEach((item, i) => {
+                         if (item.key === 'specs' || item.key === 'features') return;
+                         const containerId = 'topic-quill-' + i;
+                         const inputId = 'topic-content-input-' + i;
+                         const container = document.getElementById(containerId);
+                         if (!container || !window.Quill) return;
+                         if (this.quillInstances[i]) {
+                             // Instance exists (reused DOM node): just update content
+                             this.quillInstances[i].root.innerHTML = item.content || '';
+                             const inp = document.getElementById(inputId);
+                             if (inp) inp.value = item.content || '';
+                             return;
+                         }
+                         // Fresh init (new DOM node added by addTopicRow or first load)
+                         const q = new Quill(container, {
+                             theme: 'snow',
+                             placeholder: 'Konten / narasi topik ini...'
+                         });
+                         q.root.innerHTML = item.content || '';
+                         q.on('text-change', () => {
+                             const html = q.root.innerHTML;
+                             item.content = html;
+                             const inp = document.getElementById(inputId);
+                             if (inp) inp.value = html;
+                         });
+                         this.quillInstances[i] = q;
+                     });
+                 },
+                 initTopicQuill(i, item) {
+                     // Called via x-init when Alpine first mounts this node.
+                     // Skip if already managed (reloadTopicQuills handles the rest).
+                     if (this.quillInstances[i]) return;
+                     this.$nextTick(() => this.reloadTopicQuills());
                  }
              }" x-init="initTopics()">
 
@@ -428,13 +525,12 @@
                                     <input type="hidden" :name="'topic_content[' + i + ']'" :value="item.content">
                                 </div>
                             </template>
-                            {{-- Generic topic content (non-specs, non-features) --}}
+                            {{-- Generic topic content (non-specs, non-features) — Quill editor --}}
                             <template x-if="item.key !== 'specs' && item.key !== 'features'">
-                                <div>
+                                <div x-init="$nextTick(() => initTopicQuill(i, item))">
                                     <label class="block text-[10px] font-bold text-zinc-500 uppercase mb-1">Konten Topik</label>
-                                    <textarea :name="'topic_content[' + i + ']'" x-model="item.content" rows="3"
-                                        placeholder="Konten / narasi topik ini..."
-                                        class="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 focus:border-indigo-500/50 rounded-xl text-zinc-100 text-xs resize-none transition-colors"></textarea>
+                                    <input type="hidden" :name="'topic_content[' + i + ']'" :id="'topic-content-input-' + i" :value="item.content">
+                                    <div :id="'topic-quill-' + i" class="rounded-xl"></div>
                                 </div>
                             </template>
 
@@ -851,5 +947,7 @@
         </div>
 
     </div>
+    {{-- Quill Rich Text Editor Script --}}
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
 
 </x-layouts.admin>

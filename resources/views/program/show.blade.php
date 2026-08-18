@@ -237,9 +237,14 @@
                     <h3 class="text-xl font-extrabold text-zinc-100 font-heading flex items-center gap-2">
                         <span>📖</span> Penjelasan Detail Program
                     </h3>
-                    <p class="text-zinc-300 text-sm sm:text-base leading-relaxed font-normal whitespace-pre-line">
-                        {{ collect($topics)->firstWhere('key', 'overview')['content'] ?? $program->description }}
-                    </p>
+                    @php $overviewContent = collect($topics)->firstWhere('key', 'overview')['content'] ?? $program->description; @endphp
+                    @if(!empty($overviewContent))
+                        <div class="prose max-w-none">
+                            {!! $overviewContent !!}
+                        </div>
+                    @else
+                        <p class="text-zinc-400 text-sm italic">Belum ada deskripsi detail untuk program ini.</p>
+                    @endif
                 </div>
 
             </div>
@@ -415,9 +420,13 @@
                                     <p class="text-xs text-zinc-400 mt-1">{{ $t['subtitle'] }}</p>
                                 @endif
                             </div>
-                            <div class="text-zinc-300 text-sm sm:text-base leading-relaxed whitespace-pre-line">
-                                {{ $t['content'] ?? 'Belum ada deskripsi konten tambahan untuk topik ini.' }}
-                            </div>
+                            @if(!empty($t['content']))
+                                <div class="prose max-w-none">
+                                    {!! $t['content'] !!}
+                                </div>
+                            @else
+                                <p class="text-zinc-400 text-sm italic">Belum ada deskripsi konten tambahan untuk topik ini.</p>
+                            @endif
                         </div>
                     </div>
                 @endif

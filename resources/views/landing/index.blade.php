@@ -751,8 +751,9 @@
 
                                     @if(!empty($program->outcome))
                                         <div class="border-t border-white/5 pt-6">
-                                            <p class="text-xs font-bold text-zinc-300 uppercase tracking-wider mb-4">Benefit
-                                                Platform:</p>
+                                            <p class="text-xs font-bold text-zinc-300 uppercase tracking-wider mb-4">
+                                                Cocok Untuk:
+                                            </p>
                                             <ul class="space-y-2.5">
                                                 @if(is_array($program->outcome))
                                                     @foreach($program->outcome as $item)
