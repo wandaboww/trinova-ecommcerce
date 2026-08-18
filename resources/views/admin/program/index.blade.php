@@ -27,7 +27,11 @@
             spec_warranty: '',
             spec_speed: '',
             spec_support: '',
-            spec_license: ''
+            spec_license: '',
+            original_price: '',
+            current_price: '',
+            is_active: true,
+            icon: ''
         },
 
         addOutcomeItems: [{ icon: 'check', text: '', custom_class: '' }],
@@ -65,7 +69,7 @@
                 <p class="text-xs text-zinc-500 mt-1">Kelola paket program akselerasi bisnis yang ditampilkan di halaman
                     utama.</p>
             </div>
-            <button @click="showAddModal = true; addOutcomeItems = [{ icon: 'check', text: '' }];"
+            <button @click="showAddModal = true; addOutcomeItems = [{ icon: 'check', text: '', custom_class: '' }];"
                 class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow transition-all hover:-translate-y-0.5 duration-200">
                 + Tambah Program
             </button>
@@ -167,7 +171,9 @@
                                                                 spec_support: {{ Js::from($prog->spec_support) }},
                                                                 spec_license: {{ Js::from($prog->spec_license) }},
                                                                 original_price: {{ Js::from($prog->original_price) }},
-                                                                current_price: {{ Js::from($prog->current_price) }}
+                                                                current_price: {{ Js::from($prog->current_price) }},
+                                                                is_active: {{ $prog->is_active ? 'true' : 'false' }},
+                                                                icon: {{ Js::from($prog->icon) }}
                                                             })"
                             class="flex-1 text-center py-2 bg-zinc-900 border border-zinc-800 hover:border-indigo-500/40 text-zinc-300 hover:text-white text-[10px] font-bold rounded-lg transition-all">
                             Edit
@@ -422,9 +428,16 @@
                                     <input type="hidden" :name="'topic_content[' + i + ']'" :value="item.content">
                                 </div>
                             </template>
+                            {{-- Generic topic content (non-specs, non-features) --}}
+                            <template x-if="item.key !== 'specs' && item.key !== 'features'">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-zinc-500 uppercase mb-1">Konten Topik</label>
+                                    <textarea :name="'topic_content[' + i + ']'" x-model="item.content" rows="3"
+                                        placeholder="Konten / narasi topik ini..."
+                                        class="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 focus:border-indigo-500/50 rounded-xl text-zinc-100 text-xs resize-none transition-colors"></textarea>
+                                </div>
+                            </template>
 
-
-                        </div>
                     </template>
                 </div>
 
@@ -486,6 +499,13 @@
                             <input type="text" name="target_market" placeholder="cth: Pemula / Brand Baru" required
                                 class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
                         </div>
+
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Ikon Program (Opsional)</label>
+                            <input type="text" name="icon" placeholder="cth: 🚀 atau nama-ikon"
+                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
+                        </div>
+
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
@@ -594,6 +614,28 @@
                             </div>
                         </div>
 
+                        {{-- Deskripsi Panjang --}}
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Deskripsi Lengkap (Opsional)</label>
+                            <textarea name="description" rows="3" placeholder="Deskripsi lengkap program, ditampilkan di halaman detail..."
+                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors resize-none"></textarea>
+                        </div>
+
+                        {{-- Status Aktif --}}
+                        <div class="flex items-center justify-between px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl">
+                            <div>
+                                <p class="text-xs font-bold text-gray-300">Status Program</p>
+                                <p class="text-[10px] text-gray-500 mt-0.5">Program aktif akan tampil di halaman utama.</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="hidden" name="is_active" value="0">
+                                <input type="checkbox" name="is_active" value="1" checked
+                                    class="sr-only peer">
+                                <div class="w-9 h-5 bg-zinc-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-4 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
+                            </label>
+                        </div>
+
+
 
 
                         <div class="flex justify-end gap-3 pt-2 border-t border-gray-700">
@@ -654,6 +696,14 @@
                             <input type="text" name="target_market" x-model="activeProgram.target_market" required
                                 class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                         </div>
+
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Ikon Program (Opsional)</label>
+                            <input type="text" name="icon" x-model="activeProgram.icon"
+                                placeholder="cth: 🚀 atau nama-ikon"
+                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors">
+                        </div>
+
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
@@ -764,7 +814,29 @@
                             </div>
                         </div>
 
+                        {{-- Deskripsi Panjang --}}
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Deskripsi Lengkap (Opsional)</label>
+                            <textarea name="description" rows="3" x-ref="editLongDescription"
+                                placeholder="Deskripsi lengkap program, ditampilkan di halaman detail..."
+                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm placeholder-gray-500 focus:outline-none transition-colors resize-none"></textarea>
+                        </div>
 
+                        {{-- Status Aktif --}}
+                        <div class="flex items-center justify-between px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl">
+                            <div>
+                                <p class="text-xs font-bold text-gray-300">Status Program</p>
+                                <p class="text-[10px] text-gray-500 mt-0.5">Program aktif akan tampil di halaman utama.</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="hidden" name="is_active" value="0">
+                                <input type="checkbox" name="is_active" value="1"
+                                    :checked="activeProgram.is_active"
+                                    @change="activeProgram.is_active = $event.target.checked"
+                                    class="sr-only peer">
+                                <div class="w-9 h-5 bg-zinc-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-4 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
+                            </label>
+                        </div>
 
                         <div class="flex justify-end gap-3 pt-2 border-t border-gray-700">
                             <button type="button" @click="showEditModal = false"
