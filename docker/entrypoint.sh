@@ -6,14 +6,19 @@ cd /var/www/html
 mkdir -p storage/framework/{views,sessions,cache} \
          storage/logs \
          storage/app/{private,public} \
-         bootstrap/cache
+         bootstrap/cache \
+         /data
 
-chown -R www-data:www-data storage bootstrap/cache
+chown -R www-data:www-data storage bootstrap/cache /data
+chmod -R 775 storage bootstrap/cache /data
 
-if [ ! -f database/database.sqlite ]; then
-    touch database/database.sqlite
-    chown www-data:www-data database/database.sqlite
-    echo "[entrypoint] Created fresh database/database.sqlite"
+DB_FILE="${DB_DATABASE:-/data/database.sqlite}"
+
+if [ ! -f "$DB_FILE" ]; then
+    touch "$DB_FILE"
+    chown www-data:www-data "$DB_FILE"
+    chmod 664 "$DB_FILE"
+    echo "[entrypoint] Created fresh $DB_FILE"
 fi
 
 php artisan config:cache

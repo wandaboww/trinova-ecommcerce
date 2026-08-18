@@ -25,7 +25,6 @@ RUN composer install \
     --ignore-platform-reqs \
     --no-scripts
 
-
 FROM dunglas/frankenphp:latest-php8.2-alpine
 
 LABEL org.opencontainers.image.title="Trinova Digital"
@@ -61,8 +60,9 @@ RUN mkdir -p storage/framework/{views,sessions,cache} \
              storage/app/{private,public} \
              bootstrap/cache \
              database \
- && chown -R www-data:www-data storage bootstrap/cache database \
- && chmod -R 775 storage bootstrap/cache \
+             /data \
+ && chown -R www-data:www-data storage bootstrap/cache database /data \
+ && chmod -R 775 storage bootstrap/cache /data \
  && ln -sf /usr/local/bin/frankenphp /var/www/html/frankenphp
 
 EXPOSE 8000
