@@ -245,5 +245,7 @@ class DatabaseSeeder extends Seeder
                 'user_id' => 1,
             ]
         );
+
+        $this->call(LegalDocumentSeeder::class);
     }
 }
