@@ -83,6 +83,10 @@
             icon: ''
         },
 
+        empirePriceText: '',
+        empirePriceAlign: 'left',
+        empirePriceSize: 'text-2xl',
+
         addOutcomeItems: [{ icon: 'check', text: '', custom_class: '' }],
         editOutcomeItems: [],
 
@@ -96,6 +100,27 @@
 
         openEdit(data) {
             this.activeProgram = data;
+            
+            // Inisialisasi default
+            this.empirePriceText = '';
+            this.empirePriceAlign = 'left';
+            this.empirePriceSize = 'text-2xl';
+
+            if (data.slug === 'empire' && data.current_price) {
+                try {
+                    let parsed = JSON.parse(data.current_price);
+                    if (parsed && typeof parsed === 'object') {
+                        this.empirePriceText = parsed.text || '';
+                        this.empirePriceAlign = parsed.align || 'left';
+                        this.empirePriceSize = parsed.size || 'text-2xl';
+                    } else {
+                        this.empirePriceText = data.current_price;
+                    }
+                } catch(e) {
+                    this.empirePriceText = data.current_price;
+                }
+            }
+
             try {
                 let parsed = typeof data.outcome === 'string' ? JSON.parse(data.outcome) : data.outcome;
                 this.editOutcomeItems = Array.isArray(parsed) && parsed.length > 0
@@ -145,33 +170,51 @@
                     }
                 @endphp
                 <div
-                    class="bg-zinc-950 border border-zinc-900 hover:border-indigo-500/30 rounded-2xl p-5 transition-all relative group flex flex-col justify-between">
+                    class="bg-zinc-900 border border-zinc-800 hover:border-indigo-500/40 rounded-3xl p-6 transition-all duration-300 relative group flex flex-col justify-between hover:-translate-y-1 hover:shadow-2xl hover:shadow-indigo-500/5">
                     @if($prog->is_best_value)
                         <span
-                            class="absolute -top-2.5 left-4 px-3 py-0.5 bg-indigo-600 text-[10px] font-bold rounded-full text-white uppercase tracking-wider">Recommended</span>
+                            class="absolute -top-3 left-6 px-3 py-1 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full text-[9px] font-extrabold text-white uppercase tracking-wider shadow-lg shadow-indigo-500/20">Recommended</span>
                     @endif
                     <div>
-                        <div class="flex items-center gap-3 mb-2">
+                        <div class="flex items-center gap-3.5 mb-5">
                             <div
-                                class="w-10 h-10 bg-indigo-500/10 border border-indigo-500/20 rounded-xl flex shrink-0 items-center justify-center font-extrabold text-indigo-400 text-sm">
+                                class="w-12 h-12 bg-zinc-950 border border-zinc-850 rounded-2xl flex shrink-0 items-center justify-center font-extrabold text-indigo-400 text-base shadow-inner">
                                 {{ strtoupper($prog->title[0]) }}
                             </div>
                             <div>
-                                <h3 class="font-extrabold text-zinc-100 text-base leading-tight">{{ $prog->title }}</h3>
-                                <p class="text-[10px] text-indigo-400 font-semibold mt-0.5">Target:
-                                    {{ $prog->target_market }}</p>
+                                <h3 class="font-bold text-zinc-100 text-base leading-tight tracking-tight">{{ $prog->title }}</h3>
+                                <p class="text-[10px] text-zinc-400 font-semibold mt-1 flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+                                    {{ $prog->target_market }}
+                                </p>
                             </div>
                         </div>
 
                         @if($prog->current_price || $prog->original_price)
+                            @php
+                                $priceText = $prog->current_price;
+                                $isJson = false;
+                                if (!empty($prog->current_price)) {
+                                    $decoded = json_decode($prog->current_price, true);
+                                    if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                                        $isJson = true;
+                                        $priceText = $decoded['text'] ?? '';
+                                    }
+                                }
+                            @endphp
+                            <div class="border-t border-zinc-850 my-4"></div>
                             <div class="flex items-baseline gap-2 mb-4 px-1">
                                 @if($prog->original_price)
                                     <span
-                                        class="text-xs text-zinc-500 line-through decoration-zinc-500/50">{{ $prog->original_price }}</span>
+                                        class="text-xs text-zinc-500 line-through decoration-zinc-600">{{ $prog->original_price }}</span>
                                 @endif
                                 @if($prog->current_price)
-                                    <span class="font-bold text-emerald-400">
-                                        {!! preg_replace('/^(Rp\s*)/i', '<span class="text-xs font-semibold">$1</span><span class="text-lg font-black">', e($prog->current_price)) !!}{!! preg_match('/^(Rp\s*)/i', $prog->current_price) ? '</span>' : '' !!}
+                                    <span class="font-black text-emerald-400 text-lg tracking-tight">
+                                        @if($isJson)
+                                            {{ $priceText }}
+                                        @else
+                                            {!! preg_replace('/^(Rp\s*)/i', '<span class="text-xs font-semibold">$1</span><span class="text-lg font-black">', e($prog->current_price)) !!}{!! preg_match('/^(Rp\s*)/i', $prog->current_price) ? '</span>' : '' !!}
+                                        @endif
                                     </span>
                                 @endif
                             </div>
@@ -179,34 +222,35 @@
                             <div class="mb-4"></div>
                         @endif
 
-                        <ul class="space-y-1.5 mb-4">
+                        <div class="border-t border-zinc-850 my-4"></div>
+                        <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-3">Target Pencapaian:</p>
+                        <ul class="space-y-2 mb-5">
                             @foreach($outcomeItems as $item)
-                                <li class="flex items-start gap-1.5 text-[11px] text-zinc-400 leading-relaxed">
+                                <li class="flex items-start gap-2.5 text-xs text-zinc-400 leading-relaxed">
                                     @if(($item['icon'] ?? 'check') === 'check')
-                                        <span class="text-green-400 mt-0.5 shrink-0">✓</span>
+                                        <span class="w-5 h-5 rounded-lg bg-green-500/10 border border-green-500/20 text-green-400 flex items-center justify-center shrink-0 text-[10px] font-bold">✓</span>
                                     @else
-                                        <span class="text-red-400 mt-0.5 shrink-0">✗</span>
+                                        <span class="w-5 h-5 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center shrink-0 text-[10px] font-bold">✗</span>
                                     @endif
-                                    {{ $item['text'] ?? '' }}
+                                    <span class="pt-0.5">{{ $item['text'] ?? '' }}</span>
                                 </li>
                             @endforeach
                         </ul>
 
                         {{-- Toggle Best Value / Recommended --}}
-                        <div class="border-t border-zinc-900 pt-3 mt-2 mb-4 flex items-center justify-between">
-                            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Mark
-                                Recommended</span>
+                        <div class="border-t border-zinc-850 pt-4 mt-2 mb-5 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Mark Recommended</span>
                             <form action="{{ route('admin.program.toggle-best-value', $prog->id) }}" method="POST">
                                 @csrf
                                 <button type="submit"
-                                    class="relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none {{ $prog->is_best_value ? 'bg-indigo-600' : 'bg-zinc-800' }}">
+                                    class="relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border border-zinc-800 transition-colors duration-200 ease-in-out focus:outline-none {{ $prog->is_best_value ? 'bg-indigo-600' : 'bg-zinc-800' }}">
                                     <span
-                                        class="pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out {{ $prog->is_best_value ? 'translate-x-4' : 'translate-x-0' }}"></span>
+                                        class="pointer-events-none inline-block h-3 w-3 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out mt-[2px] ml-[2px] {{ $prog->is_best_value ? 'translate-x-4' : 'translate-x-0' }}"></span>
                                 </button>
                             </form>
                         </div>
                     </div>
-                    <div class="flex gap-2 mt-auto">
+                    <div class="flex gap-2.5 mt-auto pt-2">
                         <button @click="openEdit({
                                                                 id: '{{ $prog->id }}',
                                                                 title: {{ Js::from($prog->title) }},
@@ -224,7 +268,7 @@
                                                                 is_active: {{ $prog->is_active ? 'true' : 'false' }},
                                                                 icon: {{ Js::from($prog->icon) }}
                                                             })"
-                            class="flex-1 text-center py-2 bg-zinc-900 border border-zinc-800 hover:border-indigo-500/40 text-zinc-300 hover:text-white text-[10px] font-bold rounded-lg transition-all">
+                            class="flex-1 text-center py-2.5 bg-zinc-950 border border-zinc-850 hover:border-indigo-500/30 hover:bg-zinc-900 text-zinc-300 hover:text-indigo-400 text-xs font-bold rounded-xl transition-all duration-200 shadow-sm">
                             Edit
                         </button>
                         <form action="{{ route('admin.program.destroy', $prog->id) }}" method="POST" class="flex-1"
@@ -232,7 +276,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit"
-                                class="w-full py-2 bg-zinc-900 border border-red-500/10 hover:border-red-500/40 text-red-400 hover:text-red-300 text-[10px] font-bold rounded-lg transition-all">Hapus</button>
+                                class="w-full py-2.5 bg-zinc-950 border border-zinc-850 hover:border-red-500/30 hover:bg-zinc-900 text-red-400 hover:text-red-300 text-xs font-bold rounded-xl transition-all duration-200 shadow-sm">Hapus</button>
                         </form>
                     </div>
                 </div>
@@ -801,12 +845,13 @@
                         </div>
 
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" x-show="activeProgram.slug !== 'empire'">
                             <div>
                                 <label
                                     class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Harga
                                     Coret (Opsional)</label>
                                 <input type="text" name="original_price" x-model="activeProgram.original_price"
+                                    :disabled="activeProgram.slug === 'empire'"
                                     placeholder="cth: Rp 5.000.000"
                                     @input="let val = $event.target.value.replace(/[^0-9]/g, ''); activeProgram.original_price = val ? 'Rp ' + val.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';"
                                     class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
@@ -816,10 +861,48 @@
                                     class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Harga
                                     Saat Ini</label>
                                 <input type="text" name="current_price" x-model="activeProgram.current_price"
+                                    :disabled="activeProgram.slug === 'empire'"
                                     placeholder="cth: Rp 3.500.000"
                                     @input="let val = $event.target.value.replace(/[^0-9]/g, ''); activeProgram.current_price = val ? 'Rp ' + val.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';"
                                     class="w-full px-4 py-3 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
                             </div>
+                        </div>
+
+                        <div x-show="activeProgram.slug === 'empire'" class="space-y-4">
+                            <label class="block text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Teks Kustom Pricing Tier (Empire)</label>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="md:col-span-1">
+                                    <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Teks Harga</label>
+                                    <input type="text" x-model="empirePriceText"
+                                        placeholder="cth: Prioritas Eksekutif"
+                                        class="w-full px-4 py-2.5 bg-gray-700 border border-gray-600 focus:border-blue-400 rounded-xl text-gray-100 text-sm focus:outline-none transition-colors">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Perataan (Alignment)</label>
+                                    <div class="flex border border-gray-600 rounded-xl overflow-hidden bg-gray-700 h-[42px] items-center">
+                                        <button type="button" @click="empirePriceAlign = 'left'" :class="empirePriceAlign === 'left' ? 'bg-blue-600 text-white font-bold' : 'text-gray-400 hover:text-white hover:bg-gray-600'" class="flex-1 h-full text-[10px] uppercase tracking-wider transition-colors">Kiri</button>
+                                        <button type="button" @click="empirePriceAlign = 'center'" :class="empirePriceAlign === 'center' ? 'bg-blue-600 text-white font-bold' : 'text-gray-400 hover:text-white hover:bg-gray-600'" class="flex-1 h-full text-[10px] uppercase tracking-wider transition-colors">Tengah</button>
+                                        <button type="button" @click="empirePriceAlign = 'right'" :class="empirePriceAlign === 'right' ? 'bg-blue-600 text-white font-bold' : 'text-gray-400 hover:text-white hover:bg-gray-600'" class="flex-1 h-full text-[10px] uppercase tracking-wider transition-colors">Kanan</button>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Ukuran Font (Size)</label>
+                                    <select x-model="empirePriceSize" class="w-full px-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-100 text-sm rounded-xl focus:outline-none focus:border-blue-400 h-[42px]">
+                                        <option value="text-sm">Kecil (sm)</option>
+                                        <option value="text-base">Normal (base)</option>
+                                        <option value="text-lg">Besar (lg)</option>
+                                        <option value="text-xl">Sangat Besar (xl)</option>
+                                        <option value="text-2xl">2XL</option>
+                                        <option value="text-3xl">3XL</option>
+                                        <option value="text-4xl">4XL</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <input type="hidden" name="current_price" :value="JSON.stringify({ text: empirePriceText, align: empirePriceAlign, size: empirePriceSize })" :disabled="activeProgram.slug !== 'empire'">
+                            <input type="hidden" name="original_price" value="" :disabled="activeProgram.slug !== 'empire'">
                         </div>
 
                         {{-- Outcome List Builder (Edit) --}}

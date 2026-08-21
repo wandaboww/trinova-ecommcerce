@@ -729,23 +729,59 @@
                                 </div>
 
                                 @if($program->current_price || $program->original_price)
-                                    <div class="flex flex-col gap-1 mb-4">
-                                        @if($program->original_price)
-                                            <div class="relative inline-block w-max">
-                                                <span class="text-2xl font-semibold text-zinc-500">Rp {{ $program->original_price }}</span>
-                                                <div class="absolute left-[-5%] top-1/2 w-[110%] h-[3px] bg-red-500/80 -translate-y-1/2 -rotate-12 origin-center pointer-events-none rounded-full"></div>
-                                            </div>
-                                        @endif
-                                        @if($program->current_price)
-                                            <div class="flex items-baseline gap-2">
-                                                <span class="text-zinc-300 font-semibold text-xl">Rp</span>
-                                                <span class="text-4xl xl:text-4xl font-black text-emerald-400 tracking-tight">
-                                                    {{ trim(preg_replace('/^(Rp\s*)/i', '', $program->current_price)) }}
-                                                </span>
-                                            </div>
-                                        @endif
-                                    </div>
-                                @endif
+                                     @php
+                                         $priceText = $program->current_price;
+                                         $priceAlign = 'left';
+                                         $priceSize = 'text-2xl';
+                                         $isJson = false;
+
+                                         if (!empty($program->current_price)) {
+                                             $decoded = json_decode($program->current_price, true);
+                                             if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                                                 $isJson = true;
+                                                 $priceText = $decoded['text'] ?? '';
+                                                 $priceAlign = $decoded['align'] ?? 'left';
+                                                 $priceSize = $decoded['size'] ?? 'text-2xl';
+                                             }
+                                         }
+                                     @endphp
+                                     <div class="flex flex-col gap-1 mb-4 w-full">
+                                         @if($program->original_price)
+                                             <div class="relative inline-block w-max">
+                                                 <span class="text-2xl font-semibold text-zinc-500">Rp {{ trim(preg_replace('/^(Rp\s*)/i', '', $program->original_price)) }}</span>
+                                                 <div class="absolute left-[-5%] top-1/2 w-[110%] h-[3px] bg-red-500/80 -translate-y-1/2 -rotate-12 origin-center pointer-events-none rounded-full"></div>
+                                             </div>
+                                         @endif
+                                         @if($program->current_price)
+                                             <div class="flex items-baseline gap-2 w-full">
+                                                 @if($isJson)
+                                                     <div class="border-t border-white/30 pt-3 w-full text-{{ $priceAlign }}">
+                                                         <span class="font-black text-emerald-400 tracking-tight {{ $priceSize }}">
+                                                             {{ $priceText }}
+                                                         </span>
+                                                     </div>
+                                                 @else
+                                                     @php
+                                                         $cleanPrice = trim(preg_replace('/^(Rp\s*)/i', '', $program->current_price));
+                                                         $isNumeric = preg_match('/[0-9]/', $cleanPrice);
+                                                     @endphp
+                                                     @if($isNumeric)
+                                                         <span class="text-zinc-300 font-semibold text-xl">Rp</span>
+                                                         <span class="text-4xl xl:text-4xl font-black text-emerald-400 tracking-tight">
+                                                             {{ $cleanPrice }}
+                                                         </span>
+                                                     @else
+                                                         <div class="border-t border-white/30 pt-3 w-full">
+                                                             <span class="text-2xl xl:text-3xl font-black text-emerald-400 tracking-tight">
+                                                                 {{ $cleanPrice }}
+                                                             </span>
+                                                         </div>
+                                                     @endif
+                                                 @endif
+                                             </div>
+                                         @endif
+                                     </div>
+                                 @endif
 
                                 <p class="text-zinc-400 text-sm leading-relaxed mb-6">{{ $program->short_description }}</p>
 
@@ -901,6 +937,14 @@
                                     <div>
                                         <h3 class="text-xl font-bold text-zinc-100 mb-1 font-heading">EMPIRE</h3>
                                         <p class="text-xs font-bold text-zinc-300 tracking-wider mb-4">Target: <span class="text-indigo-400 font-medium">Penguasa Pasar / Enterprise</span></p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex flex-col gap-1 mb-4">
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-2xl xl:text-3xl font-black text-emerald-400 tracking-tight">
+                                            Prioritas Eksekutif
+                                        </span>
                                     </div>
                                 </div>
                                 <p class="text-zinc-400 text-sm leading-relaxed mb-6">Membangun ekosistem ERP mandiri untuk

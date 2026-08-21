@@ -13,7 +13,8 @@ class WebsiteSettingsController extends Controller
     public function index()
     {
         $setting = Setting::first() ?? new Setting();
-        return view('admin.settings.index', compact('setting'));
+        $landingSetting = LandingSetting::first() ?? new LandingSetting();
+        return view('admin.settings.index', compact('setting', 'landingSetting'));
     }
 
     public function update(Request $request)
@@ -37,7 +38,8 @@ class WebsiteSettingsController extends Controller
         LandingSetting::updateOrCreate(
             ['id' => 1],
             [
-                'whatsapp_message' => $request->input('whatsapp_message'),
+                'whatsapp_message'    => $request->input('whatsapp_message'),
+                'show_whatsapp_float' => $request->boolean('show_whatsapp_float'),
             ]
         );
 

@@ -34,6 +34,20 @@
                     <input type="text" name="whatsapp_message" value="{{ $setting->whatsapp_message ?? 'Halo Omset Digital, saya ingin konsultasi pembuatan toko online.' }}"
                            class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 focus:border-indigo-500/60 rounded-xl text-zinc-100 text-sm placeholder-zinc-600 focus:outline-none transition-colors">
                 </div>
+                
+                {{-- Show/Hide WhatsApp Float Switch --}}
+                <div class="md:col-span-2 flex items-center justify-between p-4 bg-zinc-900 border border-green-500/40 rounded-xl">
+                    <div>
+                        <label for="show_whatsapp_float" class="text-xs font-bold text-zinc-200 cursor-pointer">Icon Whatsapp</label>
+                        <p class="text-[10px] text-zinc-500 mt-0.5">Pilih Show/Hide untuk mengontrol munculnya tombol WhatsApp melayang di halaman website.</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="show_whatsapp_float" name="show_whatsapp_float" value="1"
+                               {{ ($landingSetting->show_whatsapp_float ?? true) ? 'checked' : '' }}
+                               class="sr-only peer">
+                        <div class="w-11 h-6 bg-zinc-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                    </label>
+                </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>

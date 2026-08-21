@@ -22,7 +22,7 @@ class DashboardController extends Controller
         // Blog scoreboard analytics
         $topArticles       = Article::with('category')
                                 ->orderByDesc('views')
-                                ->take(5)
+                                ->take(10)
                                 ->get();
         $totalPublished    = Article::where('status', 'published')->count();
         $totalDraft        = Article::where('status', 'draft')->count();

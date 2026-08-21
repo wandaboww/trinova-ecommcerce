@@ -1,5 +1,22 @@
 <x-layouts.admin :title="'CMS Dashboard — Omset Digital'" :headerTitle="'Ringkasan Dashboard'">
 
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 9999px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+
     {{-- Main Light Canvas Wrapper --}}
     <div class="-m-8 p-6 sm:p-8 bg-slate-100/95 min-h-[calc(100vh-4rem)] text-slate-800 space-y-8">
         
@@ -28,62 +45,69 @@
             </div>
 
             {{-- Blog Scoreboard Card (Right) --}}
-            <div class="bg-white border border-slate-200/80 p-6 sm:p-7 rounded-3xl shadow-sm flex flex-col">
-                {{-- Header --}}
-                <div class="flex items-center justify-between bg-blue-600 p-4 rounded-2xl mb-5 shadow-sm">
-                    <div class="flex items-center gap-2">
-                        <span class="text-base">📊</span>
-                        <h3 class="font-extrabold text-white text-sm font-heading uppercase tracking-wider">Blog Scoreboard</h3>
-                    </div>
-                    <a href="{{ route('admin.blog.index') }}" class="text-[11px] text-blue-100 hover:text-white font-bold transition-colors bg-blue-700/50 hover:bg-blue-700 px-3 py-1.5 rounded-lg">Kelola Blog →</a>
-                </div>
-
-                {{-- Mini Stats Row --}}
-                <div class="grid grid-cols-3 gap-3 mb-5">
-                    <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-3 text-center">
-                        <div class="text-xl font-extrabold text-indigo-700 font-heading">{{ $totalPublished }}</div>
-                        <div class="text-[10px] font-bold text-indigo-500 uppercase tracking-wider mt-0.5">Published</div>
-                    </div>
-                    <div class="bg-amber-50 border border-amber-100 rounded-2xl p-3 text-center">
-                        <div class="text-xl font-extrabold text-amber-700 font-heading">{{ $totalDraft }}</div>
-                        <div class="text-[10px] font-bold text-amber-500 uppercase tracking-wider mt-0.5">Draft</div>
-                    </div>
-                    <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-3 text-center">
-                        <div class="text-xl font-extrabold text-emerald-700 font-heading">{{ number_format($totalViews) }}</div>
-                        <div class="text-[10px] font-bold text-emerald-500 uppercase tracking-wider mt-0.5">Total Views</div>
-                    </div>
-                </div>
-
-                {{-- Top Articles Table --}}
-                <div class="flex-grow overflow-hidden">
-                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 px-1">Top Artikel berdasarkan Views</div>
-                    @if($topArticles->isEmpty())
-                        <div class="py-6 text-center text-slate-400 text-xs bg-slate-50 border border-slate-100 rounded-2xl">Belum ada artikel yang dipublikasikan.</div>
-                    @else
-                        <div class="space-y-2">
-                            @foreach($topArticles as $index => $art)
-                                <div class="flex items-center gap-3 px-3 py-2.5 bg-slate-50/80 hover:bg-indigo-50/40 border border-slate-200/60 hover:border-indigo-200 rounded-xl transition-all group">
-                                    {{-- Rank --}}
-                                    <span class="w-6 h-6 flex-shrink-0 flex items-center justify-center rounded-lg text-[11px] font-extrabold
-                                        {{ $index === 0 ? 'bg-amber-400 text-white' : ($index === 1 ? 'bg-slate-300 text-slate-700' : ($index === 2 ? 'bg-orange-300 text-white' : 'bg-slate-100 text-slate-500')) }}">
-                                        {{ $index + 1 }}
-                                    </span>
-                                    {{-- Title --}}
-                                    <div class="flex-grow min-w-0">
-                                        <a href="{{ route('blog.show', $art->slug) }}" target="_blank" class="text-xs font-bold text-slate-800 group-hover:text-indigo-700 truncate block transition-colors">
-                                            {{ $art->title }}
-                                        </a>
-                                        <span class="text-[10px] text-slate-400">{{ $art->category->name ?? '—' }}</span>
-                                    </div>
-                                    {{-- Views Badge --}}
-                                    <span class="flex-shrink-0 text-[11px] font-bold text-slate-500 flex items-center gap-1">
-                                        <svg class="w-3 h-3 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                                        {{ number_format($art->views) }}
-                                    </span>
-                                </div>
-                            @endforeach
+            <div class="bg-white border border-slate-200/80 p-6 sm:p-7 rounded-3xl shadow-sm flex flex-col justify-between">
+                <div>
+                    {{-- Header --}}
+                    <div class="flex items-center justify-between bg-blue-600 p-4 rounded-2xl mb-5 shadow-sm">
+                        <div class="flex items-center gap-2">
+                            <span class="text-base">📊</span>
+                            <h3 class="font-extrabold text-white text-sm font-heading uppercase tracking-wider">Blog Scoreboard</h3>
                         </div>
-                    @endif
+                        <a href="{{ route('admin.blog.index') }}" class="text-[11px] text-blue-100 hover:text-white font-bold transition-colors bg-blue-700/50 hover:bg-blue-700 px-3 py-1.5 rounded-lg">Kelola Blog →</a>
+                    </div>
+
+                    {{-- Mini Stats Row --}}
+                    <div class="grid grid-cols-3 gap-3 mb-4">
+                        <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-3 text-center">
+                            <div class="text-xl font-extrabold text-indigo-700 font-heading">{{ $totalPublished }}</div>
+                            <div class="text-[10px] font-bold text-indigo-500 uppercase tracking-wider mt-0.5">Published</div>
+                        </div>
+                        <div class="bg-amber-50 border border-amber-100 rounded-2xl p-3 text-center">
+                            <div class="text-xl font-extrabold text-amber-700 font-heading">{{ $totalDraft }}</div>
+                            <div class="text-[10px] font-bold text-amber-500 uppercase tracking-wider mt-0.5">Draft</div>
+                        </div>
+                        <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-3 text-center">
+                            <div class="text-xl font-extrabold text-emerald-700 font-heading">{{ number_format($totalViews) }}</div>
+                            <div class="text-[10px] font-bold text-emerald-500 uppercase tracking-wider mt-0.5">Total Views</div>
+                        </div>
+                    </div>
+
+                    {{-- Top Articles List with Vertical Scroll --}}
+                    <div class="flex-grow flex flex-col min-h-0">
+                        <div class="flex items-center justify-between mb-2 px-1">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Top Artikel berdasarkan Views</span>
+                            <span class="text-[9px] font-bold text-indigo-500 bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-100 flex items-center gap-1">
+                                ↕ Scroll Vertikal
+                            </span>
+                        </div>
+                        @if($topArticles->isEmpty())
+                            <div class="py-6 text-center text-slate-400 text-xs bg-slate-50 border border-slate-100 rounded-2xl">Belum ada artikel yang dipublikasikan.</div>
+                        @else
+                            <div class="max-h-[220px] overflow-y-auto pr-1 space-y-2 custom-scrollbar">
+                                @foreach($topArticles as $index => $art)
+                                    <div class="flex items-center gap-3 px-3 py-2.5 bg-slate-50/80 hover:bg-indigo-50/40 border border-slate-200/60 hover:border-indigo-200 rounded-xl transition-all group">
+                                        {{-- Rank --}}
+                                        <span class="w-6 h-6 flex-shrink-0 flex items-center justify-center rounded-lg text-[11px] font-extrabold
+                                            {{ $index === 0 ? 'bg-amber-400 text-white shadow-xs' : ($index === 1 ? 'bg-slate-300 text-slate-700' : ($index === 2 ? 'bg-orange-300 text-white' : 'bg-slate-100 text-slate-500 border border-slate-200/50')) }}">
+                                            {{ $index + 1 }}
+                                        </span>
+                                        {{-- Title & Category --}}
+                                        <div class="flex-grow min-w-0">
+                                            <a href="{{ route('blog.show', $art->slug) }}" target="_blank" class="text-xs font-bold text-slate-800 group-hover:text-indigo-700 truncate block transition-colors">
+                                                {{ $art->title }}
+                                            </a>
+                                            <span class="text-[10px] text-slate-400 font-medium">{{ $art->category->name ?? 'Umum' }}</span>
+                                        </div>
+                                        {{-- Views Badge --}}
+                                        <span class="flex-shrink-0 text-[11px] font-bold text-slate-600 bg-white border border-slate-200/80 px-2 py-0.5 rounded-md shadow-2xs flex items-center gap-1">
+                                            <svg class="w-3 h-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                            {{ number_format($art->views) }}
+                                        </span>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
 

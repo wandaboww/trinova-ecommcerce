@@ -14,7 +14,7 @@
    class="fixed bottom-6 left-6 z-50 w-14 h-14 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-xl shadow-green-500/30 hover:scale-110 hover:shadow-green-500/50 transition-all duration-200 group"
    target="_blank"
    rel="noopener"
-   id="whatsappFloat"
+   id="whatsappfloat"
    aria-label="Chat WhatsApp Omset Digital">
 
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-7 h-7" aria-hidden="true">
